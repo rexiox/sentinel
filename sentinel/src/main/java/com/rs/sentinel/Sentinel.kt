@@ -50,12 +50,12 @@ class Sentinel private constructor(
         }
 
         fun root() {
-            detectors.add(RootDetector(context = context))
+            detectors.add(element = RootDetector(context = context))
         }
 
         fun tamper() {
             detectors.add(
-                TamperDetector(
+                element = TamperDetector(
                     context = context,
                     packageName = config.packageName,
                     packageSignature = config.packageSignature
@@ -63,33 +63,33 @@ class Sentinel private constructor(
             )
         }
 
+        fun hook() {
+            detectors.add(element = HookDetector())
+        }
+
         fun emulator() {
-            detectors.add(EmulatorDetector())
+            detectors.add(element = EmulatorDetector())
         }
 
         fun debug() {
-            detectors.add(DebugDetector(context = context))
-        }
-
-        fun hook() {
-            detectors.add(HookDetector())
+            detectors.add(element = DebugDetector(context = context))
         }
 
         fun location() {
-            detectors.add(MockLocationSettingDetector(context = context))
-            detectors.add(MockLocationAppDetector(context = context))
+            detectors.add(element = MockLocationSettingDetector(context = context))
+            detectors.add(element = MockLocationAppDetector(context = context))
         }
 
         fun location(location: Location) {
-            detectors.add(MockLocationDetector(location = location))
+            detectors.add(element = MockLocationDetector(location = location))
         }
 
         fun all() {
             root()
             tamper()
+            hook()
             emulator()
             debug()
-            hook()
             location()
         }
 

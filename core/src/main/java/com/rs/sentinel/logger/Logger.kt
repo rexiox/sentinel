@@ -9,7 +9,7 @@ class Logger {
         report: SecurityReport,
         logger: (String) -> Unit,
     ) {
-        logger("=== Sentinel Security Report ===")
+        logger("--- Sentinel Security Report ---")
         logger("Severity: ${report.severity}")
         logger("Risk Level: ${report.riskLevel}")
         logger("Threat Count: ${report.threats.size}")
