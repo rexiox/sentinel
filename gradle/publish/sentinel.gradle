@@ -1,0 +1,66 @@
+apply plugin: 'maven-publish'
+apply plugin: 'signing'
+
+def pomConfig = [
+        name            : 'Sentinel',
+        artifact        : 'sentinel',
+        description     : 'Android Security Toolkit for protecting apps against tampering, reverse engineering, rooted devices, and insecure runtime environments.',
+        url             : 'https://github.com/ResulSilay/Sentinel',
+        licenseName     : 'MIT License',
+        licenseUrl      : 'https://opensource.org/licenses/MIT',
+        developerId     : 'resulsilay',
+        developerName   : 'Resul Silay',
+        developerEmail  : 'resulsilay@gmail.com',
+        scmUrl          : 'https://github.com/ResulSilay/Sentinel',
+        scmConnection   : 'scm:git:git://github.com/ResulSilay/Sentinel.git',
+        scmDevConnection: 'scm:git:ssh://github.com/ResulSilay/Sentinel.git'
+]
+
+publishing {
+    publications {
+        release(MavenPublication) {
+            afterEvaluate {
+                from components.release
+            }
+
+            artifactId = pomConfig.artifact
+
+            pom {
+                name = pomConfig.name
+                description = pomConfig.description
+                url = pomConfig.url
+
+                licenses {
+                    license {
+                        name = pomConfig.licenseName
+                        url = pomConfig.licenseUrl
+                    }
+                }
+
+                scm {
+                    connection = pomConfig.scmConnection
+                    developerConnection = pomConfig.scmDevConnection
+                    url = pomConfig.scmUrl
+                }
+
+                developers {
+                    developer {
+                        id = pomConfig.developerId
+                        name = pomConfig.developerName
+                        email = pomConfig.developerEmail
+                    }
+                }
+            }
+        }
+    }
+}
+
+def signingKey = System.getenv("PGP_KEY")
+def signingPwd = System.getenv("PGP_KEY_PASSWORD")
+
+if (signingKey && signingPwd) {
+    signing {
+        useInMemoryPgpKeys(signingKey, signingPwd)
+        sign publishing.publications.release
+    }
+}
