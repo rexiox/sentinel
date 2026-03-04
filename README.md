@@ -4,7 +4,10 @@
   <img src="/art/logo.png" alt="Logo" width="200"/>
 </p>
 
+[![KMP](https://img.shields.io/badge/Kotlin%20Multiplatform%20(SOON)-000000?style=for-the-badge&logo=kotlin)](#)
 [![Android](https://img.shields.io/badge/Android-000000?style=for-the-badge&logo=android&logoColor=ffffff)](https://developer.android.com/)
+[![iOS](https://img.shields.io/badge/iOS-000000?style=for-the-badge&logo=ios&logoColor=ffffff)]((https://developer.apple.com/))
+
 [![Security](https://img.shields.io/badge/Security-000000?style=for-the-badge&logo=bitwarden)](#)
 [![Toolkit](https://img.shields.io/badge/Toolkit-000000?style=for-the-badge&logo=hackthebox&logoColor=ffffff)](#)
 [![Gradle](https://img.shields.io/badge/Gradle-000000?style=for-the-badge&logo=gradle)](#)
@@ -57,7 +60,7 @@ produces a comprehensive security report.
 Sentinel uses a centralized DSL configuration to manage all security checks.
 
 ```gradle
-implementation("com.github.ResulSilay:Sentinel:1.2.2.jitpack.beta")
+implementation("com.github.ResulSilay:Sentinel:1.0.0-alpha01")
 ```
 
 ```kotlin
@@ -123,7 +126,7 @@ dependencyResolutionManagement {
 Include the library in your **app module** `build.gradle`:
 
 ```gradle
-implementation("com.github.ResulSilay:Sentinel:1.2.2.jitpack.beta")
+implementation("com.github.ResulSilay:Sentinel:1.0.0-alpha01")
 ```
 
 ## License

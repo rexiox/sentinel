@@ -9,8 +9,8 @@ object Config {
         const val MIN_SDK = 24
         const val TARGET_SDK = 36
         const val COMPILE_SDK = 36
-        const val CODE = 2
-        const val NAME = "1.0.0-alpha03"
+        const val CODE = 3
+        const val NAME = "1.0.0-alpha01"
     }
 
     object Publishing {
