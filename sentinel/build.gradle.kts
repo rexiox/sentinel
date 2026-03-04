@@ -1,10 +1,6 @@
 plugins {
     alias(libs.plugins.android.library)
-    alias(libs.plugins.kotlin.android)
 }
-
-group = Config.GROUP_ID
-version = Config.Version.NAME
 
 android {
     namespace = "com.rs.sentinel"
@@ -34,13 +30,6 @@ android {
         targetCompatibility = JavaVersion.VERSION_21
     }
 
-    publishing {
-        singleVariant(variantName = "release") {
-            withSourcesJar()
-            withJavadocJar()
-        }
-    }
-
     kotlin {
         jvmToolchain(jdkVersion = 21)
     }
@@ -63,5 +52,3 @@ dependencies {
     api(project(":kit:hook"))
     api(project(":kit:location"))
 }
-
-apply(from = rootProject.file("gradle/publish/sentinel.gradle"))
