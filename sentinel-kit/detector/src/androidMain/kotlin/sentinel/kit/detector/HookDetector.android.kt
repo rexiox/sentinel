@@ -18,19 +18,11 @@ class HookDetector : SecurityDetector {
 
         return buildList {
             if (isFridaDetected()) {
-                add(
-                    Threat(
-                        violation = AndroidViolation.Hook.FridaDetected
-                    )
-                )
+                add(element = Threat(violation = AndroidViolation.Hook.FridaDetected))
             }
 
             if (isCheckStackTraceManually) {
-                add(
-                    Threat(
-                        violation = AndroidViolation.Hook.FrameworkDetected(name = name)
-                    )
-                )
+                add(element = Threat(violation = AndroidViolation.Hook.FrameworkDetected(name = name)))
             }
         }
     }
@@ -39,11 +31,8 @@ class HookDetector : SecurityDetector {
         throw Exception()
     }.onFailure { exception ->
         val detectedPackage = exception.stackTrace.firstNotNullOfOrNull { element ->
-            DetectorConst.HOOK_PACKAGES.firstOrNull { pkg ->
-                element.className.contains(pkg)
-            }
+            DetectorConst.HOOK_PACKAGES.firstOrNull(predicate = element.className::contains)
         }
-
         (detectedPackage != null) to detectedPackage
     }.getOrElse {
         false to null

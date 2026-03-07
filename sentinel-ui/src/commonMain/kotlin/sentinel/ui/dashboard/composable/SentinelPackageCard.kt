@@ -57,7 +57,9 @@ internal fun SentinelPackageCard(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Image(
-                modifier = Modifier.size(size = 64.dp),
+                modifier = Modifier
+                    .padding(top = 32.dp)
+                    .size(size = 64.dp),
                 painter = painterResource(resource = Res.drawable.ic_launcher),
                 contentDescription = null
             )

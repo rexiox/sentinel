@@ -28,19 +28,11 @@ class TamperDetector(
 
     override fun detect(): List<Threat> = buildList {
         if (!isPackageValid()) {
-            add(
-                element = Threat(
-                    violation = AndroidViolation.Tamper.PackageNameChanged
-                )
-            )
+            add(element = Threat(violation = AndroidViolation.Tamper.PackageNameChanged))
         }
 
         if (!isSignatureValid()) {
-            add(
-                element = Threat(
-                    violation = AndroidViolation.Tamper.SignatureMismatch
-                )
-            )
+            add(element = Threat(violation = AndroidViolation.Tamper.SignatureMismatch))
         }
     }
 

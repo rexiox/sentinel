@@ -11,11 +11,7 @@ class SimulatorDetector : SecurityDetector {
 
     override fun detect(): List<Threat> = buildList {
         if (isSimulator()) {
-            add(
-                element = Threat(
-                    violation = IosViolation.Simulator.Detected()
-                )
-            )
+            add(element = Threat(violation = IosViolation.Simulator.Detected()))
         }
     }
 

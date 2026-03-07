@@ -23,35 +23,19 @@ class RootDetector(
 
     override fun detect(): List<Threat> = buildList {
         if (checkApps(context = context)) {
-            add(
-                Threat(
-                    violation = AndroidViolation.Root.AppInstalled()
-                )
-            )
+            add(element = Threat(violation = AndroidViolation.Root.AppInstalled()))
         }
 
         if (checkBinaries()) {
-            add(
-                Threat(
-                    violation = AndroidViolation.Root.SuBinaryFound
-                )
-            )
+            add(element = Threat(violation = AndroidViolation.Root.SuBinaryFound))
         }
 
         if (checkMounts()) {
-            add(
-                Threat(
-                    violation = AndroidViolation.Root.SuspiciousMount()
-                )
-            )
+            add(element = Threat(violation = AndroidViolation.Root.SuspiciousMount()))
         }
 
         if (checkSuCommand()) {
-            add(
-                Threat(
-                    violation = AndroidViolation.Root.SuCommandExecuted
-                )
-            )
+            add(element = Threat(violation = AndroidViolation.Root.SuCommandExecuted))
         }
     }
 }

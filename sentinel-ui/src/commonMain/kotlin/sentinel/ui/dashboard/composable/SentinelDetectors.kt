@@ -43,7 +43,9 @@ internal fun SentinelDetectors(
         }
     }
 
-    Column {
+    Column(
+        modifier = Modifier.padding(bottom = 48.dp)
+    ) {
         Text(
             modifier = Modifier
                 .fillMaxWidth()

@@ -33,8 +33,9 @@ actual fun logReport(report: SecurityReport) {
                     val name = violation::class.simpleName ?: "Unknown Violation"
 
                     val detail = when (violation) {
-                        is IosViolation.Jailbreak.AppInstalled -> "Package: ${violation.packageName}"
-                        is IosViolation.Jailbreak.SuspiciousMount -> "Mount: ${violation.mountPoint}"
+                        is IosViolation.Jailbreak.AppInstalled -> "App Id: ${violation.appId}"
+                        is IosViolation.Jailbreak.URLSchemes -> "URL Scheme: ${violation.urlScheme}"
+                        is IosViolation.Jailbreak.SuspiciousSymlinks -> "Mount: ${violation.mountPoint}"
                         is IosViolation.Hook.FrameworkDetected -> "Framework: ${violation.name ?: "Unknown"}"
                         is IosViolation.Simulator.Detected -> "Name: ${violation.name ?: "Unknown"}"
                         is IosViolation.Location.MockAppInstalled -> "Apps: ${violation.packages}"

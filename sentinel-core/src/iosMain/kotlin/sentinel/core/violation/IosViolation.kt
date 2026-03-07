@@ -6,9 +6,11 @@ sealed class IosViolation(
 
     sealed class Jailbreak(severity: Int) : IosViolation(severity = severity) {
 
-        data class SuspiciousMount(val mountPoint: String? = null) : Jailbreak(severity = 80)
+        data class AppInstalled(val appId: String? = null) : Jailbreak(severity = 90)
 
-        data class AppInstalled(val packageName: String? = null) : Jailbreak(severity = 50)
+        data class URLSchemes(val urlScheme: String? = null) : Jailbreak(severity = 90)
+
+        data class SuspiciousSymlinks(val mountPoint: String? = null) : Jailbreak(severity = 50)
     }
 
     sealed class Tamper(severity: Int) : IosViolation(severity = severity) {

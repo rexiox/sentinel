@@ -22,19 +22,11 @@ class DebugDetector(
 
         return buildList {
             if (isDebugger || isDebuggable) {
-                add(
-                    Threat(
-                        violation = AndroidViolation.Debugger.Debuggable
-                    )
-                )
+                add(element = Threat(violation = AndroidViolation.Debugger.Debuggable))
             }
 
             if (isTestKeys) {
-                add(
-                    Threat(
-                        violation = AndroidViolation.Debugger.TestKeys
-                    )
-                )
+                add(element = Threat(violation = AndroidViolation.Debugger.TestKeys))
             }
         }
     }

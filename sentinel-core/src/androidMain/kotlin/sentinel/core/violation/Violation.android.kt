@@ -1,10 +1,10 @@
 package sentinel.core.violation
 
 actual fun getViolations(): List<SecurityViolation> = listOf(
+    AndroidViolation.Root.AppInstalled(),
     AndroidViolation.Root.SuBinaryFound,
     AndroidViolation.Root.SuCommandExecuted,
     AndroidViolation.Root.SuspiciousMount(),
-    AndroidViolation.Root.AppInstalled(),
 
     AndroidViolation.Tamper.PackageNameChanged,
     AndroidViolation.Tamper.DexIntegrityFailed,

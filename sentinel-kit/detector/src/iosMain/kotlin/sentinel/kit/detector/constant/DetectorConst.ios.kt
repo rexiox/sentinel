@@ -2,7 +2,7 @@ package sentinel.kit.detector.constant
 
 object DetectorConst {
 
-    val JAILBREAK_APPS: List<String> = listOf(
+    val APP_PATHS: List<String> = listOf(
         "/Applications/Cydia.app",
         "/Library/MobileSubstrate/MobileSubstrate.dylib",
         "/bin/bash",
@@ -15,12 +15,21 @@ object DetectorConst {
         "/var/lib/cydia"
     )
 
-    val MOUNTS: List<String> = listOf(
+    val SUSPICIOUS_SYMLINKS: List<String> = listOf(
         "/Library",
         "/usr/lib",
         "/bin",
         "/etc",
         "/var"
+    )
+
+    val URL_SCHEMES: List<String> = listOf(
+        "cydia://package/com.example.package",
+        "cydia://",
+        "undecimus://",
+        "sileo://",
+        "zbra://",
+        "filza://",
     )
 
     val SIMULATOR_KEYS: List<String> = listOf(

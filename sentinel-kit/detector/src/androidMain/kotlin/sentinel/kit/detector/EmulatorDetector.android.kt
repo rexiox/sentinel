@@ -43,7 +43,7 @@ class EmulatorDetector : SecurityDetector {
                 ).lowercase()
 
         val pipe = DetectorConst.EMULATOR_PIPES.firstOrNull { File(it).exists() }
-        val prop = DetectorConst.EMULATOR_PROPS.firstOrNull { buildDetails.contains(it) }
+        val prop = DetectorConst.EMULATOR_PROPS.firstOrNull(predicate = buildDetails::contains)
         return Pair(pipe, prop)
     }
 }
