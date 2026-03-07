@@ -7,7 +7,7 @@
 [![Security](https://img.shields.io/badge/Security-000000?style=for-the-badge&logo=bitwarden)](#)
 [![Toolkit](https://img.shields.io/badge/Toolkit-000000?style=for-the-badge&logo=hackthebox&logoColor=ffffff)](#)
 [![Gradle](https://img.shields.io/badge/Gradle-000000?style=for-the-badge&logo=gradle)](#)
-[![Version](https://img.shields.io/badge/1.0.0.alpha07-000000?style=for-the-badge&logo=stackblitz)](#)
+[![Version](https://img.shields.io/badge/1.0.0.alpha08-000000?style=for-the-badge&logo=stackblitz)](#)
 
 [![KMP](https://img.shields.io/badge/Kotlin%20Multiplatform%20-000000?style=for-the-badge&logo=kotlin&logoColor=ffffff)](#)
 [![Android](https://img.shields.io/badge/Android-000000?style=for-the-badge&logo=android&logoColor=ffffff)](https://developer.android.com/)
@@ -27,7 +27,6 @@
 </p>
 
 </div>
-<br>
 
 ## Sentinel
 
@@ -71,7 +70,7 @@ produces a comprehensive security report.
 Sentinel uses a centralized DSL configuration to manage all security checks.
 
 ```gradle
-implementation("io.github.resulsilay:sentinel:1.0.0-alpha07")
+implementation("io.github.resulsilay:sentinel:1.0.0-alpha08")
 ```
 
 ### Android Usage
@@ -82,6 +81,7 @@ val sentinel = Sentinel.configure(context = context) {
         this.appId = Sentinel.Identity.appId.toByteList()
         this.signature = Sentinel.Identity.signature?.toByteList()
         this.threshold = 90
+        this.isLoggingEnabled = true
     }
 
     all()
@@ -100,11 +100,12 @@ val sentinel = Sentinel.configure {
     config {
         this.appId = Sentinel.Identity.appId.toByteList()
         this.threshold = 90
+        this.isLoggingEnabled = true
     }
 
     all()
-    // root()
-    // emulator()
+    // jailbreak()
+    // simulator()
 }
 ```
 
@@ -116,15 +117,17 @@ detailed report based on threat severity.
 ```kotlin
 val report = sentinel.inspect()
 
-println("----- Security Report -----")
 println("Risk Level: ${report.riskLevel}")
 println("Severity Score: ${report.severity}")
 println("Threat Count: ${report.threats.size}")
+println("Timestamp: ${report.timestamp}")
 
 if (report.isRooted) println("❌ Root detected")
+if (report.isJailbroken) println("❌ Jailbreak detected")
 if (report.isTampered) println("❌ App tampering detected")
 if (report.isHooked) println("❌ Hooking detected")
 if (report.isEmulator) println("❌ Emulator detected")
+if (report.isSimulator) println("❌ Simulator detected")
 if (report.isDebuggable) println("❌ Debugger detected")
 
 if (report.isSafe()) {
