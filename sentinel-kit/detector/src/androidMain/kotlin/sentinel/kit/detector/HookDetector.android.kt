@@ -2,10 +2,10 @@ package sentinel.kit.detector
 
 import sentinel.core.detector.SecurityDetector
 import sentinel.core.detector.Threat
-import sentinel.core.violation.SecurityViolation
+import sentinel.core.violation.AndroidViolation
 import sentinel.kit.detector.constant.DetectorConst
 
-actual class HookDetector : SecurityDetector {
+class HookDetector : SecurityDetector {
 
     init {
         System.loadLibrary("sentinel-hook")
@@ -13,14 +13,14 @@ actual class HookDetector : SecurityDetector {
 
     private external fun isFridaDetected(): Boolean
 
-    actual override fun detect(): List<Threat> {
+    override fun detect(): List<Threat> {
         val (isCheckStackTraceManually, name) = checkStackTraceManually()
 
         return buildList {
             if (isFridaDetected()) {
                 add(
                     Threat(
-                        violation = SecurityViolation.Hook.FridaDetected
+                        violation = AndroidViolation.Hook.FridaDetected
                     )
                 )
             }
@@ -28,7 +28,7 @@ actual class HookDetector : SecurityDetector {
             if (isCheckStackTraceManually) {
                 add(
                     Threat(
-                        violation = SecurityViolation.Hook.FrameworkDetected(name = name)
+                        violation = AndroidViolation.Hook.FrameworkDetected(name = name)
                     )
                 )
             }

@@ -3,15 +3,11 @@ package sentinel.kit.detector
 import android.content.Context
 import sentinel.core.detector.SecurityDetector
 import sentinel.core.detector.Threat
-import sentinel.core.violation.SecurityViolation
+import sentinel.core.violation.AndroidViolation
 
-actual class RootDetector actual constructor(
-    private val context: Any?,
+class RootDetector(
+    private val context: Context,
 ) : SecurityDetector {
-
-    private val androidContext: Context
-        get() = context as? Context
-            ?: throw IllegalArgumentException("RootDetector requires a valid Android Context")
 
     init {
         System.loadLibrary("sentinel-root")
@@ -25,11 +21,11 @@ actual class RootDetector actual constructor(
 
     external fun checkSuCommand(): Boolean
 
-    actual override fun detect(): List<Threat> = buildList {
-        if (checkApps(context = androidContext)) {
+    override fun detect(): List<Threat> = buildList {
+        if (checkApps(context = context)) {
             add(
                 Threat(
-                    violation = SecurityViolation.Root.RootAppInstalled()
+                    violation = AndroidViolation.Root.AppInstalled()
                 )
             )
         }
@@ -37,7 +33,7 @@ actual class RootDetector actual constructor(
         if (checkBinaries()) {
             add(
                 Threat(
-                    violation = SecurityViolation.Root.SuBinaryFound
+                    violation = AndroidViolation.Root.SuBinaryFound
                 )
             )
         }
@@ -45,7 +41,7 @@ actual class RootDetector actual constructor(
         if (checkMounts()) {
             add(
                 Threat(
-                    violation = SecurityViolation.Root.SuspiciousMount()
+                    violation = AndroidViolation.Root.SuspiciousMount()
                 )
             )
         }
@@ -53,7 +49,7 @@ actual class RootDetector actual constructor(
         if (checkSuCommand()) {
             add(
                 Threat(
-                    violation = SecurityViolation.Root.SuCommandExecuted
+                    violation = AndroidViolation.Root.SuCommandExecuted
                 )
             )
         }

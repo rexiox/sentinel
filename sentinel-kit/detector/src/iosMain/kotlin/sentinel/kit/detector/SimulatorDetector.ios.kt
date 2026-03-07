@@ -4,16 +4,16 @@ import platform.Foundation.NSProcessInfo
 import platform.UIKit.UIDevice
 import sentinel.core.detector.SecurityDetector
 import sentinel.core.detector.Threat
-import sentinel.core.violation.SecurityViolation
+import sentinel.core.violation.IosViolation
 import sentinel.kit.detector.constant.DetectorConst
 
-actual class EmulatorDetector : SecurityDetector {
+class SimulatorDetector : SecurityDetector {
 
-    actual override fun detect(): List<Threat> = buildList {
+    override fun detect(): List<Threat> = buildList {
         if (isSimulator()) {
             add(
                 element = Threat(
-                    violation = SecurityViolation.Emulator.Detected()
+                    violation = IosViolation.Simulator.Detected()
                 )
             )
         }

@@ -4,6 +4,7 @@ plugins {
 }
 
 mavenPublishing {
+    @Suppress("UnstableApiUsage")
     configureBasedOnAppliedPlugins(
         sourcesJar = true,
         javadocJar = true

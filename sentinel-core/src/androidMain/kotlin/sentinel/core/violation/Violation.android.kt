@@ -1,7 +1,4 @@
-package sentinel.ui.violation
-
-import sentinel.core.violation.AndroidViolation
-import sentinel.core.violation.SecurityViolation
+package sentinel.core.violation
 
 actual fun getViolations(): List<SecurityViolation> = listOf(
     AndroidViolation.Root.SuBinaryFound,
@@ -17,11 +14,13 @@ actual fun getViolations(): List<SecurityViolation> = listOf(
     AndroidViolation.Hook.FridaDetected,
 
     AndroidViolation.Emulator.Detected(),
+
     AndroidViolation.Debugger.Debuggable,
     AndroidViolation.Debugger.TestKeys,
+
     AndroidViolation.Location.MockSettingEnabled,
     AndroidViolation.Location.MockLocationDetected,
-    AndroidViolation.Location.MockAppInstalled(emptyList())
+    AndroidViolation.Location.MockAppInstalled(packages = emptyList())
 )
 
 actual fun getGroupName(violation: SecurityViolation): String = when (violation) {

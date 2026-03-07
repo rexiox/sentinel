@@ -71,8 +71,7 @@ fun SentinelDashboardScreen(
 
             is SentinelDashboardState.Error -> {
                 Text(
-                    modifier = Modifier
-                        .fillMaxWidth(),
+                    modifier = Modifier.fillMaxWidth(),
                     text = "${stringResource(resource = Res.string.error)}: ${state.throwable.message}",
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )

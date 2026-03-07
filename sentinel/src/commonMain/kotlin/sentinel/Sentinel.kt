@@ -1,27 +1,13 @@
 package sentinel
 
-import sentinel.core.detector.SecurityDetector
-import sentinel.core.identity.Identity
 import sentinel.core.report.SecurityReport
 
-class Sentinel internal constructor(
-    private val detectors: List<SecurityDetector>,
-    val config: Config,
-) {
+expect class Sentinel {
 
-    fun inspect(): SecurityReport {
-        val threads = detectors.flatMap { detector -> detector.detect().orEmpty() }
+    val config: Config
 
-        return SecurityReport(
-            threats = threads,
-            threshold = config.threshold
-        )
-    }
+    fun inspect(): SecurityReport
 
-    companion object {
-
-        lateinit var Identity: Identity
-            internal set
-    }
+    fun report(report: SecurityReport)
 }
 

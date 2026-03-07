@@ -6,20 +6,16 @@ import android.os.Build
 import android.os.Debug.isDebuggerConnected
 import sentinel.core.detector.SecurityDetector
 import sentinel.core.detector.Threat
-import sentinel.core.violation.SecurityViolation
+import sentinel.core.violation.AndroidViolation
 import sentinel.kit.detector.constant.DetectorConst
 
-actual class DebugDetector actual constructor(
-    private val context: Any?,
+class DebugDetector(
+    context: Context,
 ) : SecurityDetector {
 
-    private val androidContext: Context
-        get() = context as? Context
-            ?: throw IllegalArgumentException("RootDetector requires a valid Android Context")
+    private val flags = context.applicationInfo.flags
 
-    private val flags = androidContext.applicationInfo.flags
-
-    actual override fun detect(): List<Threat> {
+    override fun detect(): List<Threat> {
         val isDebugger = isDebuggerConnected()
         val isDebuggable = (flags and ApplicationInfo.FLAG_DEBUGGABLE != 0)
         val isTestKeys = Build.TAGS?.contains(other = DetectorConst.TEST_KEYS_TAG) == true
@@ -28,7 +24,7 @@ actual class DebugDetector actual constructor(
             if (isDebugger || isDebuggable) {
                 add(
                     Threat(
-                        violation = SecurityViolation.Debugger.Debuggable
+                        violation = AndroidViolation.Debugger.Debuggable
                     )
                 )
             }
@@ -36,7 +32,7 @@ actual class DebugDetector actual constructor(
             if (isTestKeys) {
                 add(
                     Threat(
-                        violation = SecurityViolation.Debugger.TestKeys
+                        violation = AndroidViolation.Debugger.TestKeys
                     )
                 )
             }

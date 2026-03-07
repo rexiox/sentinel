@@ -3,20 +3,20 @@ package sentinel.kit.detector
 import android.os.Build
 import sentinel.core.detector.SecurityDetector
 import sentinel.core.detector.Threat
-import sentinel.core.violation.SecurityViolation
+import sentinel.core.violation.AndroidViolation
 import sentinel.kit.detector.constant.DetectorConst
 import java.io.File
 
-actual class EmulatorDetector : SecurityDetector {
+class EmulatorDetector : SecurityDetector {
 
-    actual override fun detect(): List<Threat> {
+    override fun detect(): List<Threat> {
         val (pipe, prop) = isEmulator()
 
         return buildList {
             if (pipe != null) {
                 add(
                     element = Threat(
-                        violation = SecurityViolation.Emulator.Detected(name = "Pipe: $pipe")
+                        violation = AndroidViolation.Emulator.Detected(name = "Pipe: $pipe")
                     )
                 )
             }
@@ -24,7 +24,7 @@ actual class EmulatorDetector : SecurityDetector {
             if (prop != null) {
                 add(
                     element = Threat(
-                        violation = SecurityViolation.Emulator.Detected(name = "Prop: $prop")
+                        violation = AndroidViolation.Emulator.Detected(name = "Prop: $prop")
                     )
                 )
             }

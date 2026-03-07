@@ -5,18 +5,16 @@ import platform.Foundation.NSFileManager
 import platform.Foundation.NSFileTypeSymbolicLink
 import sentinel.core.detector.SecurityDetector
 import sentinel.core.detector.Threat
-import sentinel.core.violation.SecurityViolation
+import sentinel.core.violation.IosViolation
 import sentinel.kit.detector.constant.DetectorConst
 
-actual class RootDetector actual constructor(
-    context: Any?,
-) : SecurityDetector {
+class JailbreakDetector : SecurityDetector {
 
-    actual override fun detect(): List<Threat> = buildList {
+    override fun detect(): List<Threat> = buildList {
         if (checkJailbreakApps()) {
             add(
                 element = Threat(
-                    violation = SecurityViolation.Root.RootAppInstalled()
+                    violation = IosViolation.Jailbreak.AppInstalled()
                 )
             )
         }
@@ -24,7 +22,7 @@ actual class RootDetector actual constructor(
         if (checkMounts()) {
             add(
                 Threat(
-                    violation = SecurityViolation.Root.SuspiciousMount()
+                    violation = IosViolation.Jailbreak.SuspiciousMount()
                 )
             )
         }

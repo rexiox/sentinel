@@ -9,6 +9,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import sentinel.Sentinel
+import sentinel.all
 import sentinel.configure
 import sentinel.core.ext.toByteList
 
@@ -38,9 +39,15 @@ class MainActivity : ComponentActivity() {
                         this.appId = Sentinel.Identity.appId.toByteList()
                         this.signature = Sentinel.Identity.signature?.toByteList()
                         this.threshold = 20
+                        this.isLoggingEnabled = true
                     }
 
                     all()
+                    // root()
+                    // tamper()
+                    // hook()
+                    // emulator()
+                    // debug()
                 }
             }
 
