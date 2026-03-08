@@ -122,22 +122,22 @@ println("Severity Score: ${report.severity}")
 println("Threat Count: ${report.threats.size}")
 println("Timestamp: ${report.timestamp}")
 
-if (report.isRooted) println("❌ Root detected")
-if (report.isJailbroken) println("❌ Jailbreak detected")
-if (report.isTampered) println("❌ App tampering detected")
-if (report.isHooked) println("❌ Hooking detected")
-if (report.isEmulator) println("❌ Emulator detected")
-if (report.isSimulator) println("❌ Simulator detected")
-if (report.isDebuggable) println("❌ Debugger detected")
+if (report.isRooted) println("Root detected")
+if (report.isJailbroken) println("Jailbreak detected")
+if (report.isTampered) println("App tampering detected")
+if (report.isHooked) println("Hooking detected")
+if (report.isEmulator) println("Emulator detected")
+if (report.isSimulator) println("Simulator detected")
+if (report.isDebuggable) println("Debugger detected")
 
 if (report.isSafe()) {
-    println("✅ Device is secure")
+    println("Device is secure")
 } else {
-    println("⚠️ Security risks detected!")
+    println("Security risks detected!")
 }
 
 if (report.isCritical()) {
-    println("🚫 Block app usage.")
+    println("Block app usage.")
 }
 ```
 

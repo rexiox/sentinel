@@ -6,7 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import sentinel.Sentinel
-import sentinel.ui.dashboard.SentinelDashboardScreen
+import sentinel.ui.screen.main.SentinelMainScreen
 import sentinel.ui.theme.SentinelTheme
 
 @Composable
@@ -20,7 +20,7 @@ fun App(
             modifier = Modifier.fillMaxSize(),
             containerColor = Color.Black
         ) {
-            SentinelDashboardScreen(
+            SentinelMainScreen(
                 sentinel = sentinel,
                 appId = appId,
                 appSignature = appSignature

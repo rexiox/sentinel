@@ -1,40 +1,52 @@
 package sentinel.ui.ext
 
-import androidx.compose.foundation.background
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import sentinel.core.type.RiskLevel
 
 fun Modifier.sentinelGradientBackground(
     riskLevel: RiskLevel? = null,
-    isReversed: Boolean = false,
 ): Modifier {
     val baseColor = when (riskLevel) {
         RiskLevel.SAFE -> Color(0xFF1B5E20)
         RiskLevel.LOW -> Color(0xFFFBC02D)
         RiskLevel.MEDIUM -> Color(0xFFF57C00)
         RiskLevel.HIGH -> Color(0xFFD32F2F)
-        null -> Color(0xFF7E7E7E)
+        else -> Color(0xFF424242)
     }
 
-    return then(
-        background(
-            brush = Brush.verticalGradient(
-                colors = if (isReversed) {
-                    listOf(
-                        Color(0xFF000000),
-                        Color(0xFF000000),
-                        baseColor.copy(alpha = 0.12f)
-                    )
-                } else {
-                    listOf(
-                        baseColor.copy(alpha = 0.2f),
-                        baseColor.copy(alpha = 0.01f),
-                        Color(0xFF000000)
-                    )
-                }
+    return drawBehind {
+        drawRect(color = Color(0xFF0A0000))
+
+        drawRect(
+            brush = Brush.radialGradient(
+                colors = listOf(
+                    baseColor.copy(alpha = 0.4f),
+                    Color.Transparent
+                ),
+                center = Offset(
+                    x = size.width * 0.8f,
+                    y = size.height * 0.2f
+                ),
+                radius = size.width * 1.2f
             )
         )
-    )
+
+        drawRect(
+            brush = Brush.radialGradient(
+                colors = listOf(
+                    baseColor.copy(alpha = 0.3f),
+                    Color.Transparent
+                ),
+                center = Offset(
+                    x = size.width * 0.4f,
+                    y = size.height * 0.5f
+                ),
+                radius = size.width * 0.8f
+            )
+        )
+    }
 }
