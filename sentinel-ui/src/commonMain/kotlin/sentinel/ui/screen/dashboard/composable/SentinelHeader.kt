@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -14,7 +13,6 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.unit.dp
 import sentinel.core.type.RiskLevel
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun SentinelHeader(
     scrollState: ScrollState,
@@ -25,8 +23,8 @@ internal fun SentinelHeader(
 ) {
     val collapseRange = 350f
 
-    val collapseFraction =
-        (scrollState.value / collapseRange).coerceIn(0f, 1f)
+    @Suppress("FrequentlyChangingValue")
+    val collapseFraction = (scrollState.value / collapseRange).coerceIn(0f, 1f)
 
     val scale by animateFloatAsState(
         targetValue = 1f - (collapseFraction * 0.3f),

@@ -6,7 +6,7 @@ expect class Sentinel {
 
     val config: Config
 
-    fun inspect(): SecurityReport
+    suspend fun inspect(): SecurityReport
 
     fun report(report: SecurityReport)
 }

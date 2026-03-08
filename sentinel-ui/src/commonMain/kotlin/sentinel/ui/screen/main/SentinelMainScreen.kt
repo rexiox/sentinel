@@ -22,12 +22,13 @@ fun SentinelMainScreen(
     appSignature: String,
 ) {
     var selectedTab by remember { mutableStateOf(SentinelTab.Dashboard) }
+    val onTabSelected = remember { { tab: SentinelTab -> selectedTab = tab } }
 
     Scaffold(
         bottomBar = {
             SentinelNavigationBar(
                 selectedTab = selectedTab,
-                onTabSelected = { tab -> selectedTab = tab },
+                onTabSelected = onTabSelected
             )
         }
     ) { _ ->

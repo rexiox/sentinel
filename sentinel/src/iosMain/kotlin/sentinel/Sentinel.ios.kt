@@ -10,7 +10,7 @@ actual class Sentinel internal constructor(
     private val detectors: List<SecurityDetector>,
     actual val config: Config,
 ) {
-    actual fun inspect(): SecurityReport = IosSecurityReport(
+    actual suspend fun inspect(): SecurityReport = IosSecurityReport(
         threats = detectors.flatMap { detector -> detector.detect().orEmpty() },
         threshold = config.threshold
     ).also { report ->

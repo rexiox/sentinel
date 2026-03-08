@@ -57,13 +57,14 @@ import sentinel.ui.screen.main.tab.SentinelTab
 
 @Composable
 internal fun SentinelNavigationBar(
+    modifier: Modifier = Modifier,
     selectedTab: SentinelTab,
     onTabSelected: (SentinelTab) -> Unit,
 ) {
     val tabs = SentinelTab.entries
 
-    var selectedTabItem by remember { mutableStateOf(value = 0f) }
-    var selectedTabWidth by remember { mutableStateOf(value = 0f) }
+    var selectedTabItem by remember { mutableStateOf(0f) }
+    var selectedTabWidth by remember { mutableStateOf(0f) }
 
     val animX by animateFloatAsState(
         targetValue = selectedTabItem,
@@ -75,11 +76,11 @@ internal fun SentinelNavigationBar(
     )
 
     Box(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .padding(
                 horizontal = 24.dp,
-                vertical = 20.dp
+                vertical = 24.dp
             )
             .height(height = 64.dp)
     ) {
@@ -87,28 +88,14 @@ internal fun SentinelNavigationBar(
             modifier = Modifier
                 .fillMaxSize()
                 .blur(
-                    radius = 30.dp,
+                    radius = 24.dp,
                     edgeTreatment = BlurredEdgeTreatment.Unbounded
                 )
                 .background(
-                    brush = Brush.linearGradient(
-                        colors = listOf(
-                            Color.Black.copy(alpha = 0.7f),
-                            Color.Black.copy(alpha = 0.9f)
-                        ),
-                    ),
+                    color = Color.Black.copy(alpha = 0.9f),
                     shape = CircleShape
                 )
-        ) {
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(
-                        color = Color.Black.copy(alpha = 0.05f),
-                        shape = CircleShape
-                    )
-            )
-        }
+        )
 
         Box(
             modifier = Modifier
@@ -130,14 +117,6 @@ internal fun SentinelNavigationBar(
                             Color.White.copy(alpha = 0.3f),
                             Color.White.copy(alpha = 0.03f),
                             Color.White.copy(alpha = 0.1f)
-                        ),
-                        start = Offset(
-                            x = 0f,
-                            y = 0f
-                        ),
-                        end = Offset(
-                            x = Float.POSITIVE_INFINITY,
-                            y = Float.POSITIVE_INFINITY
                         )
                     ),
                     shape = CircleShape
@@ -146,11 +125,15 @@ internal fun SentinelNavigationBar(
                     val paddingPx = 6.dp.toPx()
 
                     drawRoundRect(
-                        brush = Brush.verticalGradient(
+                        brush = Brush.linearGradient(
                             colors = listOf(
-                                Color.DarkGray.copy(alpha = 0.25f),
+                                Color.DarkGray.copy(alpha = 0.20f),
                                 Color.DarkGray.copy(alpha = 0.05f),
                                 Color.Transparent
+                            ),
+                            start = Offset(
+                                x = 32f,
+                                y = 0f
                             )
                         ),
                         topLeft = Offset(
@@ -249,7 +232,7 @@ private fun SentinelNavigationBarItem(
         modifier = modifier
             .fillMaxHeight()
             .clickable(
-                interactionSource = remember(calculation = ::MutableInteractionSource),
+                interactionSource = remember { MutableInteractionSource() },
                 indication = null,
                 onClick = onClick
             ),
