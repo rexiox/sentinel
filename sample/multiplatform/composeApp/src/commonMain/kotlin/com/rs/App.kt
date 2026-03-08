@@ -11,6 +11,7 @@ import sentinel.ui.theme.SentinelTheme
 
 @Composable
 fun App(
+    navigationBarModifier: Modifier = Modifier,
     sentinel: Sentinel,
     appId: String = "",
     appSignature: String = "",
@@ -18,9 +19,10 @@ fun App(
     SentinelTheme {
         Scaffold(
             modifier = Modifier.fillMaxSize(),
-            containerColor = Color.Black
+            containerColor = Color.Black,
         ) {
             SentinelMainScreen(
+                navigationBarModifier = navigationBarModifier,
                 sentinel = sentinel,
                 appId = appId,
                 appSignature = appSignature

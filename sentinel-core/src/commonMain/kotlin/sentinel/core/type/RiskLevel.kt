@@ -11,8 +11,9 @@ enum class RiskLevel {
         fun getLevel(severity: Int, threshold: Int): RiskLevel = when {
             severity == 0 -> SAFE
             severity >= threshold -> HIGH
-            severity >= threshold / 2 -> MEDIUM
-            else -> LOW
+            severity >= (threshold / 2) -> MEDIUM
+            severity > 0 -> LOW
+            else -> SAFE
         }
     }
 }

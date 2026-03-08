@@ -1,21 +1,17 @@
 package sentinel.ui.screen.dashboard.composable
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import sentinel.core.type.RiskLevel
-import sentinel.ui.component.SentinelRiskLevelBar
-import org.jetbrains.compose.resources.stringResource
 import com.rs.sentinel.ui.resources.Res
 import com.rs.sentinel.ui.resources.risk_high
 import com.rs.sentinel.ui.resources.risk_level
@@ -23,6 +19,9 @@ import com.rs.sentinel.ui.resources.risk_low
 import com.rs.sentinel.ui.resources.risk_medium
 import com.rs.sentinel.ui.resources.risk_safe
 import com.rs.sentinel.ui.resources.severity
+import org.jetbrains.compose.resources.stringResource
+import sentinel.core.type.RiskLevel
+import sentinel.ui.component.SentinelRiskLevelBar
 
 @Composable
 fun SentinelRiskLevelCard(riskLevel: RiskLevel, severity: Int) {
@@ -45,26 +44,13 @@ fun SentinelRiskLevelCard(riskLevel: RiskLevel, severity: Int) {
         Column(
             modifier = Modifier.padding(horizontal = 16.dp)
         ) {
-            Text(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp)
-                    .padding(bottom = 8.dp),
-                text = stringResource(resource = Res.string.risk_level),
-                textAlign = TextAlign.Center,
-                style = MaterialTheme.typography.titleSmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
+            SentinelInfoItem(
+                title = stringResource(resource = Res.string.risk_level),
+                subtitle = riskDescription,
+                isExpanded = true
             )
 
-            Text(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 16.dp),
-                text = riskDescription,
-                textAlign = TextAlign.Center,
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f)
-            )
+            Spacer(modifier = Modifier.height(height = 16.dp))
 
             SentinelRiskLevelBar(
                 level = riskLevel,

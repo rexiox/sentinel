@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -20,9 +21,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -50,9 +48,12 @@ import androidx.compose.ui.layout.positionInParent
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.rs.sentinel.ui.resources.Res
+import com.rs.sentinel.ui.resources.ic_nav_bar_about
+import com.rs.sentinel.ui.resources.ic_nav_bar_home
 import com.rs.sentinel.ui.resources.nav_bar_about_item
 import com.rs.sentinel.ui.resources.nav_bar_dashboard_item
 import org.jetbrains.compose.resources.stringResource
+import org.jetbrains.compose.resources.vectorResource
 import sentinel.ui.screen.main.tab.SentinelTab
 
 @Composable
@@ -78,11 +79,8 @@ internal fun SentinelNavigationBar(
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .padding(
-                horizontal = 24.dp,
-                vertical = 24.dp
-            )
-            .height(height = 64.dp)
+            .padding(horizontal = 24.dp)
+            .height(height = 60.dp),
     ) {
         Box(
             modifier = Modifier
@@ -198,12 +196,18 @@ internal fun SentinelNavigationBar(
                                 }
                             },
                         selected = isSelected,
-                        icon = if (tab == SentinelTab.Dashboard) Icons.Default.Home else Icons.Default.Info,
+                        icon = if (tab == SentinelTab.Dashboard) {
+                            vectorResource(resource = Res.drawable.ic_nav_bar_home)
+                        } else {
+                            vectorResource(resource = Res.drawable.ic_nav_bar_about)
+                        },
                         label = when (tab) {
                             SentinelTab.Dashboard -> stringResource(resource = Res.string.nav_bar_dashboard_item)
                             SentinelTab.About -> stringResource(resource = Res.string.nav_bar_about_item)
                         },
-                        onClick = { onTabSelected(tab) }
+                        onClick = {
+                            onTabSelected(tab)
+                        }
                     )
                 }
             }
@@ -223,7 +227,7 @@ private fun SentinelNavigationBarItem(
         targetValue = if (selected) {
             MaterialTheme.colorScheme.primary
         } else {
-            Color.White.copy(alpha = 0.6f)
+            Color.White.copy(alpha = 0.5f)
         },
         animationSpec = tween(durationMillis = 400)
     )
@@ -241,12 +245,14 @@ private fun SentinelNavigationBarItem(
     ) {
         Icon(
             modifier = Modifier
-                .size(size = 24.dp)
+                .size(size = 22.dp)
                 .scale(scale = if (selected) 1.1f else 1f),
             imageVector = icon,
             contentDescription = label,
             tint = contentColor,
         )
+
+        Spacer(modifier = Modifier.height(height = 2.dp))
 
         Text(
             text = label,

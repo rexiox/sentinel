@@ -26,7 +26,7 @@ actual fun logReport(report: SecurityReport) {
 
             groupedThreats.forEach { (group, threats) ->
                 println("║")
-                println("║ Category: $group")
+                println("║ Violation: $group")
 
                 threats.forEachIndexed { index, threat ->
                     val violation = threat.violation
@@ -35,7 +35,7 @@ actual fun logReport(report: SecurityReport) {
                     val detail = when (violation) {
                         is IosViolation.Jailbreak.AppInstalled -> "App Id: ${violation.appId}"
                         is IosViolation.Jailbreak.URLSchemes -> "URL Scheme: ${violation.urlScheme}"
-                        is IosViolation.Jailbreak.SuspiciousSymlinks -> "Mount: ${violation.mountPoint}"
+                        is IosViolation.Jailbreak.SuspiciousSymlinks -> "Path: ${violation.path}"
                         is IosViolation.Hook.FrameworkDetected -> "Framework: ${violation.name ?: "Unknown"}"
                         is IosViolation.Simulator.Detected -> "Name: ${violation.name ?: "Unknown"}"
                         is IosViolation.Location.MockAppInstalled -> "Apps: ${violation.packages}"

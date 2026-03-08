@@ -6,8 +6,12 @@ import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
 import sentinel.Sentinel
 import sentinel.all
 import sentinel.configure
@@ -52,6 +56,9 @@ class MainActivity : ComponentActivity() {
             }
 
             App(
+                navigationBarModifier = Modifier
+                    .navigationBarsPadding()
+                    .padding(bottom = 16.dp),
                 sentinel = sentinel,
                 appId = Sentinel.Identity.appId,
                 appSignature = Sentinel.Identity.signature.orEmpty()

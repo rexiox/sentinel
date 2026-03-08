@@ -10,7 +10,7 @@ sealed class IosViolation(
 
         data class URLSchemes(val urlScheme: String? = null) : Jailbreak(severity = 90)
 
-        data class SuspiciousSymlinks(val mountPoint: String? = null) : Jailbreak(severity = 50)
+        data class SuspiciousSymlinks(val path: String? = null) : Jailbreak(severity = 50)
     }
 
     sealed class Tamper(severity: Int) : IosViolation(severity = severity) {

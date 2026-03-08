@@ -17,6 +17,8 @@ import sentinel.ui.screen.main.tab.SentinelTab
 
 @Composable
 fun SentinelMainScreen(
+    modifier: Modifier = Modifier,
+    navigationBarModifier: Modifier = Modifier,
     sentinel: Sentinel,
     appId: String,
     appSignature: String,
@@ -25,12 +27,14 @@ fun SentinelMainScreen(
     val onTabSelected = remember { { tab: SentinelTab -> selectedTab = tab } }
 
     Scaffold(
+        modifier = modifier,
         bottomBar = {
             SentinelNavigationBar(
+                modifier = navigationBarModifier,
                 selectedTab = selectedTab,
                 onTabSelected = onTabSelected
             )
-        }
+        },
     ) { _ ->
         Box(
             modifier = Modifier.fillMaxSize()

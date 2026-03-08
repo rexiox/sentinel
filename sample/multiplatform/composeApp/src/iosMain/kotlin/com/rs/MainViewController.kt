@@ -1,6 +1,9 @@
 package com.rs
 
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.ComposeUIViewController
 import sentinel.Sentinel
 import sentinel.all
@@ -22,6 +25,7 @@ fun MainViewController() = ComposeUIViewController {
     }
 
     App(
+        navigationBarModifier = Modifier.padding(bottom = 24.dp),
         sentinel = sentinel,
         appId = Sentinel.Identity.appId
     )

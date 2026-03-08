@@ -27,7 +27,7 @@ actual fun logReport(report: SecurityReport) {
 
             groupedThreats.forEach { (group, threats) ->
                 println("║")
-                println("║ Category: $group")
+                println("║ Violation: $group")
 
                 threats.forEachIndexed { index, threat ->
                     val violation = threat.violation

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_mame">Sentinel</string>
+    <string name="app_description">Sentinel is a lightweight, modular Kotlin Multiplatform security toolkit designed to analyze runtime environments and detect potential security threats in real time on both Android and iOS.</string>
+
     <string name="app_id">App Id</string>
     <string name="app_signature">Signature</string>
 
@@ -33,4 +35,11 @@
     <string name="risk_low">Low risk present, proceed with caution.</string>
     <string name="risk_medium">Medium risk detected, precautions recommended.</string>
     <string name="risk_high">High risk detected, immediate action required.</string>
+
+    <string name="about_github_label">GitHub</string>
+    <string name="about_github_url_text">Sentinel Source</string>
+    <string name="about_github_url">https://github.com/ResulSilay/Sentinel</string>
+    <string name="about_license_label">License</string>
+    <string name="about_license_url_text">MIT License</string>
+    <string name="about_license_url">https://github.com/ResulSilay/Sentinel/blob/main/LICENSE</string>
 </resources>
