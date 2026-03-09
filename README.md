@@ -26,11 +26,25 @@
   <img alt="image" src="art/header.png" />
 </p>
 
+<table width="100%">
+  <thead>
+    <tr>
+      <th width="50%" align="center">Android</th>
+      <th width="50%" align="center">iOS</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="center">
+        <img src="art/Android.gif" width="100%" style="max-width:300px;" alt="Sentinel Android Demo">
+      </td>
+      <td align="center">
+        <img src="art/iOS.gif" width="100%" style="max-width:300px;" alt="Sentinel iOS Demo">
+      </td>
+    </tr>
+  </tbody>
+</table>
 </div>
-
-Android|iOS
---|--
-![Android](art/Android.gif) | ![iOS](art/iOS.gif)
 
 ## Sentinel
 
@@ -125,6 +139,7 @@ val report = sentinel.inspect()
 ```
 
 ### Report
+
 After the inspection completes, Sentinel returns a `SecurityReport`.
 This report aggregates all detected threats and provides a unified
 severity score and risk level for the current runtime environment.
