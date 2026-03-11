@@ -49,14 +49,14 @@ kotlin {
 }
 
 android {
-    namespace = "com.rs.sentinel.sample.kmp"
+    namespace = "com.rs.sentinel"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.rs.sentinel.sample.kmp"
+        applicationId = "com.rs.sentinel"
         minSdk = 24
         targetSdk = 36
-        versionCode = 1
+        versionCode = 2
         versionName = "1.0.0"
     }
 
