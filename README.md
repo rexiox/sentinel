@@ -13,6 +13,9 @@
 [![Android](https://img.shields.io/badge/Android-000000?style=for-the-badge&logo=android&logoColor=ffffff)](https://developer.android.com/)
 [![iOS](https://img.shields.io/badge/iOS-000000?style=for-the-badge&logo=apple&logoColor=ffffff)](https://developer.apple.com/)
 
+**Sentinel** is a lightweight, modular Kotlin Multiplatform security toolkit designed to analyze
+runtime environments and detect potential security threats in real time on both Android and iOS.
+
 > **Note:** This library is currently under active development. Some features, especially on iOS may
 > be incomplete or experimental.
 
@@ -46,21 +49,16 @@
 </table>
 </div>
 
-## Sentinel
+## Why Sentinel?
+Most mobile apps rely only on server-side security - but attacks happen on the client.
 
-**Sentinel** is a lightweight, modular Kotlin Multiplatform security toolkit designed to analyze
-runtime environments and detect potential security threats in real time on both Android and iOS.
+Sentinel provides real-time, on-device threat detection with minimal performance overhead.
 
-It helps protect your application against:
-
-- Rooted or Jailbroken devices
-- App tampering
-- Hooking frameworks
-- Emulators or Simulators
-- Debugging sessions
-
-Sentinel performs deep environmental inspection, calculates a unified **risk severity score**, and
-produces a comprehensive security report.
+☑️️ Detect compromised devices (root / jailbreak)  
+☑️️ Detect runtime manipulation (Frida, Xposed)  
+☑️️ Detect app tampering & reverse engineering  
+☑️️ Detect emulators & unsafe environments  
+☑️️ Designed for Kotlin Multiplatform (KMP)  
 
 ## Features
 
@@ -83,9 +81,7 @@ produces a comprehensive security report.
 | Debugging Detection            |    ✅    |  ❌  |
 | Mock Location Abuse            |    ✅    |  ❌  |
 
-## Getting Started
-
-Sentinel uses a centralized DSL configuration to manage all security checks.
+## Quick Start
 
 ```gradle
 implementation("io.github.resulsilay:sentinel:1.1.0-alpha2")
@@ -145,12 +141,6 @@ After the inspection completes, Sentinel returns a `SecurityReport`.
 This report aggregates all detected threats and provides a unified
 severity score and risk level for the current runtime environment.
 
-> **Note:** Sentinel uses a categorical aggregation model. Instead of a simple sum, it selects the
-> maximum severity from each category (e.g., Root, Hook, Location) and sums those peaks. This
-> ensures
-> a balanced risk score that accurately reflects the device's security posture without artificial
-> inflation.
-
 ```kotlin
 println("Risk Level: ${report.riskLevel}")
 println("Total Risk Score: ${report.severity} / ${report.threshold}")
@@ -182,6 +172,18 @@ You can optionally log the report to the console / logcat for debugging purposes
 ```kotlin
 sentinel.log(report = report)
 ```
+
+## Samples
+- [Multiplatform](sample/multiplatform)
+- [Android](sample/android)
+
+## Risk Scoring
+Sentinel does NOT simply sum threats.
+
+Instead:
+- Groups threats by category
+- Takes the highest severity per category
+- Produces a realistic risk score
 
 ## License
 
