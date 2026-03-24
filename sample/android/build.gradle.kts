@@ -25,6 +25,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = signingConfigs.getByName("debug")
         }
     }
 
@@ -41,7 +42,7 @@ android {
 dependencies {
     // implementation(project(":sentinel"))
 
-    implementation("io.github.resulsilay:sentinel:1.1.0-alpha2")
+    implementation("io.github.resulsilay:sentinel:1.1.0-alpha3")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

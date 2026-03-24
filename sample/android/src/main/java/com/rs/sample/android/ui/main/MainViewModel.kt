@@ -2,6 +2,4 @@ package com.rs.sample.android.ui.main
 
 import androidx.lifecycle.ViewModel
 
-class MainViewModel : ViewModel() {
-    // TODO: Implement the ViewModel
-}
+class MainViewModel : ViewModel()
