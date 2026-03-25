@@ -2,25 +2,34 @@ package sentinel.kit.detector.constant
 
 object DetectorConst {
 
-    val APP_PATHS: List<String> = listOf(
+    object SandBox {
+
+        const val TEST_PATH = "/private/sentinel_jailbreak_test.txt"
+        const val TEST_CONTENT = "sentinel_check"
+    }
+
+    val JB_APPS: List<String> = listOf(
         "/Applications/Cydia.app",
+        "/Applications/Sileo.app",
+        "/Applications/Zebra.app"
+    )
+
+    val JB_SYSTEM_PATHS: List<String> = listOf(
         "/Library/MobileSubstrate/MobileSubstrate.dylib",
         "/bin/bash",
         "/usr/sbin/sshd",
         "/etc/apt",
         "/private/var/lib/apt/",
-        "/Applications/Sileo.app",
-        "/Applications/Zebra.app",
-        "/Applications/Filza.app",
         "/var/lib/cydia"
     )
 
     val SUSPICIOUS_SYMLINKS: List<String> = listOf(
-        "/Library",
-        "/usr/lib",
-        "/bin",
-        "/etc",
-        "/var"
+        "/Applications",
+        "/Library/Ringtones",
+        "/Library/Wallpaper",
+        "/usr/include",
+        "/usr/libexec",
+        "/usr/share"
     )
 
     val URL_SCHEMES: List<String> = listOf(

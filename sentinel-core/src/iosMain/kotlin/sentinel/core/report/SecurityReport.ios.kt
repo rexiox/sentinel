@@ -13,7 +13,16 @@ class IosSecurityReport(
     timestamp = Clock.System.now().toEpochMilliseconds()
 ) {
 
-    override val isJailbroken: Boolean get() = threats.any { it.violation is IosViolation.Jailbreak }
+    override val isJailbroken: Boolean
+        get() {
+            val score = threats
+                .map(Threat::violation)
+                .filterIsInstance<IosViolation.Jailbreak>()
+                .sumOf(IosViolation.Jailbreak::severity)
+
+            return score >= 90
+        }
+
     override val isTampered: Boolean get() = threats.any { it.violation is IosViolation.Tamper }
     override val isHooked: Boolean get() = threats.any { it.violation is IosViolation.Hook }
     override val isSimulator: Boolean get() = threats.any { it.violation is IosViolation.Simulator }

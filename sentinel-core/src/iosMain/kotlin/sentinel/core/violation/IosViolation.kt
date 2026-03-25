@@ -6,11 +6,13 @@ sealed class IosViolation(
 
     sealed class Jailbreak(severity: Int) : IosViolation(severity = severity) {
 
-        data class AppInstalled(val appId: String? = null) : Jailbreak(severity = 90)
+        data class Sandbox(val appId: String? = null) : Jailbreak(severity = 100)
 
-        data class URLSchemes(val urlScheme: String? = null) : Jailbreak(severity = 90)
+        data class SuspiciousSymlinks(val path: String? = null) : Jailbreak(severity = 80)
 
-        data class SuspiciousSymlinks(val path: String? = null) : Jailbreak(severity = 60)
+        data class AppInstalled(val appId: String? = null) : Jailbreak(severity = 50)
+
+        data class URLSchemes(val urlScheme: String? = null) : Jailbreak(severity = 30)
     }
 
     sealed class Tamper(severity: Int) : IosViolation(severity = severity) {

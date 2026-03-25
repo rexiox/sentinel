@@ -1,9 +1,11 @@
 package sentinel.kit.detector
 
+import kotlinx.cinterop.BetaInteropApi
 import kotlinx.cinterop.ExperimentalForeignApi
 import platform.Foundation.NSFileManager
-import platform.Foundation.NSFileTypeSymbolicLink
 import platform.Foundation.NSURL
+import platform.Foundation.create
+import platform.Foundation.writeToFile
 import platform.UIKit.UIApplication
 import sentinel.core.detector.SecurityDetector
 import sentinel.core.detector.Threat
@@ -13,6 +15,14 @@ import sentinel.kit.detector.constant.DetectorConst
 class JailbreakDetector : SecurityDetector {
 
     override fun detect(): List<Threat> = buildList {
+        if (checkSandbox()) {
+            add(element = Threat(violation = IosViolation.Jailbreak.Sandbox()))
+        }
+
+        if (checkSuspiciousSymlinks()) {
+            add(element = Threat(violation = IosViolation.Jailbreak.SuspiciousSymlinks()))
+        }
+
         if (checkJailbreakApps()) {
             add(element = Threat(violation = IosViolation.Jailbreak.AppInstalled()))
         }
@@ -20,33 +30,53 @@ class JailbreakDetector : SecurityDetector {
         if (checkURLSchemes()) {
             add(element = Threat(violation = IosViolation.Jailbreak.URLSchemes()))
         }
+    }
 
-        if (checkSuspiciousSymlinks()) {
-            add(element = Threat(violation = IosViolation.Jailbreak.SuspiciousSymlinks()))
+    @OptIn(ExperimentalForeignApi::class, BetaInteropApi::class)
+    private fun checkSandbox(): Boolean = runCatching {
+        val path = DetectorConst.SandBox.TEST_PATH
+        val content = platform.Foundation.NSString.create(
+            string = DetectorConst.SandBox.TEST_CONTENT
+        )
+
+        val success = content.writeToFile(
+            path = path,
+            atomically = true,
+            encoding = platform.Foundation.NSUTF8StringEncoding,
+            error = null
+        )
+
+        when {
+            success -> {
+                NSFileManager.defaultManager.removeItemAtPath(path = path, error = null)
+                true
+            }
+
+            else -> false
         }
-    }
-
-    private fun checkJailbreakApps(): Boolean {
-        val fileManager = NSFileManager.defaultManager
-
-        return DetectorConst.APP_PATHS.any(predicate = fileManager::fileExistsAtPath)
-    }
-
-    private fun checkURLSchemes(): Boolean {
-        val sharedApp = UIApplication.sharedApplication
-
-        return DetectorConst.URL_SCHEMES
-            .mapNotNull { NSURL.URLWithString(it) }
-            .any(predicate = sharedApp::canOpenURL)
-    }
+    }.getOrDefault(defaultValue = false)
 
     @OptIn(ExperimentalForeignApi::class)
     private fun checkSuspiciousSymlinks(): Boolean {
         val fileManager = NSFileManager.defaultManager
+        val hasSuspiciousFiles = DetectorConst.JB_SYSTEM_PATHS.any(
+            predicate = fileManager::fileExistsAtPath
+        )
 
-        return DetectorConst.SUSPICIOUS_SYMLINKS.any { path ->
-            val attributes = fileManager.attributesOfItemAtPath(path, null)
-            attributes?.get(platform.Foundation.NSFileType) == NSFileTypeSymbolicLink
+        val hasSymlinks = DetectorConst.SUSPICIOUS_SYMLINKS.any { path ->
+            fileManager.destinationOfSymbolicLinkAtPath(path = path, error = null) != null
         }
+
+        return hasSuspiciousFiles || hasSymlinks
+    }
+
+    private fun checkJailbreakApps(): Boolean {
+        return DetectorConst.JB_APPS.any(predicate = NSFileManager.defaultManager::fileExistsAtPath)
+    }
+
+    private fun checkURLSchemes(): Boolean {
+        return DetectorConst.URL_SCHEMES
+            .mapNotNull { url -> NSURL.URLWithString(URLString = url) }
+            .any(predicate = UIApplication.sharedApplication::canOpenURL)
     }
 }
