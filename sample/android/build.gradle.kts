@@ -42,7 +42,7 @@ android {
 dependencies {
     implementation(project(":sentinel"))
 
-    // implementation("io.github.resulsilay:sentinel:1.3.0-alpha1")
+    // implementation("io.github.resulsilay:sentinel:1.3.0-alpha2")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
