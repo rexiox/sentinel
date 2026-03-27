@@ -7,7 +7,7 @@
 [![Security](https://img.shields.io/badge/Security-000000?style=for-the-badge&logo=bitwarden)](#)
 [![Toolkit](https://img.shields.io/badge/Toolkit-000000?style=for-the-badge&logo=hackthebox&logoColor=ffffff)](#)
 [![Gradle](https://img.shields.io/badge/Gradle-000000?style=for-the-badge&logo=gradle)](#)
-[![Version](https://img.shields.io/badge/1.1.0.alpha4-000000?style=for-the-badge&logo=stackblitz)](#)
+[![Version](https://img.shields.io/badge/1.2.0.alpha1-000000?style=for-the-badge&logo=stackblitz)](#)
 
 [![KMP](https://img.shields.io/badge/Kotlin%20Multiplatform%20-000000?style=for-the-badge&logo=kotlin&logoColor=ffffff)](#)
 [![Android](https://img.shields.io/badge/Android-000000?style=for-the-badge&logo=android&logoColor=ffffff)](https://developer.android.com/)
@@ -76,7 +76,7 @@ Sentinel provides real-time, on-device threat detection with minimal performance
 |--------------------------------|:-------:|:---:|
 | Root / Jailbreak               |    ✅    |  ✅  |
 | App Tampering                  |    ✅    |  ❌  |
-| Hooking Frameworks             |    ✅    |  ❌  |
+| Hooking Detection              |    ✅    |  ✅  |
 | Emulator / Simulator Detection |    ✅    |  ✅  |
 | Debugging Detection            |    ✅    |  ✅  |
 | Mock Location Abuse            |    ✅    |  ❌  |
@@ -84,7 +84,7 @@ Sentinel provides real-time, on-device threat detection with minimal performance
 ## Quick Start
 
 ```gradle
-implementation("io.github.resulsilay:sentinel:1.1.0-alpha4")
+implementation("io.github.resulsilay:sentinel:1.2.0-alpha1")
 ```
 
 ### Android Usage
@@ -120,6 +120,7 @@ val sentinel = Sentinel.configure {
 
     all()
     // jailbreak()
+    // hook()
     // simulator()
     // debug()
 }

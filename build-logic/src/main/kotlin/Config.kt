@@ -6,7 +6,7 @@ object Config {
 
         const val MIN_SDK = 24
         const val COMPILE_SDK = 36
-        const val NAME = "1.1.0-alpha4"
+        const val NAME = "1.2.0-alpha1"
     }
 
     object Publishing {

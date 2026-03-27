@@ -20,6 +20,7 @@ fun MainViewController() = ComposeUIViewController {
 
             all()
             // jailbreak()
+            // hook()
             // simulator()
             // debug()
         }

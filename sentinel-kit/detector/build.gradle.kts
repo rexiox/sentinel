@@ -26,6 +26,12 @@ kotlin {
         iosSimulatorArm64()
     )
 
+    val compileNativeSecurity by tasks.creating(Exec::class) {
+        val scriptFile = project.file("src/nativeInterop/cinterop/build.sh")
+        workingDir = scriptFile.parentFile
+        commandLine("sh", scriptFile.name)
+    }
+
     iosTargets.forEach { target ->
         target.binaries.framework {
             baseName = "sentinel-kit-detector"
@@ -33,16 +39,24 @@ kotlin {
 
         target.compilations.getByName("main") {
             cinterops {
-                val debuggerInterop by creating {
-                    definitionFile.set(
-                        project.file(
-                            if (target.konanTarget.name.contains("sim"))
-                                "src/nativeInterop/cinterop/debugger/debugger_sim.def"
-                            else
-                                "src/nativeInterop/cinterop/debugger/debugger_device.def"
+                val libSubDir =
+                    if (target.konanTarget.name.contains("simulator") ||
+                        target.konanTarget.name.contains("x64")
+                    ) {
+                        "sim"
+                    } else {
+                        "device"
+                    }
+
+                val detector by creating {
+                    definitionFile.set(project.file("src/nativeInterop/cinterop/def/detector_$libSubDir.def"))
+
+                    includeDirs.allHeaders(
+                        includeDirs = listOf(
+                            "src/nativeInterop/cinterop/debugger/",
+                            "src/nativeInterop/cinterop/hook/"
                         )
                     )
-                    includeDirs.allHeaders("src/nativeInterop/cinterop/debugger/")
                 }
             }
         }

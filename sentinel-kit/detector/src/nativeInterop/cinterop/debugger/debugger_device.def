@@ -1,5 +1,0 @@
-headers = debugger.h
-package = sentinel.detector.debugger
-staticLibraries = libdebugger_arm64.a
-
-libraryPaths = src/nativeInterop/cinterop/debugger/libs

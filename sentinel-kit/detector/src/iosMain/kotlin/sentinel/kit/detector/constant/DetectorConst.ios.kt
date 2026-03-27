@@ -49,4 +49,13 @@ object DetectorConst {
     val SIMULATOR_MODEL_KEYS: List<String> = listOf(
         "Simulator"
     )
+
+    val CRITICAL_SYSTEM_FUNCTIONS = listOf(
+        "ptrace",
+        "exit",
+        "sysctl",
+        "dlopen",
+        "abort",
+        "fork"
+    )
 }

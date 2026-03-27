@@ -12,6 +12,8 @@ actual fun getViolations(): List<SecurityViolation> = listOf(
     IosViolation.Tamper.SignatureMismatch,
 
     IosViolation.Hook.FrameworkDetected(),
+    IosViolation.Hook.InlineHookDetected(),
+    IosViolation.Hook.FridaDetected,
 
     IosViolation.Simulator.Detected(),
 

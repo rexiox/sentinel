@@ -4,7 +4,7 @@ import kotlinx.cinterop.ExperimentalForeignApi
 import sentinel.core.detector.SecurityDetector
 import sentinel.core.detector.Threat
 import sentinel.core.violation.IosViolation
-import sentinel.detector.debugger.isDebuggerAttached
+import sentinel.detector.isDebuggerAttached
 
 class DebugDetector : SecurityDetector {
 

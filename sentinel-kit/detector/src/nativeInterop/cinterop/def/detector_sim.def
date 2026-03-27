@@ -1,0 +1,5 @@
+headers = hook.h debugger.h
+package = sentinel.detector
+staticLibraries = libnative_detector.a
+
+libraryPaths = src/nativeInterop/cinterop/libs/sim
