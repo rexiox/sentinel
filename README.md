@@ -7,7 +7,7 @@
 [![Security](https://img.shields.io/badge/Security-000000?style=for-the-badge&logo=bitwarden)](#)
 [![Toolkit](https://img.shields.io/badge/Toolkit-000000?style=for-the-badge&logo=hackthebox&logoColor=ffffff)](#)
 [![Gradle](https://img.shields.io/badge/Gradle-000000?style=for-the-badge&logo=gradle)](#)
-[![Version](https://img.shields.io/badge/1.3.0.alpha2-000000?style=for-the-badge&logo=stackblitz)](#)
+[![Version](https://img.shields.io/badge/1.3.0.alpha3-000000?style=for-the-badge&logo=stackblitz)](#)
 
 [![KMP](https://img.shields.io/badge/Kotlin%20Multiplatform%20-000000?style=for-the-badge&logo=kotlin&logoColor=ffffff)](#)
 [![Android](https://img.shields.io/badge/Android-000000?style=for-the-badge&logo=android&logoColor=ffffff)](https://developer.android.com/)
@@ -85,7 +85,7 @@ Sentinel provides real-time, on-device threat detection with minimal performance
 ## Quick Start
 
 ```gradle
-implementation("io.github.resulsilay:sentinel:1.3.0-alpha2")
+implementation("io.github.resulsilay:sentinel:1.3.0-alpha3")
 ```
 
 ### Android Usage
