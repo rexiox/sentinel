@@ -26,9 +26,7 @@ sealed class AndroidViolation(
 
     sealed class Hook(severity: Int) : AndroidViolation(severity = severity) {
 
-        data class FrameworkDetected(val name: String? = null) : Hook(severity = 80)
-
-        object FridaDetected : Hook(severity = 100)
+        data class FrameworkDetected(val name: String? = null) : Hook(severity = 100)
     }
 
     sealed class Emulator(severity: Int) : AndroidViolation(severity = severity) {

@@ -14,7 +14,6 @@ actual fun getViolations(): List<SecurityViolation> = listOf(
     AndroidViolation.Tamper.SignatureMismatch,
 
     AndroidViolation.Hook.FrameworkDetected(),
-    AndroidViolation.Hook.FridaDetected,
 
     AndroidViolation.Emulator.Detected(),
 

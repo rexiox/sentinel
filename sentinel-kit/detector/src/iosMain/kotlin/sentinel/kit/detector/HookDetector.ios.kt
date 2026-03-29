@@ -1,6 +1,7 @@
 package sentinel.kit.detector
 
 import kotlinx.cinterop.ExperimentalForeignApi
+import kotlinx.cinterop.toKString
 import platform.posix.dlsym
 import sentinel.core.detector.SecurityDetector
 import sentinel.core.detector.Threat
@@ -15,12 +16,17 @@ class HookDetector : SecurityDetector {
 
     @OptIn(ExperimentalForeignApi::class)
     override fun detect(): List<Threat> = buildList {
-        if (checkDyldImages()) {
-            add(element = Threat(violation = IosViolation.Hook.FrameworkDetected()))
+        checkDyldImages()?.also { name ->
+            add(
+                element = Threat(
+                    violation = IosViolation.Hook.FrameworkDetected(name = name.toKString())
+                )
+            )
+            platform.posix.free(name)
         }
 
         if (scanMemoryForFridaSignatures() || checkFridaDefaultPort()) {
-            add(element = Threat(violation = IosViolation.Hook.FridaDetected))
+            add(element = Threat(violation = IosViolation.Hook.FrameworkDetected(name = "Frida")))
         }
 
         DetectorConst.CRITICAL_SYSTEM_FUNCTIONS.forEach { funcName ->

@@ -14,7 +14,6 @@ actual fun getViolations(): List<SecurityViolation> = listOf(
 
     IosViolation.Hook.FrameworkDetected(),
     IosViolation.Hook.InlineHookDetected(),
-    IosViolation.Hook.FridaDetected,
 
     IosViolation.Simulator.Detected(),
 

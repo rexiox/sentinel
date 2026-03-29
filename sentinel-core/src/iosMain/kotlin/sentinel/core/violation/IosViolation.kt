@@ -24,11 +24,9 @@ sealed class IosViolation(
 
     sealed class Hook(severity: Int) : IosViolation(severity = severity) {
 
-        data class FrameworkDetected(val name: String? = null) : Hook(severity = 80)
+        data class FrameworkDetected(val name: String? = null) : Hook(severity = 100)
 
         data class InlineHookDetected(val name: String? = null) : Hook(severity = 90)
-
-        object FridaDetected : Hook(severity = 100)
     }
 
     sealed class Simulator(severity: Int) : IosViolation(severity = severity) {

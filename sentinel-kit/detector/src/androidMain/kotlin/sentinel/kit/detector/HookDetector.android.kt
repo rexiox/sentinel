@@ -18,7 +18,7 @@ class HookDetector : SecurityDetector {
 
         return buildList {
             if (isFridaDetected()) {
-                add(element = Threat(violation = AndroidViolation.Hook.FridaDetected))
+                add(element = Threat(violation = AndroidViolation.Hook.FrameworkDetected(name = "Frida")))
             }
 
             if (isCheckStackTraceManually) {

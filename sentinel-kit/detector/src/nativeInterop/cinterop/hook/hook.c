@@ -69,14 +69,12 @@ bool checkFridaDefaultPort() {
   return result == 0;
 }
 
-__attribute__((always_inline)) bool checkDyldImages() {
+__attribute__((always_inline)) char* checkDyldImages(void) {
   uint32_t count = _dyld_image_count();
   for (uint32_t i = 0; i < count; i++) {
     const char *name = _dyld_get_image_name(i);
     if (!name)
       continue;
-
-    // os_log(OS_LOG_DEFAULT, "NAME: %s", name);
 
     if (strstr(name, "Frida") ||
         strstr(name, "frida") ||
@@ -84,11 +82,11 @@ __attribute__((always_inline)) bool checkDyldImages() {
         strstr(name, "libhooker") ||
         strstr(name, "Substrate") ||
         strstr(name, "TweakInject")) {
-      return true;
+      return strdup(name);
     }
   }
 
-  return false;
+  return NULL;
 }
 
 bool isFunctionHooked(void *func_ptr) {

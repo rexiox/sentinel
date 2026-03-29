@@ -9,7 +9,7 @@ extern "C" {
 
 bool scanMemoryForFridaSignatures(void);
 bool checkFridaDefaultPort(void);
-bool checkDyldImages(void);
+char *checkDyldImages(void);
 bool isFunctionHooked(void *func_ptr);
 
 #ifdef __cplusplus
