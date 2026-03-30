@@ -23,25 +23,31 @@ runtime environments and detect potential security threats in real time on both 
   <img alt="image" src="art/header.png" />
 </p>
 
-<table width="100%">
+<table style="width: auto; margin: auto; border-collapse: collapse;">
   <thead>
     <tr>
-      <th width="50%" align="center">Android</th>
-      <th width="50%" align="center">iOS</th>
+      <th align="center" style="padding: 10px;">Android</th>
+      <th align="center" style="padding: 10px;">iOS</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td align="center">
-        <img src="art/Android.gif" width="100%" style="max-width:300px;" alt="Sentinel Android Demo">
+      <td align="center" style="padding: 5px;">
+        <img src="art/Android.gif" width="240" alt="Android Demo">
+      </td>
+      <td align="center" style="padding: 5px;">
+        <img src="art/iOS.gif" width="240" alt="iOS Demo">
+      </td>
+    </tr>
+    <tr>
+      <td align="center" style="padding: 10px;">
         <a href="https://play.google.com/store/apps/details?id=com.rs.sentinel">
-            <img src="art/google-play-badge.svg" width="200" alt="sentinel"/>
+          <img src="art/google-play-badge.svg" height="40" alt="Google Play">
         </a>
       </td>
-      <td align="center">
-        <img src="art/iOS.gif" width="100%" style="max-width:300px;" alt="Sentinel iOS Demo">
+      <td align="center" style="padding: 10px;">
         <a href="https://apps.apple.com/us/app/">
-            <img src="art/app-store-badge.svg" width="200" alt="sentinel"/>
+          <img src="art/app-store-badge.svg" height="40" alt="App Store">
         </a>
       </td>
     </tr>
