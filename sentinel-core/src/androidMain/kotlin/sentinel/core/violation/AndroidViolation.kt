@@ -46,7 +46,5 @@ sealed class AndroidViolation(
         object MockSettingEnabled : Location(severity = 50)
 
         data class MockAppInstalled(val packages: List<String>) : Location(severity = 60)
-
-        object MockLocationDetected : Location(severity = 70)
     }
 }

@@ -16,7 +16,7 @@
 #include <sys/socket.h>
 #include <unistd.h>
 
-__attribute__((always_inline)) bool scanMemoryForFridaSignatures() {
+bool scanMemoryForFridaSignatures() {
   vm_address_t address = 0;
   vm_size_t size = 0;
   kern_return_t kr;
@@ -69,7 +69,7 @@ bool checkFridaDefaultPort() {
   return result == 0;
 }
 
-__attribute__((always_inline)) char* checkDyldImages(void) {
+char* checkDyldImages(void) {
   uint32_t count = _dyld_image_count();
   for (uint32_t i = 0; i < count; i++) {
     const char *name = _dyld_get_image_name(i);

@@ -18,11 +18,10 @@ class SimulatorDetector : SecurityDetector {
     private fun isSimulator(): Boolean {
         val model = UIDevice.currentDevice.model
         val env = NSProcessInfo.processInfo.environment
-
+        val hasSimulatorEnv = DetectorConst.SIMULATOR_KEYS.any { key -> env[key] != null }
         val isSimulatorModel = DetectorConst.SIMULATOR_MODEL_KEYS.any { modelKey ->
             model.contains(other = modelKey, ignoreCase = true)
         }
-        val hasSimulatorEnv = DetectorConst.SIMULATOR_KEYS.any { key -> env[key] != null }
 
         return isSimulatorModel || hasSimulatorEnv
     }

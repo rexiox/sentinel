@@ -22,8 +22,7 @@
 extern "C" {
 
 JNIEXPORT jboolean JNICALL
-Java_sentinel_kit_detector_HookDetector_isFridaDetected(JNIEnv *env,
-                                                           jobject thiz) {
+Java_sentinel_kit_detector_HookDetector_isFridaDetected(JNIEnv *env, jobject thiz) {
   char line[512];
   FILE *fp = fopen("/proc/self/maps", "r");
   if (fp == nullptr)

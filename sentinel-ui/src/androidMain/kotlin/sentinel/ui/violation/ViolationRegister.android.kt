@@ -21,7 +21,6 @@ actual fun getViolations(): List<SecurityViolation> = listOf(
     AndroidViolation.Debugger.TestKeys,
 
     AndroidViolation.Location.MockSettingEnabled,
-    AndroidViolation.Location.MockLocationDetected,
     AndroidViolation.Location.MockAppInstalled(packages = emptyList())
 )
 

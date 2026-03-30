@@ -113,8 +113,7 @@ Java_sentinel_kit_detector_RootDetector_checkMounts(JNIEnv *env, jobject) {
 }
 
 JNIEXPORT jboolean JNICALL
-Java_sentinel_kit_detector_RootDetector_checkSuCommand(JNIEnv *env,
-                                                          jobject) {
+Java_sentinel_kit_detector_RootDetector_checkSuCommand(JNIEnv *env, jobject) {
   FILE *pipe = popen("which su", "r");
   if (!pipe)
     return JNI_FALSE;
