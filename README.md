@@ -16,12 +16,23 @@
 **Sentinel** is a lightweight, modular Kotlin Multiplatform security toolkit designed to analyze
 runtime environments and detect potential security threats in real time on both Android and iOS.
 
-> **Note:** This library is currently under active development. Some features, especially on iOS may
-> be incomplete or experimental.
-
 <p align="center">
   <img alt="image" src="art/header.png" />
 </p>
+</div>
+
+## Why Sentinel?
+
+Most mobile apps rely only on server-side security, but attacks happen on the client.
+
+Sentinel provides real-time, on-device threat detection with minimal performance overhead.
+
+☑️️ Detect compromised devices (root / jailbreak)  
+☑️️ Detect runtime manipulation (Frida, Xposed)  
+☑️️ Detect app tampering & reverse engineering  
+☑️️ Detect emulators & unsafe environments  
+☑️️ Designed for Kotlin Multiplatform (KMP)
+
 
 <table style="width: auto; margin: auto; border-collapse: collapse;">
   <thead>
@@ -53,19 +64,6 @@ runtime environments and detect potential security threats in real time on both 
     </tr>
   </tbody>
 </table>
-</div>
-
-## Why Sentinel?
-
-Most mobile apps rely only on server-side security, but attacks happen on the client.
-
-Sentinel provides real-time, on-device threat detection with minimal performance overhead.
-
-☑️️ Detect compromised devices (root / jailbreak)  
-☑️️ Detect runtime manipulation (Frida, Xposed)  
-☑️️ Detect app tampering & reverse engineering  
-☑️️ Detect emulators & unsafe environments  
-☑️️ Designed for Kotlin Multiplatform (KMP)
 
 ## Features
 
