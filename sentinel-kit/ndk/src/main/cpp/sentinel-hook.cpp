@@ -113,7 +113,7 @@ void *integrity_monitor(void *arg) {
       g_vm->DetachCurrentThread();
     }
 
-    sleep(10);
+    sleep(3);
   }
   return nullptr;
 }

@@ -5,13 +5,10 @@
 </p>
 
 [![Security](https://img.shields.io/badge/Security-000000?style=for-the-badge&logo=bitwarden)](#)
-[![Toolkit](https://img.shields.io/badge/Toolkit-000000?style=for-the-badge&logo=hackthebox&logoColor=ffffff)](#)
-[![Gradle](https://img.shields.io/badge/Gradle-000000?style=for-the-badge&logo=gradle)](#)
-[![Version](https://img.shields.io/badge/1.3.0.alpha4-000000?style=for-the-badge&logo=stackblitz)](#)
-
-[![KMP](https://img.shields.io/badge/Kotlin%20Multiplatform%20-000000?style=for-the-badge&logo=kotlin&logoColor=ffffff)](#)
+[![KMP](https://img.shields.io/badge/KMP-000000?style=for-the-badge&logo=kotlin&logoColor=ffffff)](#)
 [![Android](https://img.shields.io/badge/Android-000000?style=for-the-badge&logo=android&logoColor=ffffff)](https://developer.android.com/)
 [![iOS](https://img.shields.io/badge/iOS-000000?style=for-the-badge&logo=apple&logoColor=ffffff)](https://developer.apple.com/)
+[![Version](https://img.shields.io/badge/1.3.0.alpha4-000000?style=for-the-badge&logo=stackblitz)](#)
 
 **Sentinel** is a lightweight, modular Kotlin Multiplatform security toolkit designed to analyze
 runtime environments and detect potential security threats in real time on both Android and iOS.
@@ -67,13 +64,15 @@ Sentinel provides real-time, on-device threat detection with minimal performance
 
 ## Features
 
+♦️ **Kotlin Multiplatform:** Works on Android and iOS with a single codebase.
 ♦️ **Modular Detector Architecture:** Easily enable, disable, or extend security checks.  
 ♦️ **Smart Risk Aggregation:** Weighted category scoring to prevent artificial risk inflation.  
 ♦️ **Configurable Threat Threshold:** Set your own critical risk level to control app behavior.  
 ♦️ **DSL-Based Configuration:** Use a clean and expressive API for configuration.  
 ♦️ **Detailed Security Reports:** Get a full breakdown of detected threats.  
 ♦️ **Lightweight & High Performance:** Minimal runtime overhead for optimal performance.  
-♦️ **Kotlin Multiplatform:** Works on Android and iOS with a single codebase.
+♦️ **RASP-Based Threat Detection:** Real-time monitoring of dynamic instrumentation, hooking, and
+injection attempts.
 
 ## Supported Threats by Platform
 
@@ -182,11 +181,11 @@ You can optionally log the report to the console / logcat for debugging purposes
 SentinelLogger.report(report = report)
 ```
 
-### RASP - Runtime Application Self-Protection
+### RASP - Runtime Application Self-Protection (Detection)
 
-Sentinel goes beyond initial startup checks; it provides active protection throughout the
-application's lifecycle. By performing periodic background scans, it enables real-time responses to
-unauthorized access attempts and external manipulations occurring at runtime.
+Sentinel extends protection beyond initial startup checks by continuously monitoring the application
+during runtime. Through background scanning mechanisms, it detects unauthorized access attempts,
+runtime tampering, and external manipulation activities in real time.
 
 ```kotlin
 sentinel.runtime {

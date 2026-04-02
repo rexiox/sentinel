@@ -9,6 +9,7 @@ pluginManagement {
 }
 
 dependencyResolutionManagement {
+    @Suppress("UnstableApiUsage")
     repositories {
         google()
         mavenCentral()
@@ -23,6 +24,7 @@ include(":sentinel-core")
 include(":sentinel-runtime")
 include(":sentinel-identity")
 include(":sentinel-kit")
+include(":sentinel-kit:kni")
 include(":sentinel-kit:ndk")
 include(":sentinel-kit:detector")
 

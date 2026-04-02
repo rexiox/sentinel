@@ -102,7 +102,7 @@ void *integrity_monitor(void *arg) {
       g_last_debugger_state = false;
     }
 
-    sleep(10);
+    sleep(3);
   }
   return nullptr;
 }

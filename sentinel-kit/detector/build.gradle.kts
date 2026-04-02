@@ -9,7 +9,6 @@ group = Config.Publishing.GROUP_ID
 version = Config.Version.NAME
 
 kotlin {
-
     android {
         namespace = "${Config.NAMESPACE}.kit.detector"
 
@@ -30,31 +29,6 @@ kotlin {
         target.binaries.framework {
             baseName = "sentinel-kit-detector"
         }
-
-        target.compilations.getByName("main") {
-            cinterops {
-                val libSubDir =
-                    if (target.konanTarget.name.contains("simulator") ||
-                        target.konanTarget.name.contains("x64")
-                    ) {
-                        "sim"
-                    } else {
-                        "device"
-                    }
-
-                val detector by creating {
-                    definitionFile.set(project.file("src/nativeInterop/cinterop/def/detector_$libSubDir.def"))
-
-                    includeDirs.allHeaders(
-                        includeDirs = listOf(
-                            "src/nativeInterop/cinterop/tamper/",
-                            "src/nativeInterop/cinterop/hook/",
-                            "src/nativeInterop/cinterop/debugger/"
-                        )
-                    )
-                }
-            }
-        }
     }
 
     sourceSets {
@@ -68,6 +42,12 @@ kotlin {
         androidMain {
             dependencies {
                 api(project(":sentinel-kit:ndk"))
+            }
+        }
+
+        iosMain {
+            dependencies {
+                api(project(":sentinel-kit:kni"))
             }
         }
 

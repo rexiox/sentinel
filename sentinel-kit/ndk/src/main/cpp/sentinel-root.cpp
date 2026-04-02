@@ -138,7 +138,7 @@ void *integrity_monitor(void *arg) {
     }
 
     g_last_root_violation = current_violation;
-    sleep(10);
+    sleep(3);
   }
   return nullptr;
 }
