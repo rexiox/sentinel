@@ -20,6 +20,7 @@ rootProject.name = "sentinel"
 include(":sentinel")
 include(":sentinel-ui")
 include(":sentinel-core")
+include(":sentinel-runtime")
 include(":sentinel-identity")
 include(":sentinel-kit")
 include(":sentinel-kit:ndk")

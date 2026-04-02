@@ -2,17 +2,15 @@ package sentinel.kit.detector
 
 import kotlinx.cinterop.COpaquePointer
 import kotlinx.cinterop.ExperimentalForeignApi
-import kotlinx.cinterop.toKString
 import platform.posix.RTLD_DEFAULT
 import platform.posix.dlsym
-import platform.posix.free
 import sentinel.core.detector.SecurityDetector
 import sentinel.core.detector.Threat
 import sentinel.core.violation.IosViolation
-import sentinel.detector.checkDyldImages
-import sentinel.detector.checkFridaDefaultPort
-import sentinel.detector.isFunctionHooked
-import sentinel.detector.scanMemoryForFridaSignatures
+import sentinel.detector.checkReservedPort
+import sentinel.detector.isInstructionTampered
+import sentinel.detector.scanMemorySignatures
+import sentinel.detector.verifyLoadedImages
 import sentinel.kit.detector.constant.DetectorConst
 
 class HookDetector : SecurityDetector {
@@ -26,16 +24,15 @@ class HookDetector : SecurityDetector {
 
     @OptIn(ExperimentalForeignApi::class)
     override fun detect(): List<Threat> = buildList {
-        checkDyldImages()?.also { name ->
+        if (verifyLoadedImages()) {
             add(
                 element = Threat(
-                    violation = IosViolation.Hook.FrameworkDetected(name = name.toKString())
+                    violation = IosViolation.Hook.FrameworkDetected(name = "Frida")
                 )
             )
-            free(name)
         }
 
-        if (scanMemoryForFridaSignatures()) {
+        if (scanMemorySignatures()) {
             add(
                 element = Threat(
                     violation = IosViolation.Hook.FrameworkDetected(name = "Frida-Memory")
@@ -43,7 +40,7 @@ class HookDetector : SecurityDetector {
             )
         }
 
-        if (checkFridaDefaultPort()) {
+        if (checkReservedPort()) {
             add(
                 element = Threat(
                     violation = IosViolation.Hook.FrameworkDetected(name = "Frida-Port")
@@ -52,7 +49,7 @@ class HookDetector : SecurityDetector {
         }
 
         systemFunctionAddresses.forEach { (funcName, funcAddr) ->
-            if (funcAddr != null && isFunctionHooked(func_ptr = funcAddr)) {
+            if (funcAddr != null && isInstructionTampered(func_ptr = funcAddr)) {
                 add(
                     element = Threat(
                         violation = IosViolation.Hook.InlineHookDetected(name = funcName)

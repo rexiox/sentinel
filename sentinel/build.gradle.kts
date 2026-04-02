@@ -41,6 +41,7 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             api(project(":sentinel-core"))
+            api(project(":sentinel-runtime"))
             api(project(":sentinel-identity"))
             api(project(":sentinel-kit:detector"))
 

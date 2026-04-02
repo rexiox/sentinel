@@ -3,12 +3,9 @@ package com.rs
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import sentinel.Sentinel
-import sentinel.core.logger.SentinelLogger.info
-import sentinel.scan
 import sentinel.ui.screen.main.SentinelMainScreen
 import sentinel.ui.theme.SentinelTheme
 
@@ -20,38 +17,6 @@ fun App(
     appSignature: String = "",
     appHash: String = "",
 ) {
-    LaunchedEffect(Unit) {
-        sentinel.scan(intervalMs = 10_000) {
-            onCompromised {
-                info(msg = "Device integrity failed (Root/Jailbreak detected).")
-            }
-
-            onTampered {
-                info(msg = "App tampering detected.")
-            }
-
-            onHooked {
-                info(msg = "Runtime hook detection.")
-            }
-
-            onSimulated {
-                info(msg = "Running on Emulator/Simulator environment.")
-            }
-
-            onDebugged {
-                info(msg = "Active debugging session detected.")
-            }
-
-            onCritical { score ->
-                info(msg = "High risk score reached: $score")
-            }
-
-            onSafe {
-                info(msg = "All systems nominal.")
-            }
-        }
-    }
-
     SentinelTheme {
         Scaffold(
             modifier = Modifier.fillMaxSize(),

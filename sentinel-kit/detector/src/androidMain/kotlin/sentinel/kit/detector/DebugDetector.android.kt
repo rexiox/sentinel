@@ -1,33 +1,35 @@
 package sentinel.kit.detector
 
 import android.content.Context
-import android.content.pm.ApplicationInfo
-import android.os.Build
-import android.os.Debug.isDebuggerConnected
 import sentinel.core.detector.SecurityDetector
 import sentinel.core.detector.Threat
 import sentinel.core.violation.AndroidViolation
-import sentinel.kit.detector.constant.DetectorConst
 
 class DebugDetector(
-    context: Context,
+    private val context: Context,
 ) : SecurityDetector {
 
-    private val flags = context.applicationInfo.flags
+    init {
+        System.loadLibrary("sentinel-debugger")
+    }
 
-    override fun detect(): List<Threat> {
-        val isDebuggerConnected = isDebuggerConnected()
-        val isDebuggable = (flags and ApplicationInfo.FLAG_DEBUGGABLE != 0)
-        val isTestKeys = Build.TAGS?.contains(other = DetectorConst.TEST_KEYS_TAG) == true
+    external fun isDebugPresent(): Boolean
 
-        return buildList {
-            if (isDebuggerConnected || isDebuggable) {
-                add(element = Threat(violation = AndroidViolation.Debugger.Debuggable))
-            }
+    external fun isPackageDebuggable(context: Context): Boolean
 
-            if (isTestKeys) {
-                add(element = Threat(violation = AndroidViolation.Debugger.TestKeys))
-            }
+    external fun checkTestKeys(): Boolean
+
+    override fun detect(): List<Threat> = buildList {
+        if (isDebugPresent()) {
+            add(element = Threat(violation = AndroidViolation.Debugger.Debuggable))
+        }
+
+        if (isPackageDebuggable(context = context)) {
+            add(element = Threat(violation = AndroidViolation.Debugger.Debuggable))
+        }
+
+        if (checkTestKeys()) {
+            add(element = Threat(violation = AndroidViolation.Debugger.TestKeys))
         }
     }
 }

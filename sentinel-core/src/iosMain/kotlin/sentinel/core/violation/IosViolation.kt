@@ -24,6 +24,8 @@ sealed class IosViolation(
 
     sealed class Hook(severity: Int) : IosViolation(severity = severity) {
 
+        object Detected : Hook(severity = 0)
+
         data class FrameworkDetected(val name: String? = null) : Hook(severity = 100)
 
         data class InlineHookDetected(val name: String? = null) : Hook(severity = 90)

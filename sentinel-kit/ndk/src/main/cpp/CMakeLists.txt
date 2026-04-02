@@ -20,3 +20,6 @@ target_link_libraries(sentinel-tamper ${log-lib})
 
 add_library(sentinel-hook SHARED sentinel-hook.cpp)
 target_link_libraries(sentinel-hook ${log-lib})
+
+add_library(sentinel-debugger SHARED sentinel-debugger.cpp)
+target_link_libraries(sentinel-debugger ${log-lib})

@@ -7,10 +7,11 @@
 extern "C" {
 #endif
 
-bool scanMemoryForFridaSignatures(void);
-bool checkFridaDefaultPort(void);
-char *checkDyldImages(void);
-bool isFunctionHooked(void *func_ptr);
+void setViolationHandler(void (*handler)(void));
+bool scanMemorySignatures(void);
+bool checkReservedPort(void);
+bool verifyLoadedImages(void);
+bool isInstructionTampered(void *func_ptr);
 
 #ifdef __cplusplus
 }

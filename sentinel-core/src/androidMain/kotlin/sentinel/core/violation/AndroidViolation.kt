@@ -6,6 +6,8 @@ sealed class AndroidViolation(
 
     sealed class Root(severity: Int) : AndroidViolation(severity = severity) {
 
+        object Detected : Root(severity = 0)
+
         data class AppInstalled(val packageName: String? = null) : Root(severity = 65)
 
         data class SuspiciousMount(val mountPoint: String? = null) : Root(severity = 75)
@@ -17,6 +19,8 @@ sealed class AndroidViolation(
 
     sealed class Tamper(severity: Int) : AndroidViolation(severity = severity) {
 
+        object Detected : Tamper(severity = 0)
+
         object PackageNameChanged : Tamper(severity = 90)
 
         object DexIntegrityFailed : Tamper(severity = 95)
@@ -25,6 +29,8 @@ sealed class AndroidViolation(
     }
 
     sealed class Hook(severity: Int) : AndroidViolation(severity = severity) {
+
+        object Detected : Hook(severity = 0)
 
         data class FrameworkDetected(val name: String? = null) : Hook(severity = 100)
     }
@@ -35,6 +41,8 @@ sealed class AndroidViolation(
     }
 
     sealed class Debugger(severity: Int) : AndroidViolation(severity = severity) {
+
+        object Detected : Debugger(severity = 0)
 
         object Debuggable : Debugger(severity = 50)
 

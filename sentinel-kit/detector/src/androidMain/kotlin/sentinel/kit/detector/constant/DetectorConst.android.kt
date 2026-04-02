@@ -2,8 +2,6 @@ package sentinel.kit.detector.constant
 
 internal object DetectorConst {
 
-    const val TEST_KEYS_TAG: String = "test-keys"
-
     val EMULATOR_PIPES: List<String> = listOf(
         "/dev/socket/qemud",
         "/dev/qemu_pipe"
@@ -17,15 +15,6 @@ internal object DetectorConst {
         "goldfish",
         "vbox86",
         "sdk_gphone"
-    )
-
-    val HOOK_PACKAGES: List<String> = listOf(
-        "de.robv.android.xposed",
-        "com.topjohnwu.lsposed",
-        "org.meowcat.edxposed.manager",
-        "com.saurik.substrate",
-        "com.devadvance.rootcloak",
-        "com.devadvance.rootcloakplus"
     )
 
     val MOCK_LOCATION_PACKAGES = setOf(

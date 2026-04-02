@@ -26,12 +26,6 @@ kotlin {
         iosSimulatorArm64()
     )
 
-    val compileNativeSecurity by tasks.creating(Exec::class) {
-        val scriptFile = project.file("src/nativeInterop/cinterop/build.sh")
-        workingDir = scriptFile.parentFile
-        commandLine("sh", scriptFile.name)
-    }
-
     iosTargets.forEach { target ->
         target.binaries.framework {
             baseName = "sentinel-kit-detector"
@@ -67,6 +61,7 @@ kotlin {
         commonMain {
             dependencies {
                 api(project(":sentinel-core"))
+                api(project(":sentinel-runtime"))
             }
         }
 
@@ -74,6 +69,10 @@ kotlin {
             dependencies {
                 api(project(":sentinel-kit:ndk"))
             }
+        }
+
+        commonTest.dependencies {
+            implementation(libs.kotlin.test)
         }
     }
 }

@@ -189,7 +189,7 @@ application's lifecycle. By performing periodic background scans, it enables rea
 unauthorized access attempts and external manipulations occurring at runtime.
 
 ```kotlin
-sentinel.scan(intervalMs = 10_000) {
+sentinel.runtime {
     onCompromised {
         info(msg = "Device integrity failed (Root/Jailbreak detected).")
     }

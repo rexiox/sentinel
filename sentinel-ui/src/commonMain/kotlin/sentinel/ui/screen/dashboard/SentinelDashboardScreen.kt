@@ -16,12 +16,14 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import com.rs.sentinel.ui.resources.Res
 import com.rs.sentinel.ui.resources.error
+import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
 import sentinel.Sentinel
 import sentinel.ui.ext.sentinelGradientBackground
@@ -35,8 +37,18 @@ internal fun SentinelDashboardScreen(
     appSignature: String,
     appHash: String,
 ) {
+    val scope = rememberCoroutineScope()
+
     var state by remember {
         mutableStateOf<SentinelDashboardState>(SentinelDashboardState.Loading)
+    }
+
+    val refreshReport = suspend {
+        state = runCatching {
+            SentinelDashboardState.Success(report = sentinel.inspect())
+        }.getOrElse {
+            SentinelDashboardState.Error(throwable = it)
+        }
     }
 
     val riskLevel by remember {
@@ -46,11 +58,25 @@ internal fun SentinelDashboardScreen(
     }
 
     LaunchedEffect(Unit) {
-        state = runCatching {
-            SentinelDashboardState.Success(report = sentinel.inspect())
-        }.getOrElse {
-            SentinelDashboardState.Error(throwable = it)
+        sentinel.runtime {
+            val triggerUpdate = {
+                scope.launch {
+                    refreshReport()
+                }
+            }
+
+            onCompromised { triggerUpdate() }
+            onTampered { triggerUpdate() }
+            onHooked { triggerUpdate() }
+            onSimulated { triggerUpdate() }
+            onDebugged { triggerUpdate() }
+            onCritical { _ -> triggerUpdate() }
+            onSafe { triggerUpdate() }
         }
+    }
+
+    LaunchedEffect(Unit) {
+        refreshReport()
     }
 
     Box(
