@@ -64,7 +64,7 @@ Sentinel provides real-time, on-device threat detection with minimal performance
 
 ## Features
 
-♦️ **Kotlin Multiplatform:** Works on Android and iOS with a single codebase.
+♦️ **Kotlin Multiplatform:** Works on Android and iOS with a single codebase.  
 ♦️ **Modular Detector Architecture:** Easily enable, disable, or extend security checks.  
 ♦️ **Smart Risk Aggregation:** Weighted category scoring to prevent artificial risk inflation.  
 ♦️ **Configurable Threat Threshold:** Set your own critical risk level to control app behavior.  
