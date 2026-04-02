@@ -15,6 +15,7 @@
 #include <sys/socket.h>
 #include <unistd.h>
 
+static bool g_violation_reported = false;
 static void (*violation_handler)(void) = NULL;
 
 void setViolationHandler(void (*handler)(void)) { violation_handler = handler; }
@@ -28,6 +29,7 @@ static void reportViolation() {
 bool isInstructionTampered(void *func_ptr) {
   if (!func_ptr)
     return false;
+
   Dl_info info;
   if (dladdr(func_ptr, &info) && info.dli_fname != NULL) {
     const char *fname = info.dli_fname;
@@ -42,6 +44,7 @@ bool isInstructionTampered(void *func_ptr) {
       }
     }
   }
+
   return false;
 }
 
@@ -51,19 +54,28 @@ bool scanMemorySignatures() {
   kern_return_t kr;
   unsigned char buf[4096];
   vm_size_t read_bytes;
+
   while (1) {
     vm_region_basic_info_data_64_t info;
     mach_msg_type_number_t count = VM_REGION_BASIC_INFO_COUNT_64;
     mach_port_t obj;
-    kr = vm_region_64(mach_task_self(), &addr, &size, VM_REGION_BASIC_INFO_64,
-                      (vm_region_info_t)&info, &count, &obj);
+    kr = vm_region_64(mach_task_self(),
+                      &addr, &size,
+                      VM_REGION_BASIC_INFO_64,
+                      (vm_region_info_t)&info,
+                      &count,
+                      &obj);
     if (kr != KERN_SUCCESS)
       break;
     if ((info.protection & VM_PROT_READ) &&
         !(info.protection & VM_PROT_EXECUTE)) {
       vm_size_t chunk = (size > sizeof(buf)) ? sizeof(buf) : size;
-      if (vm_read_overwrite(mach_task_self(), addr, chunk, (vm_address_t)buf,
-                            &read_bytes) == KERN_SUCCESS) {
+      if (vm_read_overwrite(
+              mach_task_self(),
+              addr,
+              chunk,
+              (vm_address_t)buf,
+              &read_bytes) == KERN_SUCCESS) {
         if (memmem(buf, read_bytes, "frida", 5) ||
             memmem(buf, read_bytes, "gum-js", 6) ||
             memmem(buf, read_bytes, "GumScript", 9))
@@ -83,6 +95,7 @@ bool checkReservedPort() {
   int fd = socket(AF_INET, SOCK_STREAM, 0);
   if (fd < 0)
     return false;
+
   struct timeval timeout = {.tv_sec = 0, .tv_usec = 500000};
   setsockopt(fd, SOL_SOCKET, SO_SNDTIMEO, &timeout, sizeof(timeout));
   int res = connect(fd, (struct sockaddr *)&sa, sizeof(sa));
@@ -94,8 +107,10 @@ bool verifyLoadedImages() {
   uint32_t total = _dyld_image_count();
   for (uint32_t i = 0; i < total; i++) {
     const char *path = _dyld_get_image_name(i);
-    if (path && (strstr(path, "Frida") || strstr(path, "frida") ||
-                 strstr(path, "gadget") || strstr(path, "cynject") ||
+    if (path && (strstr(path, "Frida") ||
+                 strstr(path, "frida") ||
+                 strstr(path, "gadget") ||
+                 strstr(path, "cynject") ||
                  strstr(path, "libhooker")))
       return true;
   }
@@ -104,7 +119,8 @@ bool verifyLoadedImages() {
 
 bool checkSymbolIntegrity() {
   void *symbols[] = {dlsym(RTLD_DEFAULT, "ptrace"),
-                     dlsym(RTLD_DEFAULT, "dlopen"), dlsym(RTLD_DEFAULT, "exit"),
+                     dlsym(RTLD_DEFAULT, "dlopen"),
+                     dlsym(RTLD_DEFAULT, "exit"),
                      dlsym(RTLD_DEFAULT, "objc_msgSend")};
 
   for (int i = 0; i < 4; i++) {
@@ -117,20 +133,30 @@ bool checkSymbolIntegrity() {
 
 void *integrity_monitor(void *arg) {
   while (true) {
-    if (verifyLoadedImages() || checkReservedPort() || scanMemorySignatures() ||
-        checkSymbolIntegrity()) {
+    bool has_violation = verifyLoadedImages() ||
+                         checkReservedPort() ||
+                         scanMemorySignatures() ||
+                         checkSymbolIntegrity();
+
+    if (has_violation && !g_violation_reported) {
       reportViolation();
+      g_violation_reported = true;
+    }
+    else if (!has_violation && g_violation_reported) {
+      g_violation_reported = false;
     }
 
     sleep(3);
   }
+
   return NULL;
 }
 
 static void image_load_handler(const struct mach_header *mh, intptr_t slide) {
   Dl_info info;
   if (dladdr(mh, &info) && info.dli_fname) {
-    if (strstr(info.dli_fname, "frida") || strstr(info.dli_fname, "gadget"))
+    if (strstr(info.dli_fname, "frida") ||
+        strstr(info.dli_fname, "gadget"))
       reportViolation();
   }
 }

@@ -11,6 +11,7 @@
 static JavaVM *g_debugger_vm = nullptr;
 static jobject g_debugger_obj = nullptr;
 static jmethodID g_debugger_callback = nullptr;
+static bool g_violation_reported = false;
 
 static bool internal_check_tracer_pid() {
   int status_fd = open("/proc/self/status", O_RDONLY);
@@ -87,19 +88,17 @@ void report_debugger_violation() {
   }
 }
 
-static bool g_last_debugger_state = false;
-
 void *integrity_monitor(void *arg) {
   while (true) {
     bool current_state = internal_check_tracer_pid();
 
-    if (current_state && !g_last_debugger_state) {
+    if (current_state && !g_violation_reported) {
       report_debugger_violation();
-      g_last_debugger_state = true;
+      g_violation_reported = true;
     }
 
-    else if (!current_state && g_last_debugger_state) {
-      g_last_debugger_state = false;
+    else if (!current_state && g_violation_reported) {
+      g_violation_reported = false;
     }
 
     sleep(3);
@@ -122,7 +121,7 @@ JNIEXPORT void JNICALL Java_sentinel_kit_runtime_DebugRuntime_init(
 }
 
 JNIEXPORT jboolean JNICALL
-Java_sentinel_kit_detector_DebugDetector_isDebugPresent(JNIEnv *env,
+Java_sentinel_kit_detector_DebugDetector_isDebuggerAttached(JNIEnv *env,
                                                         jobject thiz) {
   return (internal_check_tracer_pid()) ? JNI_TRUE : JNI_FALSE;
 }

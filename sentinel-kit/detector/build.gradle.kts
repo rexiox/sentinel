@@ -47,7 +47,7 @@ kotlin {
 
         iosMain {
             dependencies {
-                implementation(project(":sentinel-kit:kni"))
+                api(project(":sentinel-kit:kni"))
             }
         }
 
@@ -55,4 +55,6 @@ kotlin {
             implementation(libs.kotlin.test)
         }
     }
+
+    compilerOptions.freeCompilerArgs.add("-Xexpect-actual-classes")
 }

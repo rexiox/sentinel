@@ -63,8 +63,7 @@ std::string sha256HexJNI(JNIEnv *env, jbyteArray dataArray) {
   env->DeleteLocalRef(sha256Str);
 
   jmethodID digestMethod = env->GetMethodID(mdClass, "digest", "([B)[B");
-  auto hashArray =
-      (jbyteArray)env->CallObjectMethod(mdObj, digestMethod, dataArray);
+  auto hashArray = (jbyteArray)env->CallObjectMethod(mdObj, digestMethod, dataArray);
 
   std::string result = bytesToHex(env, hashArray);
 
@@ -76,8 +75,7 @@ std::string sha256HexJNI(JNIEnv *env, jbyteArray dataArray) {
 }
 
 JNIEXPORT jboolean JNICALL
-Java_sentinel_kit_detector_TamperDetector_verifyPackage(
-    JNIEnv *env, jobject thiz, jobject context, jbyteArray expectedPackage) {
+Java_sentinel_kit_detector_TamperDetector_verifyPackage(JNIEnv *env, jobject thiz, jobject context, jbyteArray expectedPackage) {
   std::string expPkgStr = hexToString(bytesToHex(env, expectedPackage));
 
   jclass contextClass = env->GetObjectClass(context);
@@ -101,15 +99,12 @@ Java_sentinel_kit_detector_TamperDetector_verifyPackage(
 }
 
 JNIEXPORT jboolean JNICALL
-Java_sentinel_kit_detector_TamperDetector_verifySignature(
-    JNIEnv *env, jobject thiz, jobject context, jbyteArray expectedPackage,
-    jbyteArray expectedPackageSignature) {
+Java_sentinel_kit_detector_TamperDetector_verifySignature(JNIEnv *env, jobject thiz, jobject context, jbyteArray expectedPackage,jbyteArray expectedPackageSignature) {
   std::string expPkgStr = hexToString(bytesToHex(env, expectedPackage));
   std::string expSigStr = hexToString(bytesToHex(env, expectedPackageSignature));
 
   jclass contextClass = env->GetObjectClass(context);
-  jmethodID getPkgMethod =
-      env->GetMethodID(contextClass, "getPackageName", "()Ljava/lang/String;");
+  jmethodID getPkgMethod = env->GetMethodID(contextClass, "getPackageName", "()Ljava/lang/String;");
   auto currentPackage = (jstring)env->CallObjectMethod(context, getPkgMethod);
 
   std::string curPkgStr;
@@ -123,15 +118,11 @@ Java_sentinel_kit_detector_TamperDetector_verifySignature(
   LOGI("Expected package : %s", expPkgStr.c_str());
   LOGI("Current package  : %s", curPkgStr.c_str());
 
-  jmethodID getPmMethod =
-      env->GetMethodID(contextClass, "getPackageManager",
-                       "()Landroid/content/pm/PackageManager;");
+  jmethodID getPmMethod = env->GetMethodID(contextClass, "getPackageManager", "()Landroid/content/pm/PackageManager;");
   jobject pm = env->CallObjectMethod(context, getPmMethod);
 
   jclass pmClass = env->GetObjectClass(pm);
-  jmethodID getPkgInfoMethod =
-      env->GetMethodID(pmClass, "getPackageInfo",
-                       "(Ljava/lang/String;I)Landroid/content/pm/PackageInfo;");
+  jmethodID getPkgInfoMethod = env->GetMethodID(pmClass, "getPackageInfo", "(Ljava/lang/String;I)Landroid/content/pm/PackageInfo;");
 
   jstring pkgNameJStr = env->NewStringUTF(curPkgStr.c_str());
   jobject pkgInfo =
@@ -140,14 +131,12 @@ Java_sentinel_kit_detector_TamperDetector_verifySignature(
   env->DeleteLocalRef(pm);
 
   jclass pkgInfoClass = env->GetObjectClass(pkgInfo);
-  jfieldID sigField = env->GetFieldID(pkgInfoClass, "signatures",
-                                      "[Landroid/content/pm/Signature;");
+  jfieldID sigField = env->GetFieldID(pkgInfoClass, "signatures", "[Landroid/content/pm/Signature;");
   auto sigArray = (jobjectArray)env->GetObjectField(pkgInfo, sigField);
 
   jobject sigObj = env->GetObjectArrayElement(sigArray, 0);
   jclass sigClass = env->GetObjectClass(sigObj);
-  jmethodID toByteArrayMethod =
-      env->GetMethodID(sigClass, "toByteArray", "()[B");
+  jmethodID toByteArrayMethod = env->GetMethodID(sigClass, "toByteArray", "()[B");
   auto curSigArray =
       (jbyteArray)env->CallObjectMethod(sigObj, toByteArrayMethod);
   std::string curSigStr = sha256HexJNI(env, curSigArray);

@@ -44,6 +44,8 @@ sealed class AndroidViolation(
 
         object Detected : Debugger(severity = 0)
 
+        object DebuggerAttached : Debugger(severity = 90)
+
         object Debuggable : Debugger(severity = 50)
 
         object TestKeys : Debugger(severity = 25)

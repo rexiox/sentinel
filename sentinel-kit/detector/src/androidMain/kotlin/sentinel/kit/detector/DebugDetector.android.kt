@@ -13,15 +13,15 @@ class DebugDetector(
         System.loadLibrary("sentinel-debugger")
     }
 
-    external fun isDebugPresent(): Boolean
+    external fun isDebuggerAttached(): Boolean
 
     external fun isPackageDebuggable(context: Context): Boolean
 
     external fun checkTestKeys(): Boolean
 
     override fun detect(): List<Threat> = buildList {
-        if (isDebugPresent()) {
-            add(element = Threat(violation = AndroidViolation.Debugger.Debuggable))
+        if (isDebuggerAttached()) {
+            add(element = Threat(violation = AndroidViolation.Debugger.DebuggerAttached))
         }
 
         if (isPackageDebuggable(context = context)) {

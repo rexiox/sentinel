@@ -8,11 +8,16 @@
 static JavaVM *g_vm = nullptr;
 static jobject g_detector_obj = nullptr;
 static jmethodID g_callback_method = nullptr;
+static bool g_last_memory_violation = false;
+static bool g_last_stack_violation = false;
 
 const std::vector<std::string> HOOK_PACKAGES = {
-    "de.robv.android.xposed",       "com.topjohnwu.lsposed",
-    "org.meowcat.edxposed.manager", "com.saurik.substrate",
-    "com.devadvance.rootcloak",     "com.devadvance.rootcloakplus"};
+    "de.robv.android.xposed",
+    "com.topjohnwu.lsposed",
+    "org.meowcat.edxposed.manager",
+    "com.saurik.substrate",
+    "com.devadvance.rootcloak",
+    "com.devadvance.rootcloakplus"};
 
 void sentinel_report_violation() {
   if (g_vm && g_detector_obj && g_callback_method) {
@@ -56,8 +61,7 @@ bool internal_check_stack_trace(JNIEnv *env) {
   jclass exClass = env->FindClass("java/lang/Exception");
   jmethodID exInit = env->GetMethodID(exClass, "<init>", "()V");
   jobject exObj = env->NewObject(exClass, exInit);
-  jmethodID getSTMethod = env->GetMethodID(exClass, "getStackTrace",
-                                           "()[Ljava/lang/StackTraceElement;");
+  jmethodID getSTMethod = env->GetMethodID(exClass, "getStackTrace","()[Ljava/lang/StackTraceElement;");
   auto stackTrace = (jobjectArray)env->CallObjectMethod(exObj, getSTMethod);
 
   if (stackTrace == nullptr)
@@ -65,8 +69,7 @@ bool internal_check_stack_trace(JNIEnv *env) {
 
   int len = env->GetArrayLength(stackTrace);
   jclass stElementClass = env->FindClass("java/lang/StackTraceElement");
-  jmethodID getClassNameMethod =
-      env->GetMethodID(stElementClass, "getClassName", "()Ljava/lang/String;");
+  jmethodID getClassNameMethod =env->GetMethodID(stElementClass, "getClassName", "()Ljava/lang/String;");
 
   for (int i = 0; i < len; i++) {
     jobject element = env->GetObjectArrayElement(stackTrace, i);
@@ -85,11 +88,9 @@ bool internal_check_stack_trace(JNIEnv *env) {
     env->ReleaseStringUTFChars(classNameObj, classNameCStr);
     env->DeleteLocalRef(element);
   }
+
   return false;
 }
-
-static bool g_last_memory_violation = false;
-static bool g_last_stack_violation = false;
 
 void *integrity_monitor(void *arg) {
   while (true) {
@@ -106,12 +107,12 @@ void *integrity_monitor(void *arg) {
         sentinel_report_violation();
       }
       g_last_stack_violation = current_stack_state;
-
       g_vm->DetachCurrentThread();
     }
 
     sleep(3);
   }
+
   return nullptr;
 }
 
@@ -125,14 +126,12 @@ JNIEXPORT void JNICALL Java_sentinel_kit_runtime_HookRuntime_init(
 }
 
 JNIEXPORT jboolean JNICALL
-Java_sentinel_kit_detector_HookDetector_isFridaDetected(JNIEnv *env,
-                                                        jobject thiz) {
+Java_sentinel_kit_detector_HookDetector_isFridaDetected(JNIEnv *env, jobject thiz) {
   return internal_check_memory_maps() ? JNI_TRUE : JNI_FALSE;
 }
 
 JNIEXPORT jstring JNICALL
-Java_sentinel_kit_detector_HookDetector_checkStackTraceManually(JNIEnv *env,
-                                                                jobject thiz) {
+Java_sentinel_kit_detector_HookDetector_checkStackTraceManually(JNIEnv *env, jobject thiz) {
   if (internal_check_stack_trace(env))
     return env->NewStringUTF("Violation Detected");
   return nullptr;

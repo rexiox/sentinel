@@ -64,3 +64,7 @@ final object sentinel.kit.detector.constant/DetectorConst { // sentinel.kit.dete
             final fun <get-TEST_PATH>(): kotlin/String // sentinel.kit.detector.constant/DetectorConst.SandBox.TEST_PATH.<get-TEST_PATH>|<get-TEST_PATH>(){}[0]
     }
 }
+
+final object sentinel.kit.runtime/HookRuntime { // sentinel.kit.runtime/HookRuntime|null[0]
+    final fun initialize() // sentinel.kit.runtime/HookRuntime.initialize|initialize(){}[0]
+}

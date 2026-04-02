@@ -48,6 +48,7 @@ final class sentinel/Sentinel { // sentinel/Sentinel|null[0]
     final val config // sentinel/Sentinel.config|{}config[0]
         final fun <get-config>(): sentinel/Config // sentinel/Sentinel.config.<get-config>|<get-config>(){}[0]
 
+    final fun runtime(kotlin/Function1<sentinel.runtime/SecurityScope, kotlin/Unit>) // sentinel/Sentinel.runtime|runtime(kotlin.Function1<sentinel.runtime.SecurityScope,kotlin.Unit>){}[0]
     final suspend fun inspect(): sentinel.core.report/SecurityReport // sentinel/Sentinel.inspect|inspect(){}[0]
 
     final object Companion { // sentinel/Sentinel.Companion|null[0]
@@ -63,4 +64,3 @@ final fun (sentinel/Builder).sentinel/jailbreak(): sentinel/Builder // sentinel/
 final fun (sentinel/Builder).sentinel/simulator(): sentinel/Builder // sentinel/simulator|simulator@sentinel.Builder(){}[0]
 final fun (sentinel/Builder).sentinel/tamper(): sentinel/Builder // sentinel/tamper|tamper@sentinel.Builder(){}[0]
 final fun (sentinel/Sentinel.Companion).sentinel/configure(kotlin/Function1<sentinel/Builder, kotlin/Unit>): sentinel/Sentinel // sentinel/configure|configure@sentinel.Sentinel.Companion(kotlin.Function1<sentinel.Builder,kotlin.Unit>){}[0]
-final suspend fun (sentinel/Sentinel).sentinel/scan(kotlin/Long = ..., kotlin/Function1<sentinel.core.guard/SentinelGuard, kotlin/Unit>) // sentinel/scan|scan@sentinel.Sentinel(kotlin.Long;kotlin.Function1<sentinel.core.guard.SentinelGuard,kotlin.Unit>){}[0]

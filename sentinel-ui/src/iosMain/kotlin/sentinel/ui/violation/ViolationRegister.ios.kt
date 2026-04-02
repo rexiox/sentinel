@@ -17,7 +17,7 @@ actual fun getViolations(): List<SecurityViolation> = listOf(
 
     IosViolation.Simulator.Detected(),
 
-    IosViolation.Debugger.Debuggable,
+    IosViolation.Debugger.DebuggerAttached,
 
     // IosViolation.Location.MockAppInstalled(packages = emptyList())
 )

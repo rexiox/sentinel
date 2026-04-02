@@ -38,7 +38,7 @@ sealed class IosViolation(
 
     sealed class Debugger(severity: Int) : IosViolation(severity = severity) {
 
-        object Debuggable : Debugger(severity = 50)
+        object DebuggerAttached : Debugger(severity = 90)
     }
 
     sealed class Location(severity: Int) : IosViolation(severity = severity) {

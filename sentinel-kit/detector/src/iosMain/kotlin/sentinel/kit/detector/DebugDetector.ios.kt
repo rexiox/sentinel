@@ -11,7 +11,7 @@ class DebugDetector : SecurityDetector {
     @OptIn(ExperimentalForeignApi::class)
     override fun detect(): List<Threat> = buildList {
         if (isDebuggerAttached()) {
-            add(element = Threat(violation = IosViolation.Debugger.Debuggable))
+            add(element = Threat(violation = IosViolation.Debugger.DebuggerAttached))
         }
     }
 }

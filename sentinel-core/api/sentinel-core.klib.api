@@ -135,7 +135,7 @@ sealed class sentinel.core.violation/IosViolation : sentinel.core.violation/Secu
         open fun <get-severity>(): kotlin/Int // sentinel.core.violation/IosViolation.severity.<get-severity>|<get-severity>(){}[0]
 
     sealed class Debugger : sentinel.core.violation/IosViolation { // sentinel.core.violation/IosViolation.Debugger|null[0]
-        final object Debuggable : sentinel.core.violation/IosViolation.Debugger // sentinel.core.violation/IosViolation.Debugger.Debuggable|null[0]
+        final object DebuggerAttached : sentinel.core.violation/IosViolation.Debugger // sentinel.core.violation/IosViolation.Debugger.DebuggerAttached|null[0]
     }
 
     sealed class Hook : sentinel.core.violation/IosViolation { // sentinel.core.violation/IosViolation.Hook|null[0]
@@ -164,6 +164,8 @@ sealed class sentinel.core.violation/IosViolation : sentinel.core.violation/Secu
             final fun hashCode(): kotlin/Int // sentinel.core.violation/IosViolation.Hook.InlineHookDetected.hashCode|hashCode(){}[0]
             final fun toString(): kotlin/String // sentinel.core.violation/IosViolation.Hook.InlineHookDetected.toString|toString(){}[0]
         }
+
+        final object Detected : sentinel.core.violation/IosViolation.Hook // sentinel.core.violation/IosViolation.Hook.Detected|null[0]
     }
 
     sealed class Jailbreak : sentinel.core.violation/IosViolation { // sentinel.core.violation/IosViolation.Jailbreak|null[0]

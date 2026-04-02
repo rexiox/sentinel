@@ -2,11 +2,16 @@ plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.android.kotlin.multiplatform.library)
     alias(libs.plugins.android.lint)
+    id("sentinel-publish")
 }
 
+group = Config.Publishing.GROUP_ID
+version = Config.Version.NAME
+
 kotlin {
+
     android {
-        namespace = "com.rs.sentinel.kit.kni"
+        namespace = "${Config.NAMESPACE}.kit.kni"
 
         compileSdk {
             version = release(36) { minorApiLevel = 1 }
@@ -28,6 +33,8 @@ kotlin {
 
         target.compilations.getByName("main") {
             cinterops {
+                val src = "src/nativeInterop/cinterop"
+
                 val libSubDir =
                     if (target.konanTarget.name.contains("simulator") ||
                         target.konanTarget.name.contains("x64")
@@ -37,8 +44,7 @@ kotlin {
                         "device"
                     }
 
-                val src = "src/nativeInterop/cinterop"
-
+                @Suppress("unused")
                 val detector by creating {
                     definitionFile.set(project.file("$src/def/detector_$libSubDir.def"))
 
@@ -53,6 +59,4 @@ kotlin {
             }
         }
     }
-
-    sourceSets { }
 }

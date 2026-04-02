@@ -33,8 +33,8 @@ kotlin {
         commonMain.dependencies {
             implementation(project(":sentinel-ui"))
 
-            // implementation("io.github.resulsilay:sentinel:1.4.0-alpha")
-            // implementation("io.github.resulsilay:sentinel-ui:1.4.0-alpha")
+            // implementation("io.github.resulsilay:sentinel:1.4.2-alpha")
+            // implementation("io.github.resulsilay:sentinel-ui:1.4.2-alpha")
 
             implementation(libs.compose.runtime)
             implementation(libs.compose.foundation)
@@ -46,6 +46,8 @@ kotlin {
             implementation(libs.androidx.lifecycle.runtimeCompose)
         }
     }
+
+    compilerOptions.freeCompilerArgs.add("-Xexpect-actual-classes")
 }
 
 android {

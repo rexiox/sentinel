@@ -1,0 +1,30 @@
+// Klib ABI Dump
+// Targets: [iosArm64, iosSimulatorArm64, iosX64]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <io.github.resulsilay:sentinel-runtime>
+final class sentinel.runtime/Scope : sentinel.runtime/SecurityScope { // sentinel.runtime/Scope|null[0]
+    constructor <init>() // sentinel.runtime/Scope.<init>|<init>(){}[0]
+
+    final fun dispatch(sentinel.core.violation/SecurityViolation, sentinel.core.report/SecurityReport) // sentinel.runtime/Scope.dispatch|dispatch(sentinel.core.violation.SecurityViolation;sentinel.core.report.SecurityReport){}[0]
+}
+
+open class sentinel.runtime/SecurityScope { // sentinel.runtime/SecurityScope|null[0]
+    constructor <init>() // sentinel.runtime/SecurityScope.<init>|<init>(){}[0]
+
+    final fun onCompromised(kotlin/Function0<kotlin/Unit>) // sentinel.runtime/SecurityScope.onCompromised|onCompromised(kotlin.Function0<kotlin.Unit>){}[0]
+    final fun onCritical(kotlin/Function1<kotlin/Int, kotlin/Unit>) // sentinel.runtime/SecurityScope.onCritical|onCritical(kotlin.Function1<kotlin.Int,kotlin.Unit>){}[0]
+    final fun onDebugged(kotlin/Function0<kotlin/Unit>) // sentinel.runtime/SecurityScope.onDebugged|onDebugged(kotlin.Function0<kotlin.Unit>){}[0]
+    final fun onHooked(kotlin/Function0<kotlin/Unit>) // sentinel.runtime/SecurityScope.onHooked|onHooked(kotlin.Function0<kotlin.Unit>){}[0]
+    final fun onSafe(kotlin/Function0<kotlin/Unit>) // sentinel.runtime/SecurityScope.onSafe|onSafe(kotlin.Function0<kotlin.Unit>){}[0]
+    final fun onSimulated(kotlin/Function0<kotlin/Unit>) // sentinel.runtime/SecurityScope.onSimulated|onSimulated(kotlin.Function0<kotlin.Unit>){}[0]
+    final fun onTampered(kotlin/Function0<kotlin/Unit>) // sentinel.runtime/SecurityScope.onTampered|onTampered(kotlin.Function0<kotlin.Unit>){}[0]
+}
+
+final object sentinel.runtime/Runtime { // sentinel.runtime/Runtime|null[0]
+    final fun activate(kotlin/Function1<sentinel.runtime/SecurityScope, kotlin/Unit>, kotlin/Function0<sentinel.core.report/SecurityReport>) // sentinel.runtime/Runtime.activate|activate(kotlin.Function1<sentinel.runtime.SecurityScope,kotlin.Unit>;kotlin.Function0<sentinel.core.report.SecurityReport>){}[0]
+    final fun onViolationDetected(sentinel.core.violation/SecurityViolation) // sentinel.runtime/Runtime.onViolationDetected|onViolationDetected(sentinel.core.violation.SecurityViolation){}[0]
+}

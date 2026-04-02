@@ -40,11 +40,7 @@ kotlin {
         }
     }
 
-    sourceSets {
-        commonMain {
-            dependencies {
-                implementation(libs.kotlin.stdlib)
-            }
-        }
-    }
+    sourceSets { }
+
+    compilerOptions.freeCompilerArgs.add("-Xexpect-actual-classes")
 }

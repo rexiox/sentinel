@@ -46,9 +46,9 @@ kotlin {
         commonMain {
             dependencies {
                 api(project(":sentinel-core"))
-
-                implementation(libs.kotlin.stdlib)
             }
         }
     }
+
+    compilerOptions.freeCompilerArgs.add("-Xexpect-actual-classes")
 }

@@ -11,6 +11,7 @@
 static JavaVM *g_vm = nullptr;
 static jobject g_detector_obj = nullptr;
 static jmethodID g_callback_method = nullptr;
+static bool g_violation_reported = false;
 
 const std::vector<std::string> ROOT_BINARIES = {"/system/bin/su",
                                                 "/system/xbin/su",
@@ -34,7 +35,11 @@ const char *ROOT_PACKAGES[] = {"com.noshufou.android.su",
                                "com.zhiqupk.root.global"};
 
 const std::vector<std::string> SUSPICIOUS_MOUNTS = {
-    "magisk", "core/img", "mirror", "history", "init.magisk"};
+    "magisk",
+    "core/img",
+    "mirror",
+    "history",
+    "init.magisk"};
 
 bool internal_check_binaries() {
   struct stat buffer;
@@ -42,6 +47,7 @@ bool internal_check_binaries() {
     if (stat(path.c_str(), &buffer) == 0)
       return true;
   }
+
   return false;
 }
 
@@ -60,6 +66,7 @@ bool internal_check_mounts() {
     if (mounts.find(mnt) != std::string::npos)
       return true;
   }
+
   return false;
 }
 
@@ -75,21 +82,16 @@ bool internal_check_su_command() {
 
 bool internal_check_apps(JNIEnv *env, jobject context) {
   jclass contextClass = env->GetObjectClass(context);
-  jmethodID getPackageManager =
-      env->GetMethodID(contextClass, "getPackageManager",
-                       "()Landroid/content/pm/PackageManager;");
+  jmethodID getPackageManager = env->GetMethodID(contextClass, "getPackageManager","()Landroid/content/pm/PackageManager;");
   jobject packageManager = env->CallObjectMethod(context, getPackageManager);
 
   jclass pmClass = env->GetObjectClass(packageManager);
-  jmethodID getPackageInfo =
-      env->GetMethodID(pmClass, "getPackageInfo",
-                       "(Ljava/lang/String;I)Landroid/content/pm/PackageInfo;");
+  jmethodID getPackageInfo = env->GetMethodID(pmClass, "getPackageInfo","(Ljava/lang/String;I)Landroid/content/pm/PackageInfo;");
 
   for (auto &pkgName : ROOT_PACKAGES) {
     jstring jPkg = env->NewStringUTF(pkgName);
 
-    jobject pkgInfo =
-        env->CallObjectMethod(packageManager, getPackageInfo, jPkg, 0);
+    jobject pkgInfo = env->CallObjectMethod(packageManager, getPackageInfo, jPkg, 0);
     if (env->ExceptionCheck()) {
       env->ExceptionClear();
       pkgInfo = nullptr;
@@ -117,11 +119,11 @@ void report_root_violation() {
     if (env) {
       env->CallVoidMethod(g_detector_obj, g_callback_method);
     }
+
     if (attached)
       g_vm->DetachCurrentThread();
   }
 }
-static bool g_last_root_violation = false;
 
 void *integrity_monitor(void *arg) {
   while (true) {
@@ -133,13 +135,14 @@ void *integrity_monitor(void *arg) {
       current_violation = true;
     }
 
-    if (current_violation && !g_last_root_violation) {
+    if (current_violation && !g_violation_reported) {
       report_root_violation();
     }
 
-    g_last_root_violation = current_violation;
+    g_violation_reported = current_violation;
     sleep(3);
   }
+
   return nullptr;
 }
 
@@ -172,8 +175,7 @@ Java_sentinel_kit_detector_RootDetector_checkSuCommand(JNIEnv *env, jobject) {
   return internal_check_su_command() ? JNI_TRUE : JNI_FALSE;
 }
 
-JNIEXPORT jboolean JNICALL Java_sentinel_kit_detector_RootDetector_checkApps(
-    JNIEnv *env, jobject thiz, jobject context) {
+JNIEXPORT jboolean JNICALL Java_sentinel_kit_detector_RootDetector_checkApps(JNIEnv *env, jobject thiz, jobject context) {
   return internal_check_apps(env, context) ? JNI_TRUE : JNI_FALSE;
 }
 
