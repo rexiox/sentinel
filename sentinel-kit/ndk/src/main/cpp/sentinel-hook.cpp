@@ -14,7 +14,7 @@ const std::vector<std::string> HOOK_PACKAGES = {
     "org.meowcat.edxposed.manager", "com.saurik.substrate",
     "com.devadvance.rootcloak",     "com.devadvance.rootcloakplus"};
 
-void sentinel_report_violation(const char *reason) {
+void sentinel_report_violation() {
   if (g_vm && g_detector_obj && g_callback_method) {
     JNIEnv *env;
     jint res = g_vm->GetEnv((void **)&env, JNI_VERSION_1_6);
@@ -26,9 +26,7 @@ void sentinel_report_violation(const char *reason) {
     }
 
     if (env) {
-      jstring jReason = env->NewStringUTF(reason);
-      env->CallVoidMethod(g_detector_obj, g_callback_method, jReason);
-      env->DeleteLocalRef(jReason);
+      env->CallVoidMethod(g_detector_obj, g_callback_method);
     }
 
     if (attached)
@@ -97,8 +95,7 @@ void *integrity_monitor(void *arg) {
   while (true) {
     bool current_memory_state = internal_check_memory_maps();
     if (current_memory_state && !g_last_memory_violation) {
-      sentinel_report_violation(
-          "Background Monitor: Memory Map Violation (Frida/Xposed)");
+      sentinel_report_violation();
     }
     g_last_memory_violation = current_memory_state;
 
@@ -106,7 +103,7 @@ void *integrity_monitor(void *arg) {
     if (g_vm->AttachCurrentThread(&env, nullptr) == JNI_OK) {
       bool current_stack_state = internal_check_stack_trace(env);
       if (current_stack_state && !g_last_stack_violation) {
-        sentinel_report_violation("Background Monitor: Stack Trace Violation");
+        sentinel_report_violation();
       }
       g_last_stack_violation = current_stack_state;
 
