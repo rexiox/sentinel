@@ -47,7 +47,7 @@ kotlin {
 
         iosMain {
             dependencies {
-                api(project(":sentinel-kit:kni"))
+                implementation(project(":sentinel-kit:kni"))
             }
         }
 

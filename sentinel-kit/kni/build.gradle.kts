@@ -2,16 +2,11 @@ plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.android.kotlin.multiplatform.library)
     alias(libs.plugins.android.lint)
-    id("sentinel-publish")
 }
 
-group = Config.Publishing.GROUP_ID
-version = Config.Version.NAME
-
 kotlin {
-
     android {
-        namespace = "${Config.NAMESPACE}.kit.kni"
+        namespace = "com.rs.sentinel.kit.kni"
 
         compileSdk {
             version = release(36) { minorApiLevel = 1 }
