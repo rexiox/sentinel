@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="top_bar_title">Sentinel Monitor</string>
+    <string name="top_bar_threshold">Threshold: %1$s</string>
+    <string name="refresh_text">Refresh</string>
+    <string name="report_number">Report Number</string>
+    <string name="security_analysis">Security Analysis</string>
+    <string name="analysis_date">Analysis Date</string>
+    <string name="risk_status">Risk Status</string>
+    <string name="detected_threats">Detected Threats</string>
+    <string name="threat_detail">Detail: %1$s</string>
+    <string name="no_threats_detected">No threats detected. Device is secure.</string>
+    <string name="threat_score">Score: %1$s</string>
+</resources>

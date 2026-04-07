@@ -8,6 +8,7 @@
     <string name="app_hash">Hash</string>
 
     <string name="nav_bar_dashboard_item">Dashboard</string>
+    <string name="nav_bar_monitor_item">Monitor</string>
     <string name="nav_bar_about_item">About</string>
 
     <string name="security_status_safe">Device Secure</string>

@@ -2,15 +2,20 @@ package sentinel.core.violation
 
 sealed class AndroidViolation(
     override val severity: Int,
-) : SecurityViolation(severity = severity) {
+    override val detail: String? = null,
+) : SecurityViolation(severity = severity, detail = detail) {
 
     sealed class Root(severity: Int) : AndroidViolation(severity = severity) {
 
         object Detected : Root(severity = 0)
 
-        data class AppInstalled(val packageName: String? = null) : Root(severity = 65)
+        data class AppInstalled(val packageName: String? = null) : Root(severity = 65) {
+            override val detail: String? = packageName
+        }
 
-        data class SuspiciousMount(val mountPoint: String? = null) : Root(severity = 75)
+        data class SuspiciousMount(val mountPoint: String? = null) : Root(severity = 75) {
+            override val detail: String? = mountPoint
+        }
 
         object SuBinaryFound : Root(severity = 90)
 
@@ -32,12 +37,16 @@ sealed class AndroidViolation(
 
         object Detected : Hook(severity = 0)
 
-        data class FrameworkDetected(val name: String? = null) : Hook(severity = 100)
+        data class FrameworkDetected(val name: String? = null) : Hook(severity = 100) {
+            override val detail: String? = name
+        }
     }
 
     sealed class Emulator(severity: Int) : AndroidViolation(severity = severity) {
 
-        data class Detected(val name: String? = null) : Emulator(severity = 25)
+        data class Detected(val name: String? = null) : Emulator(severity = 25) {
+            override val detail: String? = name
+        }
     }
 
     sealed class Debugger(severity: Int) : AndroidViolation(severity = severity) {
@@ -55,6 +64,8 @@ sealed class AndroidViolation(
 
         object MockSettingEnabled : Location(severity = 50)
 
-        data class MockAppInstalled(val packages: List<String>) : Location(severity = 60)
+        data class MockAppInstalled(val packages: List<String>) : Location(severity = 60) {
+            override val detail: String? = packages.toString()
+        }
     }
 }

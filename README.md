@@ -83,7 +83,7 @@ injection attempts.
 | Hooking Detection              |    ✅    |  ✅  |
 | Emulator / Simulator Detection |    ✅    |  ✅  |
 | Debugging Detection            |    ✅    |  ✅  |
-| Mock Location Abuse            |    ✅    |  ❌  |
+| Mock Location Abuse            |    ✅    |  ➖  |
 
 ## Quick Start
 
@@ -217,6 +217,19 @@ sentinel.runtime {
         info(msg = "All systems nominal.")
     }
 }
+```
+
+### Sentinel Monitor
+
+Sentinel Monitor is a monitoring infrastructure that tracks application-layer vulnerabilities and
+suspicious activities in real-time and reports these threats.
+
+```kotlin
+SentinelMonitor.start(
+    appId = sentinel.config.appId.orEmpty(),
+    hash = sentinel.config.hash.orEmpty(),
+    threshold = sentinel.config.threshold
+)
 ```
 
 ## Samples

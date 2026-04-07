@@ -12,15 +12,15 @@ group = Config.Publishing.GROUP_ID
 version = Config.Version.NAME
 
 compose.resources {
-    publicResClass = false
-    packageOfResClass = "${Config.NAMESPACE}.ui.resources"
-    generateResClass = auto
+    publicResClass = true
+    packageOfResClass = "${Config.NAMESPACE}.monitor.resources"
+    generateResClass = always
 }
 
 kotlin {
 
     android {
-        namespace = "${Config.NAMESPACE}.ui"
+        namespace = "${Config.NAMESPACE}.monitor"
 
         compileSdk {
             version = release(36) { minorApiLevel = 1 }
@@ -31,7 +31,7 @@ kotlin {
         androidResources.enable = true
     }
 
-    val xcfName = "sentinel-ui"
+    val xcfName = "sentinel-monitor"
 
     iosX64 {
         binaries.framework {
@@ -52,22 +52,28 @@ kotlin {
     }
 
     sourceSets {
+
+        androidMain {
+            dependencies {
+                implementation(libs.compose.uiToolingPreview)
+                implementation(libs.androidx.activity.compose)
+            }
+        }
+
         commonMain {
             dependencies {
-                api(project(":sentinel"))
+                implementation(project(":sentinel"))
+                implementation(project(":sentinel-ui"))
 
-                implementation(libs.kotlin.stdlib)
                 implementation(libs.compose.runtime)
                 implementation(libs.compose.foundation)
                 implementation(libs.compose.material3)
                 implementation(libs.compose.ui)
-                implementation(libs.compose.components.resources)
                 implementation(libs.compose.uiToolingPreview)
-                implementation(libs.androidx.lifecycle.viewmodelCompose)
-                implementation(libs.androidx.lifecycle.runtimeCompose)
                 implementation(libs.compose.components.resources)
-                implementation(libs.kotlin.reflect)
+                implementation(libs.androidx.lifecycle.runtimeCompose)
                 implementation(libs.material.icons.core)
+                implementation(libs.kotlinx.datetime)
             }
         }
     }

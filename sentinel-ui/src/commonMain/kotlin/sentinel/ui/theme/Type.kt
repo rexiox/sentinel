@@ -24,8 +24,8 @@ internal val Typography
         titleMedium = TextStyle(
             fontFamily = SentinelFont,
             fontWeight = FontWeight.SemiBold,
-            fontSize = 18.sp,
-            lineHeight = 24.sp
+            fontSize = 16.sp,
+            lineHeight = 22.sp
         ),
         titleSmall = TextStyle(
             fontFamily = SentinelFont,

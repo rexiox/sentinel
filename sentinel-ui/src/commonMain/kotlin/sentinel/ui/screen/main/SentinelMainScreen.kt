@@ -23,6 +23,7 @@ fun SentinelMainScreen(
     appId: String,
     appSignature: String,
     appHash: String,
+    onMonitorStart: () -> Unit,
 ) {
     var selectedTab by remember { mutableStateOf(SentinelTab.Dashboard) }
     val onTabSelected = remember { { tab: SentinelTab -> selectedTab = tab } }
@@ -41,7 +42,12 @@ fun SentinelMainScreen(
             modifier = Modifier.fillMaxSize()
         ) {
             when (selectedTab) {
-                SentinelTab.Dashboard -> {
+                SentinelTab.Dashboard,
+                SentinelTab.Monitor -> {
+                    if (selectedTab == SentinelTab.Monitor) {
+                        onMonitorStart()
+                    }
+
                     SentinelDashboardScreen(
                         sentinel = sentinel,
                         appId = appId,

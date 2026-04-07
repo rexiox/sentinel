@@ -32,6 +32,7 @@ kotlin {
 
         commonMain.dependencies {
             implementation(project(":sentinel-ui"))
+            implementation(project(":sentinel-monitor"))
 
             // implementation("io.github.resulsilay:sentinel:1.4.2-alpha")
             // implementation("io.github.resulsilay:sentinel-ui:1.4.2-alpha")

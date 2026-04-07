@@ -9,6 +9,7 @@ import sentinel.Sentinel
 import sentinel.all
 import sentinel.configure
 import sentinel.core.ext.toByteList
+import sentinel.monitor.SentinelMonitor
 
 fun MainViewController() = ComposeUIViewController {
 
@@ -34,6 +35,13 @@ fun MainViewController() = ComposeUIViewController {
         navigationBarModifier = Modifier.padding(bottom = 24.dp),
         sentinel = sentinel,
         appId = Sentinel.Identity.appId,
-        appHash = Sentinel.Identity.hash.orEmpty()
+        appHash = Sentinel.Identity.hash.orEmpty(),
+        onMonitorStart = {
+            SentinelMonitor.start(
+                appId = sentinel.config.appId.orEmpty(),
+                hash = sentinel.config.hash.orEmpty(),
+                threshold = sentinel.config.threshold
+            )
+        }
     )
 }

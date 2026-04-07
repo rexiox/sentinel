@@ -50,8 +50,10 @@ import androidx.compose.ui.unit.dp
 import com.rs.sentinel.ui.resources.Res
 import com.rs.sentinel.ui.resources.ic_nav_bar_about
 import com.rs.sentinel.ui.resources.ic_nav_bar_home
+import com.rs.sentinel.ui.resources.ic_nav_bar_monitor
 import com.rs.sentinel.ui.resources.nav_bar_about_item
 import com.rs.sentinel.ui.resources.nav_bar_dashboard_item
+import com.rs.sentinel.ui.resources.nav_bar_monitor_item
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
 import sentinel.ui.screen.main.tab.SentinelTab
@@ -190,13 +192,22 @@ internal fun SentinelNavigationBar(
                                 }
                             },
                         selected = isSelected,
-                        icon = if (tab == SentinelTab.Dashboard) {
-                            vectorResource(resource = Res.drawable.ic_nav_bar_home)
-                        } else {
-                            vectorResource(resource = Res.drawable.ic_nav_bar_about)
+                        icon = when (tab) {
+                            SentinelTab.Dashboard -> {
+                                vectorResource(resource = Res.drawable.ic_nav_bar_home)
+                            }
+
+                            SentinelTab.Monitor -> {
+                                vectorResource(resource = Res.drawable.ic_nav_bar_monitor)
+                            }
+
+                            else -> {
+                                vectorResource(resource = Res.drawable.ic_nav_bar_about)
+                            }
                         },
                         label = when (tab) {
                             SentinelTab.Dashboard -> stringResource(resource = Res.string.nav_bar_dashboard_item)
+                            SentinelTab.Monitor -> stringResource(resource = Res.string.nav_bar_monitor_item)
                             SentinelTab.About -> stringResource(resource = Res.string.nav_bar_about_item)
                         },
                         onClick = {

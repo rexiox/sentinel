@@ -23,21 +23,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import sentinel.core.type.RiskLevel
+import sentinel.ui.ext.getLevelColor
 
 @Composable
-fun SentinelRiskLevelBar(
+internal fun SentinelRiskLevelBar(
     modifier: Modifier = Modifier,
     level: RiskLevel,
     severityText: String,
 ) {
     val levels = RiskLevel.entries
-
-    fun getLevelColor(level: RiskLevel): Color = when (level) {
-        RiskLevel.SAFE -> Color(0xFF4CAF50)
-        RiskLevel.LOW -> Color(0xFFFFC107)
-        RiskLevel.MEDIUM -> Color(0xFFFF9800)
-        RiskLevel.HIGH -> Color(0xFFF44336)
-    }
 
     Column(
         modifier = modifier.fillMaxWidth()
@@ -53,8 +47,7 @@ fun SentinelRiskLevelBar(
                     val isActive = segment.ordinal <= level.ordinal
 
                     val color by animateColorAsState(
-                        targetValue = getLevelColor(level = segment).copy(alpha = if (isActive) 1f else 0.25f),
-                        label = ""
+                        targetValue = segment.getLevelColor().copy(alpha = if (isActive) 1f else 0.25f)
                     )
 
                     Box(
@@ -100,10 +93,7 @@ fun SentinelRiskLevelBar(
                 TextAlign.End
             }
 
-            val animatedSelectedColor by animateColorAsState(
-                targetValue = getLevelColor(level = level),
-                label = ""
-            )
+            val animatedSelectedColor by animateColorAsState(targetValue = level.getLevelColor())
 
             Text(
                 modifier = Modifier

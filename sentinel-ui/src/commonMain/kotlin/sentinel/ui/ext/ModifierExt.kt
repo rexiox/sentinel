@@ -7,16 +7,10 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import sentinel.core.type.RiskLevel
 
-fun Modifier.sentinelGradientBackground(
-    riskLevel: RiskLevel? = null,
-): Modifier {
-    val baseColor = when (riskLevel) {
-        RiskLevel.SAFE -> Color(0xFF1B5E20)
-        RiskLevel.LOW -> Color(0xFFFBC02D)
-        RiskLevel.MEDIUM -> Color(0xFFF57C00)
-        RiskLevel.HIGH -> Color(0xFFD32F2F)
-        else -> Color(0xFF424242)
-    }
+fun Modifier.sentinelGradientBackground(riskLevel: RiskLevel?): Modifier {
+    if (riskLevel == null) return Modifier
+
+    val baseColor = riskLevel.getLevelColor()
 
     return drawBehind {
         drawRect(color = Color(0xFF0A0000))

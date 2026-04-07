@@ -2,7 +2,6 @@ package com.rs
 
 import android.graphics.Color.TRANSPARENT
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
@@ -13,14 +12,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.lifecycleScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import sentinel.Sentinel
 import sentinel.all
 import sentinel.configure
 import sentinel.core.ext.toByteList
+import sentinel.monitor.SentinelMonitor
 
 class MainActivity : ComponentActivity() {
 
@@ -38,6 +34,7 @@ class MainActivity : ComponentActivity() {
         )
 
         super.onCreate(savedInstanceState)
+
 
         setContent {
             val context = LocalContext.current
@@ -67,7 +64,15 @@ class MainActivity : ComponentActivity() {
                     .padding(bottom = 16.dp),
                 sentinel = sentinel,
                 appId = Sentinel.Identity.appId,
-                appSignature = Sentinel.Identity.signature.orEmpty()
+                appSignature = Sentinel.Identity.signature.orEmpty(),
+                onMonitorStart = {
+                    SentinelMonitor.start(
+                        context = context,
+                        appId = sentinel.config.appId.orEmpty(),
+                        signature = sentinel.config.signature.orEmpty(),
+                        threshold = sentinel.config.threshold
+                    )
+                }
             )
         }
     }

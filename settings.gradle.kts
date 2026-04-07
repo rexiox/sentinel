@@ -19,10 +19,11 @@ dependencyResolutionManagement {
 rootProject.name = "sentinel"
 
 include(":sentinel")
-include(":sentinel-ui")
 include(":sentinel-core")
 include(":sentinel-runtime")
 include(":sentinel-identity")
+include(":sentinel-ui")
+include(":sentinel-monitor")
 include(":sentinel-kit")
 include(":sentinel-kit:kni")
 include(":sentinel-kit:ndk")
