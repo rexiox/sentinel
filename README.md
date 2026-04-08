@@ -8,7 +8,7 @@
 [![KMP](https://img.shields.io/badge/KMP-000000?style=for-the-badge&logo=kotlin&logoColor=ffffff)](#)
 [![Android](https://img.shields.io/badge/Android-000000?style=for-the-badge&logo=android&logoColor=ffffff)](https://developer.android.com/)
 [![iOS](https://img.shields.io/badge/iOS-000000?style=for-the-badge&logo=apple&logoColor=ffffff)](https://developer.apple.com/)
-[![Version](https://img.shields.io/badge/1.4.2.alpha-000000?style=for-the-badge&logo=stackblitz)](#)
+[![Version](https://img.shields.io/badge/1.5.0.beta-000000?style=for-the-badge&logo=stackblitz)](#)
 
 **Sentinel** is a lightweight, modular Kotlin Multiplatform security toolkit designed to analyze
 runtime environments and detect potential security threats in real time on both Android and iOS.
@@ -88,7 +88,7 @@ injection attempts.
 ## Quick Start
 
 ```gradle
-implementation("io.github.resulsilay:sentinel:1.4.2-alpha")
+implementation("io.github.resulsilay:sentinel:1.5.0-beta")
 ```
 
 ### Android Usage
@@ -225,7 +225,7 @@ Sentinel Monitor is a monitoring infrastructure that tracks application-layer vu
 suspicious activities in real-time and reports these threats.
 
 ```gradle
-implementation("io.github.resulsilay:sentinel-monitor:1.4.2-alpha")
+implementation("io.github.resulsilay:sentinel-monitor:1.5.0-beta")
 ```
 
 ```kotlin
