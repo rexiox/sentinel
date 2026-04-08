@@ -224,6 +224,10 @@ sentinel.runtime {
 Sentinel Monitor is a monitoring infrastructure that tracks application-layer vulnerabilities and
 suspicious activities in real-time and reports these threats.
 
+```gradle
+implementation("io.github.resulsilay:sentinel-monitor:1.4.2-alpha")
+```
+
 ```kotlin
 SentinelMonitor.start(
     appId = sentinel.config.appId.orEmpty(),

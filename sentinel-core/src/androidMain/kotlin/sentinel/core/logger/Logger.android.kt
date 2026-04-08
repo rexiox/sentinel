@@ -39,11 +39,11 @@ actual object SentinelLogger {
                         val name = violation::class.simpleName ?: "Unknown Violation"
 
                         val detail = when (violation) {
-                            is AndroidViolation.Root.AppInstalled -> "Package: ${violation.packageName.orEmpty()}"
-                            is AndroidViolation.Root.SuspiciousMount -> "Mount: ${violation.mountPoint.orEmpty()}"
-                            is AndroidViolation.Hook.FrameworkDetected -> "Framework: ${violation.name ?: "Unknown"}"
-                            is AndroidViolation.Emulator.Detected -> "Name: ${violation.name ?: "Unknown"}"
-                            is AndroidViolation.Location.MockAppInstalled -> "Apps: ${violation.packages.orEmpty()}"
+                            is AndroidViolation.Root.AppInstalled -> "Package: ${violation.detail.orEmpty()}"
+                            is AndroidViolation.Root.SuspiciousMount -> "Mount: ${violation.detail.orEmpty()}"
+                            is AndroidViolation.Hook.FrameworkDetected -> "Framework: ${violation.detail ?: "Unknown"}"
+                            is AndroidViolation.Emulator.Detected -> "Name: ${violation.detail ?: "Unknown"}"
+                            is AndroidViolation.Location.MockAppInstalled -> "Apps: ${violation.detail}"
                             else -> "System integrity check failed"
                         }
 
