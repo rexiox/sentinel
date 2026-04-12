@@ -1,7 +1,7 @@
 <div align="center">
 
 <p align="center">
-  <img src="/art/logo.png" alt="Logo" width="200"/>
+  <img src="/.github/art/logo.png" alt="Logo" width="200"/>
 </p>
 
 [![Security](https://img.shields.io/badge/Security-000000?style=for-the-badge&logo=bitwarden)](#)
@@ -14,7 +14,7 @@
 runtime environments and detect potential security threats in real time on both Android and iOS.
 
 <p align="center">
-  <img alt="image" src="art/header.png" />
+  <img alt="image" src=".github/art/header.png" />
 </p>
 </div>
 
@@ -41,21 +41,21 @@ Sentinel provides real-time, on-device threat detection with minimal performance
   <tbody>
     <tr>
       <td align="center" style="padding: 5px;">
-        <img src="art/Android.gif" width="240" alt="Android Demo">
+        <img src=".github/art/Android.gif" width="240" alt="Android Demo">
       </td>
       <td align="center" style="padding: 5px;">
-        <img src="art/iOS.gif" width="240" alt="iOS Demo">
+        <img src=".github/art/iOS.gif" width="240" alt="iOS Demo">
       </td>
     </tr>
     <tr>
       <td align="center" style="padding: 10px;">
         <a href="https://play.google.com/store/apps/details?id=com.rs.sentinel">
-          <img src="art/google-play-badge.svg" height="40" alt="Google Play">
+          <img src=".github/art/google-play-badge.svg" height="40" alt="Google Play">
         </a>
       </td>
       <td align="center" style="padding: 10px;">
         <a href="https://apps.apple.com/us/app/">
-          <img src="art/app-store-badge.svg" height="40" alt="App Store">
+          <img src=".github/art/app-store-badge.svg" height="40" alt="App Store">
         </a>
       </td>
     </tr>
