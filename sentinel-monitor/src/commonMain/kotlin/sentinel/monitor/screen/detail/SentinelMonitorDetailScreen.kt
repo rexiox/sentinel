@@ -78,7 +78,9 @@ internal fun SentinelMonitorDetailContent(report: SecurityReport) {
             ),
             shape = RoundedCornerShape(size = 8.dp)
         ) {
-            Column(modifier = Modifier.padding(all = 16.dp)) {
+            Column(
+                modifier = Modifier.padding(all = 16.dp)
+            ) {
                 SentinelMonitorDetailItem(
                     label = stringResource(resource = Res.string.report_number),
                     value = "#${report.hashCode()}",

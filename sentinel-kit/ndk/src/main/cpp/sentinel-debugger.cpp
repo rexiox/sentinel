@@ -51,13 +51,6 @@ static bool internal_check_is_debuggable(JNIEnv *env, jobject context) {
   return (flags & FLAG_DEBUGGABLE) != 0;
 }
 
-static bool internal_check_ptrace_attach() {
-  if (ptrace(PTRACE_TRACEME, 0, 1, 0) < 0)
-    return true;
-  ptrace(PTRACE_DETACH, 0, 1, 0);
-  return false;
-}
-
 static bool internal_check_test_keys() {
   char tags[PROP_VALUE_MAX];
   if (__system_property_get("ro.build.tags", tags) > 0) {
