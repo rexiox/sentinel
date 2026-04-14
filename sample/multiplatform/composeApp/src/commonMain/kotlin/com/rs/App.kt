@@ -15,8 +15,7 @@ fun App(
     navigationBarModifier: Modifier = Modifier,
     sentinel: Sentinel,
     appId: String = "",
-    appSignature: String = "",
-    appHash: String = "",
+    appIntegrity: String = "",
     onMonitorStart: () -> Unit,
 ) {
     SentinelTheme {
@@ -29,8 +28,7 @@ fun App(
                 navigationBarModifier = navigationBarModifier,
                 sentinel = sentinel,
                 appId = appId,
-                appSignature = appSignature,
-                appHash = appHash,
+                appIntegrity = appIntegrity,
                 onMonitorStart = onMonitorStart
             )
         }

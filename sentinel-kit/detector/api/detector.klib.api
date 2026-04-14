@@ -33,10 +33,10 @@ final class sentinel.kit.detector/SimulatorDetector : sentinel.core.detector/Sec
 final class sentinel.kit.detector/TamperDetector : sentinel.core.detector/SecurityDetector { // sentinel.kit.detector/TamperDetector|null[0]
     constructor <init>(kotlin.collections/List<kotlin/Byte>?, kotlin.collections/List<kotlin/Byte>?) // sentinel.kit.detector/TamperDetector.<init>|<init>(kotlin.collections.List<kotlin.Byte>?;kotlin.collections.List<kotlin.Byte>?){}[0]
 
+    final val appIntegrity // sentinel.kit.detector/TamperDetector.appIntegrity|{}appIntegrity[0]
+        final fun <get-appIntegrity>(): kotlin.collections/List<kotlin/Byte>? // sentinel.kit.detector/TamperDetector.appIntegrity.<get-appIntegrity>|<get-appIntegrity>(){}[0]
     final val bundleId // sentinel.kit.detector/TamperDetector.bundleId|{}bundleId[0]
         final fun <get-bundleId>(): kotlin.collections/List<kotlin/Byte>? // sentinel.kit.detector/TamperDetector.bundleId.<get-bundleId>|<get-bundleId>(){}[0]
-    final val hash // sentinel.kit.detector/TamperDetector.hash|{}hash[0]
-        final fun <get-hash>(): kotlin.collections/List<kotlin/Byte>? // sentinel.kit.detector/TamperDetector.hash.<get-hash>|<get-hash>(){}[0]
 
     final fun detect(): kotlin.collections/List<sentinel.core.detector/Threat> // sentinel.kit.detector/TamperDetector.detect|detect(){}[0]
 }

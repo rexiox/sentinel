@@ -8,7 +8,7 @@ import sentinel.configure
 
 fun SentinelMonitorController(
     appId: List<Byte>,
-    hash: List<Byte>,
+    appIntegrity: List<Byte>,
     threshold: Int
 ) = ComposeUIViewController {
 
@@ -16,7 +16,7 @@ fun SentinelMonitorController(
         Sentinel.configure {
             config {
                 this.appId = appId
-                this.hash = hash
+                this.appIntegrity = appIntegrity
                 this.threshold = threshold
             }
 

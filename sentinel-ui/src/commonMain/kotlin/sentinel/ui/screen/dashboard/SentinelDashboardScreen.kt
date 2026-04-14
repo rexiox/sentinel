@@ -34,8 +34,7 @@ import sentinel.ui.screen.dashboard.composable.SentinelHeader
 internal fun SentinelDashboardScreen(
     sentinel: Sentinel,
     appId: String,
-    appSignature: String,
-    appHash: String,
+    appIntegrity: String,
 ) {
     val scope = rememberCoroutineScope()
 
@@ -98,8 +97,7 @@ internal fun SentinelDashboardScreen(
                 SentinelDashboardContent(
                     state = state,
                     appId = appId,
-                    appSignature = appSignature,
-                    appHash = appHash
+                    appIntegrity = appIntegrity
                 )
             }
 
@@ -118,8 +116,7 @@ internal fun SentinelDashboardScreen(
 private fun SentinelDashboardContent(
     state: SentinelDashboardState.Success,
     appId: String,
-    appSignature: String,
-    appHash: String,
+    appIntegrity: String,
 ) {
     val scrollState = rememberScrollState()
 
@@ -133,8 +130,7 @@ private fun SentinelDashboardContent(
             SentinelHeader(
                 scrollState = scrollState,
                 appId = appId,
-                appSignature = appSignature,
-                appHash = appHash,
+                appIntegrity = appIntegrity,
                 riskLevel = state.report.riskLevel,
                 severity = state.report.severity
             )

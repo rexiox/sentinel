@@ -26,8 +26,7 @@ import org.jetbrains.compose.resources.stringResource
 internal fun SentinelPackageCard(
     modifier: Modifier = Modifier,
     appId: String,
-    appSignature: String,
-    appHash: String,
+    appIntegrity: String
 ) {
     Card(
         modifier = modifier
@@ -63,21 +62,12 @@ internal fun SentinelPackageCard(
                 subtitle = appId
             )
 
-            if (appSignature.isNotBlank()) {
+            if (appIntegrity.isNotBlank()) {
                 Spacer(modifier = Modifier.height(height = 12.dp))
 
                 SentinelInfoItem(
                     title = stringResource(resource = Res.string.app_signature),
-                    subtitle = appSignature
-                )
-            }
-
-            if (appHash.isNotBlank()) {
-                Spacer(modifier = Modifier.height(height = 12.dp))
-
-                SentinelInfoItem(
-                    title = stringResource(resource = Res.string.app_signature),
-                    subtitle = appHash
+                    subtitle = appIntegrity
                 )
             }
         }

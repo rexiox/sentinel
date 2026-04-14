@@ -1,0 +1,75 @@
+// Klib ABI Dump
+// Targets: [iosArm64, iosSimulatorArm64, iosX64]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <io.github.resulsilay:sentinel-monitor>
+final object com.rs.sentinel.monitor.resources/Res { // com.rs.sentinel.monitor.resources/Res|null[0]
+    final fun getUri(kotlin/String): kotlin/String // com.rs.sentinel.monitor.resources/Res.getUri|getUri(kotlin.String){}[0]
+    final suspend fun readBytes(kotlin/String): kotlin/ByteArray // com.rs.sentinel.monitor.resources/Res.readBytes|readBytes(kotlin.String){}[0]
+
+    final object array // com.rs.sentinel.monitor.resources/Res.array|null[0]
+
+    final object drawable // com.rs.sentinel.monitor.resources/Res.drawable|null[0]
+
+    final object font // com.rs.sentinel.monitor.resources/Res.font|null[0]
+
+    final object plurals // com.rs.sentinel.monitor.resources/Res.plurals|null[0]
+
+    final object string // com.rs.sentinel.monitor.resources/Res.string|null[0]
+}
+
+final object sentinel.monitor/SentinelMonitor { // sentinel.monitor/SentinelMonitor|null[0]
+    final fun start(kotlin.collections/List<kotlin/Byte>, kotlin.collections/List<kotlin/Byte>, kotlin/Int, kotlin/Boolean = ...) // sentinel.monitor/SentinelMonitor.start|start(kotlin.collections.List<kotlin.Byte>;kotlin.collections.List<kotlin.Byte>;kotlin.Int;kotlin.Boolean){}[0]
+}
+
+final val com.rs.sentinel.monitor.resources/allDrawableResources // com.rs.sentinel.monitor.resources/allDrawableResources|@com.rs.sentinel.monitor.resources.Res{}allDrawableResources[0]
+    final fun (com.rs.sentinel.monitor.resources/Res).<get-allDrawableResources>(): kotlin.collections/Map<kotlin/String, org.jetbrains.compose.resources/DrawableResource> // com.rs.sentinel.monitor.resources/allDrawableResources.<get-allDrawableResources>|<get-allDrawableResources>@com.rs.sentinel.monitor.resources.Res(){}[0]
+final val com.rs.sentinel.monitor.resources/allFontResources // com.rs.sentinel.monitor.resources/allFontResources|@com.rs.sentinel.monitor.resources.Res{}allFontResources[0]
+    final fun (com.rs.sentinel.monitor.resources/Res).<get-allFontResources>(): kotlin.collections/Map<kotlin/String, org.jetbrains.compose.resources/FontResource> // com.rs.sentinel.monitor.resources/allFontResources.<get-allFontResources>|<get-allFontResources>@com.rs.sentinel.monitor.resources.Res(){}[0]
+final val com.rs.sentinel.monitor.resources/allPluralStringResources // com.rs.sentinel.monitor.resources/allPluralStringResources|@com.rs.sentinel.monitor.resources.Res{}allPluralStringResources[0]
+    final fun (com.rs.sentinel.monitor.resources/Res).<get-allPluralStringResources>(): kotlin.collections/Map<kotlin/String, org.jetbrains.compose.resources/PluralStringResource> // com.rs.sentinel.monitor.resources/allPluralStringResources.<get-allPluralStringResources>|<get-allPluralStringResources>@com.rs.sentinel.monitor.resources.Res(){}[0]
+final val com.rs.sentinel.monitor.resources/allStringArrayResources // com.rs.sentinel.monitor.resources/allStringArrayResources|@com.rs.sentinel.monitor.resources.Res{}allStringArrayResources[0]
+    final fun (com.rs.sentinel.monitor.resources/Res).<get-allStringArrayResources>(): kotlin.collections/Map<kotlin/String, org.jetbrains.compose.resources/StringArrayResource> // com.rs.sentinel.monitor.resources/allStringArrayResources.<get-allStringArrayResources>|<get-allStringArrayResources>@com.rs.sentinel.monitor.resources.Res(){}[0]
+final val com.rs.sentinel.monitor.resources/allStringResources // com.rs.sentinel.monitor.resources/allStringResources|@com.rs.sentinel.monitor.resources.Res{}allStringResources[0]
+    final fun (com.rs.sentinel.monitor.resources/Res).<get-allStringResources>(): kotlin.collections/Map<kotlin/String, org.jetbrains.compose.resources/StringResource> // com.rs.sentinel.monitor.resources/allStringResources.<get-allStringResources>|<get-allStringResources>@com.rs.sentinel.monitor.resources.Res(){}[0]
+final val com.rs.sentinel.monitor.resources/analysis_date // com.rs.sentinel.monitor.resources/analysis_date|@com.rs.sentinel.monitor.resources.Res.string{}analysis_date[0]
+    final fun (com.rs.sentinel.monitor.resources/Res.string).<get-analysis_date>(): org.jetbrains.compose.resources/StringResource // com.rs.sentinel.monitor.resources/analysis_date.<get-analysis_date>|<get-analysis_date>@com.rs.sentinel.monitor.resources.Res.string(){}[0]
+final val com.rs.sentinel.monitor.resources/com_rs_sentinel_monitor_resources_Res$stableprop // com.rs.sentinel.monitor.resources/com_rs_sentinel_monitor_resources_Res$stableprop|#static{}com_rs_sentinel_monitor_resources_Res$stableprop[0]
+final val com.rs.sentinel.monitor.resources/com_rs_sentinel_monitor_resources_Res_array$stableprop // com.rs.sentinel.monitor.resources/com_rs_sentinel_monitor_resources_Res_array$stableprop|#static{}com_rs_sentinel_monitor_resources_Res_array$stableprop[0]
+final val com.rs.sentinel.monitor.resources/com_rs_sentinel_monitor_resources_Res_drawable$stableprop // com.rs.sentinel.monitor.resources/com_rs_sentinel_monitor_resources_Res_drawable$stableprop|#static{}com_rs_sentinel_monitor_resources_Res_drawable$stableprop[0]
+final val com.rs.sentinel.monitor.resources/com_rs_sentinel_monitor_resources_Res_font$stableprop // com.rs.sentinel.monitor.resources/com_rs_sentinel_monitor_resources_Res_font$stableprop|#static{}com_rs_sentinel_monitor_resources_Res_font$stableprop[0]
+final val com.rs.sentinel.monitor.resources/com_rs_sentinel_monitor_resources_Res_plurals$stableprop // com.rs.sentinel.monitor.resources/com_rs_sentinel_monitor_resources_Res_plurals$stableprop|#static{}com_rs_sentinel_monitor_resources_Res_plurals$stableprop[0]
+final val com.rs.sentinel.monitor.resources/com_rs_sentinel_monitor_resources_Res_string$stableprop // com.rs.sentinel.monitor.resources/com_rs_sentinel_monitor_resources_Res_string$stableprop|#static{}com_rs_sentinel_monitor_resources_Res_string$stableprop[0]
+final val com.rs.sentinel.monitor.resources/detected_threats // com.rs.sentinel.monitor.resources/detected_threats|@com.rs.sentinel.monitor.resources.Res.string{}detected_threats[0]
+    final fun (com.rs.sentinel.monitor.resources/Res.string).<get-detected_threats>(): org.jetbrains.compose.resources/StringResource // com.rs.sentinel.monitor.resources/detected_threats.<get-detected_threats>|<get-detected_threats>@com.rs.sentinel.monitor.resources.Res.string(){}[0]
+final val com.rs.sentinel.monitor.resources/no_threats_detected // com.rs.sentinel.monitor.resources/no_threats_detected|@com.rs.sentinel.monitor.resources.Res.string{}no_threats_detected[0]
+    final fun (com.rs.sentinel.monitor.resources/Res.string).<get-no_threats_detected>(): org.jetbrains.compose.resources/StringResource // com.rs.sentinel.monitor.resources/no_threats_detected.<get-no_threats_detected>|<get-no_threats_detected>@com.rs.sentinel.monitor.resources.Res.string(){}[0]
+final val com.rs.sentinel.monitor.resources/refresh_text // com.rs.sentinel.monitor.resources/refresh_text|@com.rs.sentinel.monitor.resources.Res.string{}refresh_text[0]
+    final fun (com.rs.sentinel.monitor.resources/Res.string).<get-refresh_text>(): org.jetbrains.compose.resources/StringResource // com.rs.sentinel.monitor.resources/refresh_text.<get-refresh_text>|<get-refresh_text>@com.rs.sentinel.monitor.resources.Res.string(){}[0]
+final val com.rs.sentinel.monitor.resources/report_number // com.rs.sentinel.monitor.resources/report_number|@com.rs.sentinel.monitor.resources.Res.string{}report_number[0]
+    final fun (com.rs.sentinel.monitor.resources/Res.string).<get-report_number>(): org.jetbrains.compose.resources/StringResource // com.rs.sentinel.monitor.resources/report_number.<get-report_number>|<get-report_number>@com.rs.sentinel.monitor.resources.Res.string(){}[0]
+final val com.rs.sentinel.monitor.resources/risk_status // com.rs.sentinel.monitor.resources/risk_status|@com.rs.sentinel.monitor.resources.Res.string{}risk_status[0]
+    final fun (com.rs.sentinel.monitor.resources/Res.string).<get-risk_status>(): org.jetbrains.compose.resources/StringResource // com.rs.sentinel.monitor.resources/risk_status.<get-risk_status>|<get-risk_status>@com.rs.sentinel.monitor.resources.Res.string(){}[0]
+final val com.rs.sentinel.monitor.resources/security_analysis // com.rs.sentinel.monitor.resources/security_analysis|@com.rs.sentinel.monitor.resources.Res.string{}security_analysis[0]
+    final fun (com.rs.sentinel.monitor.resources/Res.string).<get-security_analysis>(): org.jetbrains.compose.resources/StringResource // com.rs.sentinel.monitor.resources/security_analysis.<get-security_analysis>|<get-security_analysis>@com.rs.sentinel.monitor.resources.Res.string(){}[0]
+final val com.rs.sentinel.monitor.resources/threat_detail // com.rs.sentinel.monitor.resources/threat_detail|@com.rs.sentinel.monitor.resources.Res.string{}threat_detail[0]
+    final fun (com.rs.sentinel.monitor.resources/Res.string).<get-threat_detail>(): org.jetbrains.compose.resources/StringResource // com.rs.sentinel.monitor.resources/threat_detail.<get-threat_detail>|<get-threat_detail>@com.rs.sentinel.monitor.resources.Res.string(){}[0]
+final val com.rs.sentinel.monitor.resources/threat_score // com.rs.sentinel.monitor.resources/threat_score|@com.rs.sentinel.monitor.resources.Res.string{}threat_score[0]
+    final fun (com.rs.sentinel.monitor.resources/Res.string).<get-threat_score>(): org.jetbrains.compose.resources/StringResource // com.rs.sentinel.monitor.resources/threat_score.<get-threat_score>|<get-threat_score>@com.rs.sentinel.monitor.resources.Res.string(){}[0]
+final val com.rs.sentinel.monitor.resources/top_bar_threshold // com.rs.sentinel.monitor.resources/top_bar_threshold|@com.rs.sentinel.monitor.resources.Res.string{}top_bar_threshold[0]
+    final fun (com.rs.sentinel.monitor.resources/Res.string).<get-top_bar_threshold>(): org.jetbrains.compose.resources/StringResource // com.rs.sentinel.monitor.resources/top_bar_threshold.<get-top_bar_threshold>|<get-top_bar_threshold>@com.rs.sentinel.monitor.resources.Res.string(){}[0]
+final val com.rs.sentinel.monitor.resources/top_bar_title // com.rs.sentinel.monitor.resources/top_bar_title|@com.rs.sentinel.monitor.resources.Res.string{}top_bar_title[0]
+    final fun (com.rs.sentinel.monitor.resources/Res.string).<get-top_bar_title>(): org.jetbrains.compose.resources/StringResource // com.rs.sentinel.monitor.resources/top_bar_title.<get-top_bar_title>|<get-top_bar_title>@com.rs.sentinel.monitor.resources.Res.string(){}[0]
+final val sentinel.monitor/sentinel_monitor_SentinelMonitor$stableprop // sentinel.monitor/sentinel_monitor_SentinelMonitor$stableprop|#static{}sentinel_monitor_SentinelMonitor$stableprop[0]
+
+final fun com.rs.sentinel.monitor.resources/com_rs_sentinel_monitor_resources_Res$stableprop_getter(): kotlin/Int // com.rs.sentinel.monitor.resources/com_rs_sentinel_monitor_resources_Res$stableprop_getter|com_rs_sentinel_monitor_resources_Res$stableprop_getter(){}[0]
+final fun com.rs.sentinel.monitor.resources/com_rs_sentinel_monitor_resources_Res_array$stableprop_getter(): kotlin/Int // com.rs.sentinel.monitor.resources/com_rs_sentinel_monitor_resources_Res_array$stableprop_getter|com_rs_sentinel_monitor_resources_Res_array$stableprop_getter(){}[0]
+final fun com.rs.sentinel.monitor.resources/com_rs_sentinel_monitor_resources_Res_drawable$stableprop_getter(): kotlin/Int // com.rs.sentinel.monitor.resources/com_rs_sentinel_monitor_resources_Res_drawable$stableprop_getter|com_rs_sentinel_monitor_resources_Res_drawable$stableprop_getter(){}[0]
+final fun com.rs.sentinel.monitor.resources/com_rs_sentinel_monitor_resources_Res_font$stableprop_getter(): kotlin/Int // com.rs.sentinel.monitor.resources/com_rs_sentinel_monitor_resources_Res_font$stableprop_getter|com_rs_sentinel_monitor_resources_Res_font$stableprop_getter(){}[0]
+final fun com.rs.sentinel.monitor.resources/com_rs_sentinel_monitor_resources_Res_plurals$stableprop_getter(): kotlin/Int // com.rs.sentinel.monitor.resources/com_rs_sentinel_monitor_resources_Res_plurals$stableprop_getter|com_rs_sentinel_monitor_resources_Res_plurals$stableprop_getter(){}[0]
+final fun com.rs.sentinel.monitor.resources/com_rs_sentinel_monitor_resources_Res_string$stableprop_getter(): kotlin/Int // com.rs.sentinel.monitor.resources/com_rs_sentinel_monitor_resources_Res_string$stableprop_getter|com_rs_sentinel_monitor_resources_Res_string$stableprop_getter(){}[0]
+final fun sentinel.monitor/SentinelMonitorController(kotlin.collections/List<kotlin/Byte>, kotlin.collections/List<kotlin/Byte>, kotlin/Int): platform.UIKit/UIViewController // sentinel.monitor/SentinelMonitorController|SentinelMonitorController(kotlin.collections.List<kotlin.Byte>;kotlin.collections.List<kotlin.Byte>;kotlin.Int){}[0]
+final fun sentinel.monitor/sentinel_monitor_SentinelMonitor$stableprop_getter(): kotlin/Int // sentinel.monitor/sentinel_monitor_SentinelMonitor$stableprop_getter|sentinel_monitor_SentinelMonitor$stableprop_getter(){}[0]

@@ -22,7 +22,7 @@ fun Builder.tamper() = apply {
     addDetector(
         detector = TamperDetector(
             bundleId = config.appId,
-            hash = config.hash
+            appIntegrity = config.appIntegrity
         )
     )
 }

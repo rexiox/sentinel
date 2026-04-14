@@ -21,8 +21,7 @@ fun SentinelMainScreen(
     navigationBarModifier: Modifier = Modifier,
     sentinel: Sentinel,
     appId: String,
-    appSignature: String,
-    appHash: String,
+    appIntegrity: String,
     onMonitorStart: () -> Unit,
 ) {
     var selectedTab by remember { mutableStateOf(SentinelTab.Dashboard) }
@@ -51,8 +50,7 @@ fun SentinelMainScreen(
                     SentinelDashboardScreen(
                         sentinel = sentinel,
                         appId = appId,
-                        appSignature = appSignature,
-                        appHash = appHash
+                        appIntegrity = appIntegrity,
                     )
                 }
 

@@ -42,10 +42,10 @@ class MainActivity : ComponentActivity() {
             val sentinel = remember {
                 Sentinel.configure(context = context) {
                     config {
-                        this.appId = Sentinel.Identity.appId.toByteList()
-                        this.signature = Sentinel.Identity.signature?.toByteList()
-                        this.threshold = 20
-                        // this.isLoggingEnabled = true
+                        appId = Sentinel.Identity.appId.toByteList()
+                        appIntegrity = Sentinel.Identity.signature.toByteList()
+                        threshold = 20
+                        // isLoggingEnabled = true
                     }
 
                     all()
@@ -64,12 +64,12 @@ class MainActivity : ComponentActivity() {
                     .padding(bottom = 16.dp),
                 sentinel = sentinel,
                 appId = Sentinel.Identity.appId,
-                appSignature = Sentinel.Identity.signature.orEmpty(),
+                appIntegrity = Sentinel.Identity.signature.orEmpty(),
                 onMonitorStart = {
                     SentinelMonitor.start(
                         context = context,
-                        appId = sentinel.config.appId.orEmpty(),
-                        signature = sentinel.config.signature.orEmpty(),
+                        appId = sentinel.config.appId,
+                        appIntegrity = sentinel.config.appIntegrity,
                         threshold = sentinel.config.threshold
                     )
                 }

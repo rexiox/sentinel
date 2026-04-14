@@ -20,7 +20,14 @@ actual class Builder {
 
     actual fun config(block: Config.() -> Unit): Config = config.apply(block = block)
 
-    actual fun build(): Sentinel = Sentinel(detectors = detectors, config = config)
+    actual fun build(): Sentinel = config
+        .also(Config::validate)
+        .let { config ->
+            Sentinel(
+                detectors = detectors,
+                config = config
+            )
+        }
 }
 
 fun Sentinel.Companion.configure(

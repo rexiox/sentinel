@@ -16,10 +16,10 @@ fun MainViewController() = ComposeUIViewController {
     val sentinel = remember {
         Sentinel.configure {
             config {
-                this.appId = Sentinel.Identity.appId.toByteList()
-                this.hash = Sentinel.Identity.hash?.toByteList()
-                this.threshold = 20
-                // this.isLoggingEnabled = true
+                appId = Sentinel.Identity.appId.toByteList()
+                appIntegrity = Sentinel.Identity.hash.toByteList()
+                threshold = 20
+                // isLoggingEnabled = true
             }
 
             all()
@@ -35,11 +35,11 @@ fun MainViewController() = ComposeUIViewController {
         navigationBarModifier = Modifier.padding(bottom = 24.dp),
         sentinel = sentinel,
         appId = Sentinel.Identity.appId,
-        appHash = Sentinel.Identity.hash.orEmpty(),
+        appIntegrity = Sentinel.Identity.hash.orEmpty(),
         onMonitorStart = {
             SentinelMonitor.start(
-                appId = sentinel.config.appId.orEmpty(),
-                hash = sentinel.config.hash.orEmpty(),
+                appId = sentinel.config.appId,
+                appIntegrity = sentinel.config.appIntegrity,
                 threshold = sentinel.config.threshold
             )
         }

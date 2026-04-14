@@ -75,8 +75,10 @@ abstract class sentinel.core.report/SecurityReport { // sentinel.core.report/Sec
 }
 
 abstract class sentinel.core.violation/SecurityViolation { // sentinel.core.violation/SecurityViolation|null[0]
-    constructor <init>(kotlin/Int) // sentinel.core.violation/SecurityViolation.<init>|<init>(kotlin.Int){}[0]
+    constructor <init>(kotlin/Int, kotlin/String?) // sentinel.core.violation/SecurityViolation.<init>|<init>(kotlin.Int;kotlin.String?){}[0]
 
+    open val detail // sentinel.core.violation/SecurityViolation.detail|{}detail[0]
+        open fun <get-detail>(): kotlin/String? // sentinel.core.violation/SecurityViolation.detail.<get-detail>|<get-detail>(){}[0]
     open val severity // sentinel.core.violation/SecurityViolation.severity|{}severity[0]
         open fun <get-severity>(): kotlin/Int // sentinel.core.violation/SecurityViolation.severity.<get-severity>|<get-severity>(){}[0]
 }
@@ -92,21 +94,6 @@ final class sentinel.core.detector/Threat { // sentinel.core.detector/Threat|nul
     final fun equals(kotlin/Any?): kotlin/Boolean // sentinel.core.detector/Threat.equals|equals(kotlin.Any?){}[0]
     final fun hashCode(): kotlin/Int // sentinel.core.detector/Threat.hashCode|hashCode(){}[0]
     final fun toString(): kotlin/String // sentinel.core.detector/Threat.toString|toString(){}[0]
-}
-
-final class sentinel.core.guard/SentinelGuard { // sentinel.core.guard/SentinelGuard|null[0]
-    constructor <init>(sentinel.core.report/SecurityReport) // sentinel.core.guard/SentinelGuard.<init>|<init>(sentinel.core.report.SecurityReport){}[0]
-
-    final val report // sentinel.core.guard/SentinelGuard.report|{}report[0]
-        final fun <get-report>(): sentinel.core.report/SecurityReport // sentinel.core.guard/SentinelGuard.report.<get-report>|<get-report>(){}[0]
-
-    final inline fun onCompromised(kotlin/Function0<kotlin/Unit>) // sentinel.core.guard/SentinelGuard.onCompromised|onCompromised(kotlin.Function0<kotlin.Unit>){}[0]
-    final inline fun onCritical(kotlin/Function1<kotlin/Int, kotlin/Unit>) // sentinel.core.guard/SentinelGuard.onCritical|onCritical(kotlin.Function1<kotlin.Int,kotlin.Unit>){}[0]
-    final inline fun onDebugged(kotlin/Function0<kotlin/Unit>) // sentinel.core.guard/SentinelGuard.onDebugged|onDebugged(kotlin.Function0<kotlin.Unit>){}[0]
-    final inline fun onHooked(kotlin/Function0<kotlin/Unit>) // sentinel.core.guard/SentinelGuard.onHooked|onHooked(kotlin.Function0<kotlin.Unit>){}[0]
-    final inline fun onSafe(kotlin/Function0<kotlin/Unit>) // sentinel.core.guard/SentinelGuard.onSafe|onSafe(kotlin.Function0<kotlin.Unit>){}[0]
-    final inline fun onSimulated(kotlin/Function0<kotlin/Unit>) // sentinel.core.guard/SentinelGuard.onSimulated|onSimulated(kotlin.Function0<kotlin.Unit>){}[0]
-    final inline fun onTampered(kotlin/Function0<kotlin/Unit>) // sentinel.core.guard/SentinelGuard.onTampered|onTampered(kotlin.Function0<kotlin.Unit>){}[0]
 }
 
 final class sentinel.core.report/IosSecurityReport : sentinel.core.report/SecurityReport { // sentinel.core.report/IosSecurityReport|null[0]
@@ -131,6 +118,8 @@ final class sentinel.core.report/IosSecurityReport : sentinel.core.report/Securi
 }
 
 sealed class sentinel.core.violation/IosViolation : sentinel.core.violation/SecurityViolation { // sentinel.core.violation/IosViolation|null[0]
+    open val detail // sentinel.core.violation/IosViolation.detail|{}detail[0]
+        open fun <get-detail>(): kotlin/String? // sentinel.core.violation/IosViolation.detail.<get-detail>|<get-detail>(){}[0]
     open val severity // sentinel.core.violation/IosViolation.severity|{}severity[0]
         open fun <get-severity>(): kotlin/Int // sentinel.core.violation/IosViolation.severity.<get-severity>|<get-severity>(){}[0]
 
@@ -142,6 +131,8 @@ sealed class sentinel.core.violation/IosViolation : sentinel.core.violation/Secu
         final class FrameworkDetected : sentinel.core.violation/IosViolation.Hook { // sentinel.core.violation/IosViolation.Hook.FrameworkDetected|null[0]
             constructor <init>(kotlin/String? = ...) // sentinel.core.violation/IosViolation.Hook.FrameworkDetected.<init>|<init>(kotlin.String?){}[0]
 
+            final val detail // sentinel.core.violation/IosViolation.Hook.FrameworkDetected.detail|{}detail[0]
+                final fun <get-detail>(): kotlin/String? // sentinel.core.violation/IosViolation.Hook.FrameworkDetected.detail.<get-detail>|<get-detail>(){}[0]
             final val name // sentinel.core.violation/IosViolation.Hook.FrameworkDetected.name|{}name[0]
                 final fun <get-name>(): kotlin/String? // sentinel.core.violation/IosViolation.Hook.FrameworkDetected.name.<get-name>|<get-name>(){}[0]
 
@@ -155,6 +146,8 @@ sealed class sentinel.core.violation/IosViolation : sentinel.core.violation/Secu
         final class InlineHookDetected : sentinel.core.violation/IosViolation.Hook { // sentinel.core.violation/IosViolation.Hook.InlineHookDetected|null[0]
             constructor <init>(kotlin/String? = ...) // sentinel.core.violation/IosViolation.Hook.InlineHookDetected.<init>|<init>(kotlin.String?){}[0]
 
+            final val detail // sentinel.core.violation/IosViolation.Hook.InlineHookDetected.detail|{}detail[0]
+                final fun <get-detail>(): kotlin/String? // sentinel.core.violation/IosViolation.Hook.InlineHookDetected.detail.<get-detail>|<get-detail>(){}[0]
             final val name // sentinel.core.violation/IosViolation.Hook.InlineHookDetected.name|{}name[0]
                 final fun <get-name>(): kotlin/String? // sentinel.core.violation/IosViolation.Hook.InlineHookDetected.name.<get-name>|<get-name>(){}[0]
 
@@ -174,6 +167,8 @@ sealed class sentinel.core.violation/IosViolation : sentinel.core.violation/Secu
 
             final val appId // sentinel.core.violation/IosViolation.Jailbreak.AppInstalled.appId|{}appId[0]
                 final fun <get-appId>(): kotlin/String? // sentinel.core.violation/IosViolation.Jailbreak.AppInstalled.appId.<get-appId>|<get-appId>(){}[0]
+            final val detail // sentinel.core.violation/IosViolation.Jailbreak.AppInstalled.detail|{}detail[0]
+                final fun <get-detail>(): kotlin/String? // sentinel.core.violation/IosViolation.Jailbreak.AppInstalled.detail.<get-detail>|<get-detail>(){}[0]
 
             final fun component1(): kotlin/String? // sentinel.core.violation/IosViolation.Jailbreak.AppInstalled.component1|component1(){}[0]
             final fun copy(kotlin/String? = ...): sentinel.core.violation/IosViolation.Jailbreak.AppInstalled // sentinel.core.violation/IosViolation.Jailbreak.AppInstalled.copy|copy(kotlin.String?){}[0]
@@ -187,6 +182,8 @@ sealed class sentinel.core.violation/IosViolation : sentinel.core.violation/Secu
 
             final val appId // sentinel.core.violation/IosViolation.Jailbreak.Sandbox.appId|{}appId[0]
                 final fun <get-appId>(): kotlin/String? // sentinel.core.violation/IosViolation.Jailbreak.Sandbox.appId.<get-appId>|<get-appId>(){}[0]
+            final val detail // sentinel.core.violation/IosViolation.Jailbreak.Sandbox.detail|{}detail[0]
+                final fun <get-detail>(): kotlin/String? // sentinel.core.violation/IosViolation.Jailbreak.Sandbox.detail.<get-detail>|<get-detail>(){}[0]
 
             final fun component1(): kotlin/String? // sentinel.core.violation/IosViolation.Jailbreak.Sandbox.component1|component1(){}[0]
             final fun copy(kotlin/String? = ...): sentinel.core.violation/IosViolation.Jailbreak.Sandbox // sentinel.core.violation/IosViolation.Jailbreak.Sandbox.copy|copy(kotlin.String?){}[0]
@@ -198,6 +195,8 @@ sealed class sentinel.core.violation/IosViolation : sentinel.core.violation/Secu
         final class SuspiciousSymlinks : sentinel.core.violation/IosViolation.Jailbreak { // sentinel.core.violation/IosViolation.Jailbreak.SuspiciousSymlinks|null[0]
             constructor <init>(kotlin/String? = ...) // sentinel.core.violation/IosViolation.Jailbreak.SuspiciousSymlinks.<init>|<init>(kotlin.String?){}[0]
 
+            final val detail // sentinel.core.violation/IosViolation.Jailbreak.SuspiciousSymlinks.detail|{}detail[0]
+                final fun <get-detail>(): kotlin/String? // sentinel.core.violation/IosViolation.Jailbreak.SuspiciousSymlinks.detail.<get-detail>|<get-detail>(){}[0]
             final val path // sentinel.core.violation/IosViolation.Jailbreak.SuspiciousSymlinks.path|{}path[0]
                 final fun <get-path>(): kotlin/String? // sentinel.core.violation/IosViolation.Jailbreak.SuspiciousSymlinks.path.<get-path>|<get-path>(){}[0]
 
@@ -211,6 +210,8 @@ sealed class sentinel.core.violation/IosViolation : sentinel.core.violation/Secu
         final class URLSchemes : sentinel.core.violation/IosViolation.Jailbreak { // sentinel.core.violation/IosViolation.Jailbreak.URLSchemes|null[0]
             constructor <init>(kotlin/String? = ...) // sentinel.core.violation/IosViolation.Jailbreak.URLSchemes.<init>|<init>(kotlin.String?){}[0]
 
+            final val detail // sentinel.core.violation/IosViolation.Jailbreak.URLSchemes.detail|{}detail[0]
+                final fun <get-detail>(): kotlin/String? // sentinel.core.violation/IosViolation.Jailbreak.URLSchemes.detail.<get-detail>|<get-detail>(){}[0]
             final val urlScheme // sentinel.core.violation/IosViolation.Jailbreak.URLSchemes.urlScheme|{}urlScheme[0]
                 final fun <get-urlScheme>(): kotlin/String? // sentinel.core.violation/IosViolation.Jailbreak.URLSchemes.urlScheme.<get-urlScheme>|<get-urlScheme>(){}[0]
 
@@ -226,6 +227,8 @@ sealed class sentinel.core.violation/IosViolation : sentinel.core.violation/Secu
         final class MockAppInstalled : sentinel.core.violation/IosViolation.Location { // sentinel.core.violation/IosViolation.Location.MockAppInstalled|null[0]
             constructor <init>(kotlin.collections/List<kotlin/String>) // sentinel.core.violation/IosViolation.Location.MockAppInstalled.<init>|<init>(kotlin.collections.List<kotlin.String>){}[0]
 
+            final val detail // sentinel.core.violation/IosViolation.Location.MockAppInstalled.detail|{}detail[0]
+                final fun <get-detail>(): kotlin/String // sentinel.core.violation/IosViolation.Location.MockAppInstalled.detail.<get-detail>|<get-detail>(){}[0]
             final val packages // sentinel.core.violation/IosViolation.Location.MockAppInstalled.packages|{}packages[0]
                 final fun <get-packages>(): kotlin.collections/List<kotlin/String> // sentinel.core.violation/IosViolation.Location.MockAppInstalled.packages.<get-packages>|<get-packages>(){}[0]
 
@@ -264,5 +267,5 @@ final object sentinel.core.logger/SentinelLogger { // sentinel.core.logger/Senti
     final fun report(sentinel.core.report/SecurityReport) // sentinel.core.logger/SentinelLogger.report|report(sentinel.core.report.SecurityReport){}[0]
 }
 
-final fun (kotlin/String).sentinel.core.ext/toByteList(): kotlin.collections/List<kotlin/Byte> // sentinel.core.ext/toByteList|toByteList@kotlin.String(){}[0]
+final fun (kotlin/String?).sentinel.core.ext/toByteList(): kotlin.collections/List<kotlin/Byte> // sentinel.core.ext/toByteList|toByteList@kotlin.String?(){}[0]
 final fun sentinel.core.violation/getGroupName(sentinel.core.violation/SecurityViolation): kotlin/String // sentinel.core.violation/getGroupName|getGroupName(sentinel.core.violation.SecurityViolation){}[0]

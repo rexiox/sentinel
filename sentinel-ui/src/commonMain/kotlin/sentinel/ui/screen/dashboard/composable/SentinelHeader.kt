@@ -17,8 +17,7 @@ import sentinel.core.type.RiskLevel
 internal fun SentinelHeader(
     scrollState: ScrollState,
     appId: String,
-    appSignature: String,
-    appHash: String,
+    appIntegrity: String,
     riskLevel: RiskLevel,
     severity: Int,
 ) {
@@ -48,8 +47,7 @@ internal fun SentinelHeader(
     ) {
         SentinelPackageCard(
             appId = appId,
-            appSignature = appSignature,
-            appHash = appHash
+            appIntegrity = appIntegrity
         )
 
         SentinelRiskLevelCard(

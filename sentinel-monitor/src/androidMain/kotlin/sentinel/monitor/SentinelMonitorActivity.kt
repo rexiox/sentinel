@@ -33,7 +33,7 @@ class SentinelMonitorActivity : ComponentActivity() {
         )
 
         val appIdBytes = intent.getByteArrayExtra(EXTRA_APP_ID)?.toList() ?: emptyList()
-        val signatureBytes = intent.getByteArrayExtra(EXTRA_SIGNATURE)?.toList() ?: emptyList()
+        val appIntegrityBytes = intent.getByteArrayExtra(EXTRA_APP_INTEGRITY)?.toList() ?: emptyList()
         val threshold = intent.getIntExtra(EXTRA_THRESHOLD, 100)
 
         super.onCreate(savedInstanceState)
@@ -46,7 +46,7 @@ class SentinelMonitorActivity : ComponentActivity() {
                 Sentinel.configure(context = context) {
                     config {
                         this.appId = appIdBytes
-                        this.signature = signatureBytes
+                        this.appIntegrity = appIntegrityBytes
                         this.threshold = threshold
                     }
 
@@ -61,17 +61,17 @@ class SentinelMonitorActivity : ComponentActivity() {
     companion object {
 
         private const val EXTRA_APP_ID = "EXTRA_APP_ID"
-        private const val EXTRA_SIGNATURE = "EXTRA_SIGNATURE"
+        private const val EXTRA_APP_INTEGRITY = "EXTRA_APP_INTEGRITY"
         private const val EXTRA_THRESHOLD = "EXTRA_THRESHOLD"
 
         fun newIntent(
             context: Context,
             appId: ByteArray,
-            signature: ByteArray,
+            appIntegrity: ByteArray,
             threshold: Int,
         ): Intent = Intent(context, SentinelMonitorActivity::class.java).apply {
             putExtra(EXTRA_APP_ID, appId)
-            putExtra(EXTRA_SIGNATURE, signature)
+            putExtra(EXTRA_APP_INTEGRITY, appIntegrity)
             putExtra(EXTRA_THRESHOLD, threshold)
         }
     }

@@ -10,13 +10,13 @@ import sentinel.detector.verifyProvisioningHash
 
 class TamperDetector(
     val bundleId: List<Byte>?,
-    val hash: List<Byte>?,
+    val appIntegrity: List<Byte>?,
 ) : SecurityDetector {
 
     @OptIn(ExperimentalForeignApi::class)
     override fun detect(): List<Threat> = buildList {
         val bundleBytes = bundleId?.toByteArray() ?: byteArrayOf()
-        val hashBytes = hash?.toByteArray() ?: byteArrayOf()
+        val hashBytes = appIntegrity?.toByteArray() ?: byteArrayOf()
 
         if (bundleBytes.isNotEmpty()) {
             if (!verifyBundleId(bundleIdData = bundleBytes.refTo(0), length = bundleBytes.size)) {

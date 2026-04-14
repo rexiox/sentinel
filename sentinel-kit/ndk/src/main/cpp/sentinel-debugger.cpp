@@ -12,6 +12,13 @@ static JavaVM *g_debugger_vm = nullptr;
 static jobject g_debugger_obj = nullptr;
 static jmethodID g_debugger_callback = nullptr;
 static bool g_violation_reported = false;
+static pthread_mutex_t g_mutex = PTHREAD_MUTEX_INITIALIZER;
+
+void set_violation_status(bool status) {
+  pthread_mutex_lock(&g_mutex);
+  g_violation_reported = status;
+  pthread_mutex_unlock(&g_mutex);
+}
 
 static bool internal_check_tracer_pid() {
   int status_fd = open("/proc/self/status", O_RDONLY);
@@ -87,11 +94,11 @@ void *integrity_monitor(void *arg) {
 
     if (current_state && !g_violation_reported) {
       report_debugger_violation();
-      g_violation_reported = true;
+      set_violation_status(true);
     }
 
     else if (!current_state && g_violation_reported) {
-      g_violation_reported = false;
+      set_violation_status(false);
     }
 
     sleep(3);

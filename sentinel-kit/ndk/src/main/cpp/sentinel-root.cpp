@@ -12,6 +12,7 @@ static JavaVM *g_vm = nullptr;
 static jobject g_detector_obj = nullptr;
 static jmethodID g_callback_method = nullptr;
 static bool g_violation_reported = false;
+static pthread_mutex_t g_mutex = PTHREAD_MUTEX_INITIALIZER;
 
 const std::vector<std::string> ROOT_BINARIES = {"/system/bin/su",
                                                 "/system/xbin/su",
@@ -41,8 +42,14 @@ const std::vector<std::string> SUSPICIOUS_MOUNTS = {
     "history",
     "init.magisk"};
 
+void set_violation_status(bool status) {
+  pthread_mutex_lock(&g_mutex);
+  g_violation_reported = status;
+  pthread_mutex_unlock(&g_mutex);
+}
+
 bool internal_check_binaries() {
-  struct stat buffer;
+  struct stat buffer{};
   for (const auto &path : ROOT_BINARIES) {
     if (stat(path.c_str(), &buffer) == 0)
       return true;
@@ -139,7 +146,7 @@ void *integrity_monitor(void *arg) {
       report_root_violation();
     }
 
-    g_violation_reported = current_violation;
+    set_violation_status(current_violation);
     sleep(3);
   }
 

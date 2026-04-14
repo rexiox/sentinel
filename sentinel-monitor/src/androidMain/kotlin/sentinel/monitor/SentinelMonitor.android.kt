@@ -8,13 +8,13 @@ object SentinelMonitor {
     fun start(
         context: Context,
         appId: List<Byte>,
-        signature: List<Byte>,
+        appIntegrity: List<Byte>,
         threshold: Int,
     ) {
         val intent = SentinelMonitorActivity.newIntent(
             context = context,
             appId = appId.toByteArray(),
-            signature = signature.toByteArray(),
+            appIntegrity = appIntegrity.toByteArray(),
             threshold = threshold
         ).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK

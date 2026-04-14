@@ -17,6 +17,13 @@
 
 static bool g_violation_reported = false;
 static void (*violation_handler)(void) = NULL;
+static pthread_mutex_t g_mutex = PTHREAD_MUTEX_INITIALIZER;
+
+void set_violation_status(bool status) {
+  pthread_mutex_lock(&g_mutex);
+  g_violation_reported = status;
+  pthread_mutex_unlock(&g_mutex);
+}
 
 void setViolationHandler(void (*handler)(void)) { violation_handler = handler; }
 
@@ -140,10 +147,10 @@ void *integrity_monitor(void *arg) {
 
     if (has_violation && !g_violation_reported) {
       reportViolation();
-      g_violation_reported = true;
+      set_violation_status(true);
     }
     else if (!has_violation && g_violation_reported) {
-      g_violation_reported = false;
+      set_violation_status(false);
     }
 
     sleep(3);

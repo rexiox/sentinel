@@ -25,10 +25,10 @@ class MainFragment : Fragment() {
 
         val sentinel = Sentinel.configure(context = requireContext()) {
             config {
-                this.appId = Sentinel.Identity.appId.toByteList()
-                this.signature = Sentinel.Identity.signature?.toByteList()
-                this.threshold = 20
-                // this.isLoggingEnabled = true
+                appId = Sentinel.Identity.appId.toByteList()
+                appIntegrity = Sentinel.Identity.signature.toByteList()
+                threshold = 20
+                // isLoggingEnabled = true
             }
 
             all()

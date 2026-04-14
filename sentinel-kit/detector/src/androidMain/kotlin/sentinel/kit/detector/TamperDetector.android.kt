@@ -8,7 +8,7 @@ import sentinel.core.violation.AndroidViolation
 class TamperDetector(
     private val context: Context,
     private val appId: List<Byte>?,
-    private val appSignature: List<Byte>?,
+    private val appIntegrity: List<Byte>?,
 ) : SecurityDetector {
 
     init {
@@ -44,6 +44,6 @@ class TamperDetector(
     private fun isSignatureValid(): Boolean = verifySignature(
         context = context,
         expectedPackage = appId.orEmpty().toByteArray(),
-        expectedPackageSignature = appSignature.orEmpty().toByteArray()
+        expectedPackageSignature = appIntegrity.orEmpty().toByteArray()
     )
 }

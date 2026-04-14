@@ -10,13 +10,13 @@ object SentinelMonitor {
 
     fun start(
         appId: List<Byte>,
-        hash: List<Byte>,
+        appIntegrity: List<Byte>,
         threshold: Int,
         isBottomSheet: Boolean = true,
     ) {
         val monitorController = SentinelMonitorController(
             appId = appId,
-            hash = hash,
+            appIntegrity = appIntegrity,
             threshold = threshold
         )
         val rootViewController = UIApplication.sharedApplication.keyWindow?.rootViewController

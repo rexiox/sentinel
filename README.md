@@ -8,7 +8,7 @@
 [![KMP](https://img.shields.io/badge/KMP-000000?style=for-the-badge&logo=kotlin&logoColor=ffffff)](#)
 [![Android](https://img.shields.io/badge/Android-000000?style=for-the-badge&logo=android&logoColor=ffffff)](https://developer.android.com/)
 [![iOS](https://img.shields.io/badge/iOS-000000?style=for-the-badge&logo=apple&logoColor=ffffff)](https://developer.apple.com/)
-[![Version](https://img.shields.io/badge/1.5.1.beta-000000?style=for-the-badge&logo=stackblitz)](#)
+[![Version](https://img.shields.io/badge/1.5.2.beta-000000?style=for-the-badge&logo=stackblitz)](#)
 
 **Sentinel** is a lightweight, modular Kotlin Multiplatform security toolkit designed to analyze
 runtime environments and detect potential security threats in real time on both Android and iOS.
@@ -88,7 +88,7 @@ injection attempts.
 ## Quick Start
 
 ```gradle
-implementation("io.github.resulsilay:sentinel:1.5.1-beta")
+implementation("io.github.resulsilay:sentinel:1.5.2-beta")
 ```
 
 ### Android Usage
@@ -96,10 +96,10 @@ implementation("io.github.resulsilay:sentinel:1.5.1-beta")
 ```kotlin
 val sentinel = Sentinel.configure(context = context) {
     config {
-        this.appId = Sentinel.Identity.appId.toByteList()
-        this.signature = Sentinel.Identity.signature?.toByteList()
-        this.threshold = 90
-        this.isLoggingEnabled = true
+        appId = Sentinel.Identity.appId.toByteList()
+        appIntegrity = Sentinel.Identity.signature?.toByteList()
+        threshold = 90
+        isLoggingEnabled = true
     }
 
     all()
@@ -117,10 +117,10 @@ val sentinel = Sentinel.configure(context = context) {
 ```kotlin
 val sentinel = Sentinel.configure {
     config {
-        this.appId = Sentinel.Identity.appId.toByteList()
-        this.hash = Sentinel.Identity.hash?.toByteList()
-        this.threshold = 90
-        this.isLoggingEnabled = true
+        appId = Sentinel.Identity.appId.toByteList()
+        appIntegrity = Sentinel.Identity.hash?.toByteList()
+        threshold = 90
+        isLoggingEnabled = true
     }
 
     all()
@@ -227,13 +227,13 @@ suspicious activities in real-time and reports these threats.
 https://github.com/user-attachments/assets/acfb35ac-61c4-492e-ae42-a7576f2badb1
 
 ```gradle
-implementation("io.github.resulsilay:sentinel-monitor:1.5.1-beta")
+implementation("io.github.resulsilay:sentinel-monitor:1.5.2-beta")
 ```
 
 ```kotlin
 SentinelMonitor.start(
     appId = sentinel.config.appId.orEmpty(),
-    hash = sentinel.config.hash.orEmpty(),
+    appIntegrity = sentinel.config.hash.orEmpty(),
     threshold = sentinel.config.threshold
 )
 ```

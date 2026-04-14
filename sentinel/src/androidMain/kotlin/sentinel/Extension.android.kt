@@ -26,7 +26,7 @@ fun Builder.tamper() = apply {
         detector = TamperDetector(
             context = context,
             appId = config.appId,
-            appSignature = config.signature
+            appIntegrity = config.appIntegrity
         )
     )
 }

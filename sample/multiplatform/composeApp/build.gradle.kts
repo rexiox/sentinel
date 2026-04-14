@@ -34,9 +34,9 @@ kotlin {
             implementation(project(":sentinel-ui"))
             implementation(project(":sentinel-monitor"))
 
-            // implementation("io.github.resulsilay:sentinel:1.5.1-beta")
-            // implementation("io.github.resulsilay:sentinel-ui:1.5.1-beta")
-            // implementation("io.github.resulsilay:sentinel-monitor:1.5.1-beta")
+            // implementation("io.github.resulsilay:sentinel:1.5.2-beta")
+            // implementation("io.github.resulsilay:sentinel-ui:1.5.2-beta")
+            // implementation("io.github.resulsilay:sentinel-monitor:1.5.2-beta")
 
             implementation(libs.compose.runtime)
             implementation(libs.compose.foundation)
