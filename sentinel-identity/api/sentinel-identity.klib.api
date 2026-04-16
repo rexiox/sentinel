@@ -11,12 +11,10 @@ final class sentinel.identity/Identity : sentinel.core.identity/Identity { // se
 
     final val appId // sentinel.identity/Identity.appId|{}appId[0]
         final fun <get-appId>(): kotlin/String // sentinel.identity/Identity.appId.<get-appId>|<get-appId>(){}[0]
+    final val appIntegrity // sentinel.identity/Identity.appIntegrity|{}appIntegrity[0]
+        final fun <get-appIntegrity>(): kotlin/String? // sentinel.identity/Identity.appIntegrity.<get-appIntegrity>|<get-appIntegrity>(){}[0]
     final val deviceId // sentinel.identity/Identity.deviceId|{}deviceId[0]
         final fun <get-deviceId>(): kotlin/String // sentinel.identity/Identity.deviceId.<get-deviceId>|<get-deviceId>(){}[0]
-    final val hash // sentinel.identity/Identity.hash|{}hash[0]
-        final fun <get-hash>(): kotlin/String? // sentinel.identity/Identity.hash.<get-hash>|<get-hash>(){}[0]
     final val platform // sentinel.identity/Identity.platform|{}platform[0]
         final fun <get-platform>(): kotlin/String // sentinel.identity/Identity.platform.<get-platform>|<get-platform>(){}[0]
-    final val signature // sentinel.identity/Identity.signature|{}signature[0]
-        final fun <get-signature>(): kotlin/String? // sentinel.identity/Identity.signature.<get-signature>|<get-signature>(){}[0]
 }

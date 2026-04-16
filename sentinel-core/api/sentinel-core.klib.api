@@ -30,14 +30,12 @@ abstract interface sentinel.core.detector/SecurityDetector { // sentinel.core.de
 abstract interface sentinel.core.identity/Identity { // sentinel.core.identity/Identity|null[0]
     abstract val appId // sentinel.core.identity/Identity.appId|{}appId[0]
         abstract fun <get-appId>(): kotlin/String // sentinel.core.identity/Identity.appId.<get-appId>|<get-appId>(){}[0]
+    abstract val appIntegrity // sentinel.core.identity/Identity.appIntegrity|{}appIntegrity[0]
+        abstract fun <get-appIntegrity>(): kotlin/String? // sentinel.core.identity/Identity.appIntegrity.<get-appIntegrity>|<get-appIntegrity>(){}[0]
     abstract val deviceId // sentinel.core.identity/Identity.deviceId|{}deviceId[0]
         abstract fun <get-deviceId>(): kotlin/String // sentinel.core.identity/Identity.deviceId.<get-deviceId>|<get-deviceId>(){}[0]
-    abstract val hash // sentinel.core.identity/Identity.hash|{}hash[0]
-        abstract fun <get-hash>(): kotlin/String? // sentinel.core.identity/Identity.hash.<get-hash>|<get-hash>(){}[0]
     abstract val platform // sentinel.core.identity/Identity.platform|{}platform[0]
         abstract fun <get-platform>(): kotlin/String // sentinel.core.identity/Identity.platform.<get-platform>|<get-platform>(){}[0]
-    abstract val signature // sentinel.core.identity/Identity.signature|{}signature[0]
-        abstract fun <get-signature>(): kotlin/String? // sentinel.core.identity/Identity.signature.<get-signature>|<get-signature>(){}[0]
 }
 
 abstract class sentinel.core.report/SecurityReport { // sentinel.core.report/SecurityReport|null[0]
