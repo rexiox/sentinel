@@ -258,12 +258,12 @@ sealed class sentinel.core.violation/IosViolation : sentinel.core.violation/Secu
     sealed class Tamper : sentinel.core.violation/IosViolation { // sentinel.core.violation/IosViolation.Tamper|null[0]
         final object BundleIdChanged : sentinel.core.violation/IosViolation.Tamper // sentinel.core.violation/IosViolation.Tamper.BundleIdChanged|null[0]
 
-        final object SignatureMismatch : sentinel.core.violation/IosViolation.Tamper // sentinel.core.violation/IosViolation.Tamper.SignatureMismatch|null[0]
+        final object ProvisioningHashMismatch : sentinel.core.violation/IosViolation.Tamper // sentinel.core.violation/IosViolation.Tamper.ProvisioningHashMismatch|null[0]
     }
 }
 
 final object sentinel.core.logger/SentinelLogger { // sentinel.core.logger/SentinelLogger|null[0]
-    final fun info(kotlin/String = ..., kotlin/String) // sentinel.core.logger/SentinelLogger.info|info(kotlin.String;kotlin.String){}[0]
+    final fun print(kotlin/String = ..., kotlin/Any) // sentinel.core.logger/SentinelLogger.print|print(kotlin.String;kotlin.Any){}[0]
     final fun report(sentinel.core.report/SecurityReport) // sentinel.core.logger/SentinelLogger.report|report(sentinel.core.report.SecurityReport){}[0]
 }
 
