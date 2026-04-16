@@ -25,9 +25,7 @@ actual class Identity actual constructor(
 
     actual override val appId: String = androidContext.packageName
 
-    actual override val signature: String? = androidContext.getAppSignatureSHA256()
-
-    actual override val hash: String? = null
+    actual override val appIntegrity: String? = androidContext.getAppSignatureSHA256()
 
     actual override val platform: String = "Android"
 

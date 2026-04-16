@@ -17,7 +17,7 @@ fun MainViewController() = ComposeUIViewController {
         Sentinel.configure {
             config {
                 appId = Sentinel.Identity.appId.toByteList()
-                appIntegrity = Sentinel.Identity.hash.toByteList()
+                appIntegrity = Sentinel.Identity.appIntegrity.toByteList()
                 threshold = 20
                 // isLoggingEnabled = true
             }
@@ -35,7 +35,7 @@ fun MainViewController() = ComposeUIViewController {
         navigationBarModifier = Modifier.padding(bottom = 24.dp),
         sentinel = sentinel,
         appId = Sentinel.Identity.appId,
-        appIntegrity = Sentinel.Identity.hash.orEmpty(),
+        appIntegrity = Sentinel.Identity.appIntegrity.orEmpty(),
         onMonitorStart = {
             SentinelMonitor.start(
                 appId = sentinel.config.appId,

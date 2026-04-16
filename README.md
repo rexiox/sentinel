@@ -99,8 +99,8 @@ security or configuration processes and assign them to the relevant fields withi
 ByteList:
 
 ```kotlin
-SentinelLogger.print(tag = "APP_ID", msg = sentinel.config.appId)
-SentinelLogger.print(tag = "APP_INTEGRITY", msg = sentinel.config.appIntegrity)
+SentinelLogger.print(tag = "APP_ID", msg = Sentinel.Identity.appId.toByteList())
+SentinelLogger.print(tag = "APP_INTEGRITY", msg = Sentinel.Identity.appIntegrity.toByteList())
 ```
 
 ### Android Usage

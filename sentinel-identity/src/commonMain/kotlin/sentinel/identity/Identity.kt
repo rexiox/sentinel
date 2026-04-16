@@ -8,9 +8,7 @@ expect class Identity(context: Any? = null) : Identity {
 
     override val appId: String
 
-    override val signature: String?
-
-    override val hash: String?
+    override val appIntegrity: String?
 
     override val platform: String
 }

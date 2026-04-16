@@ -43,7 +43,7 @@ class MainActivity : ComponentActivity() {
                 Sentinel.configure(context = context) {
                     config {
                         appId = Sentinel.Identity.appId.toByteList()
-                        appIntegrity = Sentinel.Identity.signature.toByteList()
+                        appIntegrity = Sentinel.Identity.appIntegrity.toByteList()
                         threshold = 20
                         // isLoggingEnabled = true
                     }
@@ -64,7 +64,7 @@ class MainActivity : ComponentActivity() {
                     .padding(bottom = 16.dp),
                 sentinel = sentinel,
                 appId = Sentinel.Identity.appId,
-                appIntegrity = Sentinel.Identity.signature.orEmpty(),
+                appIntegrity = Sentinel.Identity.appIntegrity.orEmpty(),
                 onMonitorStart = {
                     SentinelMonitor.start(
                         context = context,
