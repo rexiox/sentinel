@@ -7,7 +7,7 @@ import sentinel.core.violation.getGroupName
 
 actual object SentinelLogger {
 
-    actual fun info(tag: String, msg: String) {
+    actual fun print(tag: String, msg: Any) {
         println("[$tag] $msg")
     }
 

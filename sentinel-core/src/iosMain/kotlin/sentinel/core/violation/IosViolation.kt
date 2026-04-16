@@ -28,7 +28,7 @@ sealed class IosViolation(
 
         object BundleIdChanged : Tamper(severity = 90)
 
-        object SignatureMismatch : Tamper(severity = 100)
+        object ProvisioningHashMismatch : Tamper(severity = 100)
     }
 
     sealed class Hook(severity: Int) : IosViolation(severity = severity) {

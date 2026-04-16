@@ -28,8 +28,6 @@ sealed class AndroidViolation(
 
         object PackageNameChanged : Tamper(severity = 90)
 
-        object DexIntegrityFailed : Tamper(severity = 95)
-
         object SignatureMismatch : Tamper(severity = 100)
     }
 

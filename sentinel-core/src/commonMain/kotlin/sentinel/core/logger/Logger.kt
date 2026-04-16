@@ -4,7 +4,7 @@ import sentinel.core.report.SecurityReport
 
 expect object SentinelLogger {
 
-    fun info(tag: String = "Sentinel", msg: String)
+    fun print(tag: String = "Sentinel", msg: Any)
 
     fun report(report: SecurityReport)
 }
