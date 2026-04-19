@@ -3,7 +3,7 @@ package sentinel.identity
 import platform.UIKit.UIDevice
 import platform.Foundation.NSBundle
 import sentinel.core.identity.Identity
-import sentinel.identity.util.getProvisioningHash
+import sentinel.identity.hash.getProvisioningHash
 
 actual class Identity actual constructor(
     context: Any?,

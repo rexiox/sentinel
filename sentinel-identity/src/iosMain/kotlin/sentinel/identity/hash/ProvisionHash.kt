@@ -1,10 +1,11 @@
-package sentinel.identity.util
+package sentinel.identity.hash
 
 import kotlinx.cinterop.ByteVar
 import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.cinterop.addressOf
 import kotlinx.cinterop.reinterpret
 import kotlinx.cinterop.usePinned
+import platform.CoreCrypto.CC_SHA256
 import platform.Foundation.NSBundle
 import platform.Foundation.NSData
 import platform.Foundation.NSString
@@ -21,14 +22,12 @@ internal fun getProvisioningHash(): String? {
 
     val digest = ByteArray(32)
     digest.usePinned { pinned ->
-        platform.CoreCrypto.CC_SHA256(bytes, length, pinned.addressOf(0).reinterpret())
+        CC_SHA256(bytes, length, pinned.addressOf(0).reinterpret())
     }
 
     return digest.toHexString()
 }
 
-private fun ByteArray.toHexString(): String {
-    return joinToString("") { byte ->
-        NSString.stringWithFormat("%02x", byte.toInt() and 0xFF)
-    }
+private fun ByteArray.toHexString(): String = joinToString("") { byte ->
+    NSString.stringWithFormat("%02x", byte.toInt() and 0xFF)
 }
