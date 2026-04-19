@@ -1,0 +1,69 @@
+public class sentinel/kit/detector/DebugDetector : sentinel/core/detector/SecurityDetector {
+	public fun <init> (Landroid/content/Context;)V
+	public fun checkTestKeys ()Z
+	public fun detect ()Ljava/util/List;
+	public fun isDebuggerAttached ()Z
+	public fun isPackageDebuggable (Landroid/content/Context;)Z
+	public fun loadLibrary ()V
+}
+
+public final class sentinel/kit/detector/EmulatorDetector : sentinel/core/detector/SecurityDetector {
+	public fun <init> ()V
+	public fun detect ()Ljava/util/List;
+}
+
+public class sentinel/kit/detector/HookDetector : sentinel/core/detector/SecurityDetector {
+	public fun <init> ()V
+	public fun checkStackTraceManually ()Ljava/lang/String;
+	public fun detect ()Ljava/util/List;
+	public fun isFridaDetected ()Z
+	public fun loadLibrary ()V
+}
+
+public final class sentinel/kit/detector/MockLocationAppDetector : sentinel/core/detector/SecurityDetector {
+	public static final field ACCESS_MOCK_LOCATION_PERMISSION Ljava/lang/String;
+	public fun <init> (Landroid/content/Context;)V
+	public fun detect ()Ljava/util/List;
+}
+
+public final class sentinel/kit/detector/MockLocationSettingDetector : sentinel/core/detector/SecurityDetector {
+	public fun <init> (Landroid/content/Context;)V
+	public fun detect ()Ljava/util/List;
+}
+
+public class sentinel/kit/detector/RootDetector : sentinel/core/detector/SecurityDetector {
+	public fun <init> (Landroid/content/Context;)V
+	public fun checkApps (Landroid/content/Context;)Z
+	public fun checkBinaries ()Z
+	public fun checkMounts ()Z
+	public fun checkSuCommand ()Z
+	public fun detect ()Ljava/util/List;
+	public fun loadLibrary ()V
+}
+
+public class sentinel/kit/detector/TamperDetector : sentinel/core/detector/SecurityDetector {
+	public fun <init> (Landroid/content/Context;Ljava/util/List;Ljava/util/List;)V
+	public fun detect ()Ljava/util/List;
+	public fun loadLibrary ()V
+	public fun verifyPackage (Landroid/content/Context;[B)Z
+	public fun verifySignature (Landroid/content/Context;[B[B)Z
+}
+
+public final class sentinel/kit/runtime/DebugRuntime {
+	public static final field INSTANCE Lsentinel/kit/runtime/DebugRuntime;
+	public final fun initialize ()V
+	public final fun onDebuggerDetected ()V
+}
+
+public final class sentinel/kit/runtime/HookRuntime {
+	public static final field INSTANCE Lsentinel/kit/runtime/HookRuntime;
+	public final fun initialize ()V
+	public final fun onHookDetected ()V
+}
+
+public final class sentinel/kit/runtime/RootRuntime {
+	public static final field INSTANCE Lsentinel/kit/runtime/RootRuntime;
+	public final fun initialize ()V
+	public final fun onRootDetected ()V
+}
+

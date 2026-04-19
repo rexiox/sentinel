@@ -6,63 +6,50 @@
 // - Show declarations: true
 
 // Library unique name: <co.rexiox:detector>
-final class sentinel.kit.detector/DebugDetector : sentinel.core.detector/SecurityDetector { // sentinel.kit.detector/DebugDetector|null[0]
+open class sentinel.kit.detector/DebugDetector : sentinel.core.detector/SecurityDetector { // sentinel.kit.detector/DebugDetector|null[0]
     constructor <init>() // sentinel.kit.detector/DebugDetector.<init>|<init>(){}[0]
 
-    final fun detect(): kotlin.collections/List<sentinel.core.detector/Threat> // sentinel.kit.detector/DebugDetector.detect|detect(){}[0]
+    open fun detect(): kotlin.collections/List<sentinel.core.detector/Threat> // sentinel.kit.detector/DebugDetector.detect|detect(){}[0]
 }
 
-final class sentinel.kit.detector/HookDetector : sentinel.core.detector/SecurityDetector { // sentinel.kit.detector/HookDetector|null[0]
+open class sentinel.kit.detector/HookDetector : sentinel.core.detector/SecurityDetector { // sentinel.kit.detector/HookDetector|null[0]
     constructor <init>() // sentinel.kit.detector/HookDetector.<init>|<init>(){}[0]
 
-    final fun detect(): kotlin.collections/List<sentinel.core.detector/Threat> // sentinel.kit.detector/HookDetector.detect|detect(){}[0]
+    open fun detect(): kotlin.collections/List<sentinel.core.detector/Threat> // sentinel.kit.detector/HookDetector.detect|detect(){}[0]
 }
 
-final class sentinel.kit.detector/JailbreakDetector : sentinel.core.detector/SecurityDetector { // sentinel.kit.detector/JailbreakDetector|null[0]
+open class sentinel.kit.detector/JailbreakDetector : sentinel.core.detector/SecurityDetector { // sentinel.kit.detector/JailbreakDetector|null[0]
     constructor <init>() // sentinel.kit.detector/JailbreakDetector.<init>|<init>(){}[0]
 
-    final fun detect(): kotlin.collections/List<sentinel.core.detector/Threat> // sentinel.kit.detector/JailbreakDetector.detect|detect(){}[0]
+    open fun detect(): kotlin.collections/List<sentinel.core.detector/Threat> // sentinel.kit.detector/JailbreakDetector.detect|detect(){}[0]
 }
 
-final class sentinel.kit.detector/SimulatorDetector : sentinel.core.detector/SecurityDetector { // sentinel.kit.detector/SimulatorDetector|null[0]
+open class sentinel.kit.detector/SimulatorDetector : sentinel.core.detector/SecurityDetector { // sentinel.kit.detector/SimulatorDetector|null[0]
     constructor <init>() // sentinel.kit.detector/SimulatorDetector.<init>|<init>(){}[0]
 
-    final fun detect(): kotlin.collections/List<sentinel.core.detector/Threat> // sentinel.kit.detector/SimulatorDetector.detect|detect(){}[0]
+    open fun detect(): kotlin.collections/List<sentinel.core.detector/Threat> // sentinel.kit.detector/SimulatorDetector.detect|detect(){}[0]
 }
 
-final class sentinel.kit.detector/TamperDetector : sentinel.core.detector/SecurityDetector { // sentinel.kit.detector/TamperDetector|null[0]
+open class sentinel.kit.detector/TamperDetector : sentinel.core.detector/SecurityDetector { // sentinel.kit.detector/TamperDetector|null[0]
     constructor <init>(kotlin.collections/List<kotlin/Byte>?, kotlin.collections/List<kotlin/Byte>?) // sentinel.kit.detector/TamperDetector.<init>|<init>(kotlin.collections.List<kotlin.Byte>?;kotlin.collections.List<kotlin.Byte>?){}[0]
 
-    final val appIntegrity // sentinel.kit.detector/TamperDetector.appIntegrity|{}appIntegrity[0]
-        final fun <get-appIntegrity>(): kotlin.collections/List<kotlin/Byte>? // sentinel.kit.detector/TamperDetector.appIntegrity.<get-appIntegrity>|<get-appIntegrity>(){}[0]
-    final val bundleId // sentinel.kit.detector/TamperDetector.bundleId|{}bundleId[0]
-        final fun <get-bundleId>(): kotlin.collections/List<kotlin/Byte>? // sentinel.kit.detector/TamperDetector.bundleId.<get-bundleId>|<get-bundleId>(){}[0]
+    open val appIntegrity // sentinel.kit.detector/TamperDetector.appIntegrity|{}appIntegrity[0]
+        open fun <get-appIntegrity>(): kotlin.collections/List<kotlin/Byte>? // sentinel.kit.detector/TamperDetector.appIntegrity.<get-appIntegrity>|<get-appIntegrity>(){}[0]
+    open val bundleId // sentinel.kit.detector/TamperDetector.bundleId|{}bundleId[0]
+        open fun <get-bundleId>(): kotlin.collections/List<kotlin/Byte>? // sentinel.kit.detector/TamperDetector.bundleId.<get-bundleId>|<get-bundleId>(){}[0]
 
-    final fun detect(): kotlin.collections/List<sentinel.core.detector/Threat> // sentinel.kit.detector/TamperDetector.detect|detect(){}[0]
+    open fun detect(): kotlin.collections/List<sentinel.core.detector/Threat> // sentinel.kit.detector/TamperDetector.detect|detect(){}[0]
 }
 
 final object sentinel.kit.detector.constant/DetectorConst { // sentinel.kit.detector.constant/DetectorConst|null[0]
     final val CRITICAL_SYSTEM_FUNCTIONS // sentinel.kit.detector.constant/DetectorConst.CRITICAL_SYSTEM_FUNCTIONS|{}CRITICAL_SYSTEM_FUNCTIONS[0]
         final fun <get-CRITICAL_SYSTEM_FUNCTIONS>(): kotlin.collections/List<kotlin/String> // sentinel.kit.detector.constant/DetectorConst.CRITICAL_SYSTEM_FUNCTIONS.<get-CRITICAL_SYSTEM_FUNCTIONS>|<get-CRITICAL_SYSTEM_FUNCTIONS>(){}[0]
-    final val JB_APPS // sentinel.kit.detector.constant/DetectorConst.JB_APPS|{}JB_APPS[0]
-        final fun <get-JB_APPS>(): kotlin.collections/List<kotlin/String> // sentinel.kit.detector.constant/DetectorConst.JB_APPS.<get-JB_APPS>|<get-JB_APPS>(){}[0]
-    final val JB_SYSTEM_PATHS // sentinel.kit.detector.constant/DetectorConst.JB_SYSTEM_PATHS|{}JB_SYSTEM_PATHS[0]
-        final fun <get-JB_SYSTEM_PATHS>(): kotlin.collections/List<kotlin/String> // sentinel.kit.detector.constant/DetectorConst.JB_SYSTEM_PATHS.<get-JB_SYSTEM_PATHS>|<get-JB_SYSTEM_PATHS>(){}[0]
     final val SIMULATOR_KEYS // sentinel.kit.detector.constant/DetectorConst.SIMULATOR_KEYS|{}SIMULATOR_KEYS[0]
         final fun <get-SIMULATOR_KEYS>(): kotlin.collections/List<kotlin/String> // sentinel.kit.detector.constant/DetectorConst.SIMULATOR_KEYS.<get-SIMULATOR_KEYS>|<get-SIMULATOR_KEYS>(){}[0]
     final val SIMULATOR_MODEL_KEYS // sentinel.kit.detector.constant/DetectorConst.SIMULATOR_MODEL_KEYS|{}SIMULATOR_MODEL_KEYS[0]
         final fun <get-SIMULATOR_MODEL_KEYS>(): kotlin.collections/List<kotlin/String> // sentinel.kit.detector.constant/DetectorConst.SIMULATOR_MODEL_KEYS.<get-SIMULATOR_MODEL_KEYS>|<get-SIMULATOR_MODEL_KEYS>(){}[0]
-    final val SUSPICIOUS_SYMLINKS // sentinel.kit.detector.constant/DetectorConst.SUSPICIOUS_SYMLINKS|{}SUSPICIOUS_SYMLINKS[0]
-        final fun <get-SUSPICIOUS_SYMLINKS>(): kotlin.collections/List<kotlin/String> // sentinel.kit.detector.constant/DetectorConst.SUSPICIOUS_SYMLINKS.<get-SUSPICIOUS_SYMLINKS>|<get-SUSPICIOUS_SYMLINKS>(){}[0]
     final val URL_SCHEMES // sentinel.kit.detector.constant/DetectorConst.URL_SCHEMES|{}URL_SCHEMES[0]
         final fun <get-URL_SCHEMES>(): kotlin.collections/List<kotlin/String> // sentinel.kit.detector.constant/DetectorConst.URL_SCHEMES.<get-URL_SCHEMES>|<get-URL_SCHEMES>(){}[0]
-
-    final object SandBox { // sentinel.kit.detector.constant/DetectorConst.SandBox|null[0]
-        final const val TEST_CONTENT // sentinel.kit.detector.constant/DetectorConst.SandBox.TEST_CONTENT|{}TEST_CONTENT[0]
-            final fun <get-TEST_CONTENT>(): kotlin/String // sentinel.kit.detector.constant/DetectorConst.SandBox.TEST_CONTENT.<get-TEST_CONTENT>|<get-TEST_CONTENT>(){}[0]
-        final const val TEST_PATH // sentinel.kit.detector.constant/DetectorConst.SandBox.TEST_PATH|{}TEST_PATH[0]
-            final fun <get-TEST_PATH>(): kotlin/String // sentinel.kit.detector.constant/DetectorConst.SandBox.TEST_PATH.<get-TEST_PATH>|<get-TEST_PATH>(){}[0]
-    }
 }
 
 final object sentinel.kit.runtime/HookRuntime { // sentinel.kit.runtime/HookRuntime|null[0]

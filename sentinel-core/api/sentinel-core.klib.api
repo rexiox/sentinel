@@ -205,6 +205,21 @@ sealed class sentinel.core.violation/IosViolation : sentinel.core.violation/Secu
             final fun toString(): kotlin/String // sentinel.core.violation/IosViolation.Jailbreak.SuspiciousSymlinks.toString|toString(){}[0]
         }
 
+        final class SystemPaths : sentinel.core.violation/IosViolation.Jailbreak { // sentinel.core.violation/IosViolation.Jailbreak.SystemPaths|null[0]
+            constructor <init>(kotlin/String? = ...) // sentinel.core.violation/IosViolation.Jailbreak.SystemPaths.<init>|<init>(kotlin.String?){}[0]
+
+            final val detail // sentinel.core.violation/IosViolation.Jailbreak.SystemPaths.detail|{}detail[0]
+                final fun <get-detail>(): kotlin/String? // sentinel.core.violation/IosViolation.Jailbreak.SystemPaths.detail.<get-detail>|<get-detail>(){}[0]
+            final val path // sentinel.core.violation/IosViolation.Jailbreak.SystemPaths.path|{}path[0]
+                final fun <get-path>(): kotlin/String? // sentinel.core.violation/IosViolation.Jailbreak.SystemPaths.path.<get-path>|<get-path>(){}[0]
+
+            final fun component1(): kotlin/String? // sentinel.core.violation/IosViolation.Jailbreak.SystemPaths.component1|component1(){}[0]
+            final fun copy(kotlin/String? = ...): sentinel.core.violation/IosViolation.Jailbreak.SystemPaths // sentinel.core.violation/IosViolation.Jailbreak.SystemPaths.copy|copy(kotlin.String?){}[0]
+            final fun equals(kotlin/Any?): kotlin/Boolean // sentinel.core.violation/IosViolation.Jailbreak.SystemPaths.equals|equals(kotlin.Any?){}[0]
+            final fun hashCode(): kotlin/Int // sentinel.core.violation/IosViolation.Jailbreak.SystemPaths.hashCode|hashCode(){}[0]
+            final fun toString(): kotlin/String // sentinel.core.violation/IosViolation.Jailbreak.SystemPaths.toString|toString(){}[0]
+        }
+
         final class URLSchemes : sentinel.core.violation/IosViolation.Jailbreak { // sentinel.core.violation/IosViolation.Jailbreak.URLSchemes|null[0]
             constructor <init>(kotlin/String? = ...) // sentinel.core.violation/IosViolation.Jailbreak.URLSchemes.<init>|<init>(kotlin.String?){}[0]
 
