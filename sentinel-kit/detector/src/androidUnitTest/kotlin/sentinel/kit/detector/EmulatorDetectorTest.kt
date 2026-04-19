@@ -35,7 +35,6 @@ class EmulatorDetectorTest {
 
     @Test
     fun `detect identifies emulator via build properties`() {
-        // "generic" is a standard key in DetectorConst.EMULATOR_PROPS
         setBuildFields(brand = "emulator", device = "emulator")
 
         val result = detector.detect()
@@ -47,7 +46,6 @@ class EmulatorDetectorTest {
 
     @Test
     fun `isEmulator detection is case-insensitive`() {
-        // Fix: Using "GOOGLE_SDK" because "google_sdk" is in your EMULATOR_PROPS
         setBuildFields(brand = "GOOGLE_SDK")
 
         val result = detector.detect()
@@ -57,7 +55,6 @@ class EmulatorDetectorTest {
 
     @Test
     fun `detect identifies specific emulator brands`() {
-        // Test for Genymotion
         setBuildFields(manufacturer = "Genymotion", hardware = "vbox86")
 
         val result = detector.detect()

@@ -15,7 +15,7 @@ open class SimulatorDetector : SecurityDetector {
         }
     }
 
-    internal fun isSimulator(): Boolean {
+    private fun isSimulator(): Boolean {
         val model = UIDevice.currentDevice.model
         val env = NSProcessInfo.processInfo.environment
         val hasSimulatorEnv = DetectorConst.SIMULATOR_KEYS.any { key -> env[key] != null }
