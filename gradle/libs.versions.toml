@@ -1,17 +1,17 @@
 [versions]
-agp = "8.13.0"
-kotlin = "2.3.0"
+agp = "8.13.2"
+kotlin = "2.3.20"
 kotlinReflect = "2.3.10"
 kotlinxCoroutinesCore = "1.10.2"
 kotlinxDatetime = "0.7.1"
 materialIconsCore = "1.7.3"
 sentinel = "1.6.3-beta"
 vanniktechMavenPublish = "0.34.0"
-androidx-lifecycle = "2.9.6"
-composeMultiplatform = "1.10.1"
+androidx-lifecycle = "2.10.0"
+composeMultiplatform = "1.10.3"
 material3 = "1.10.0-alpha05"
-androidx-activity = "1.12.2"
-coreKtx = "1.17.0"
+androidx-activity = "1.13.0"
+coreKtx = "1.18.0"
 appcompat = "1.7.1"
 material = "1.13.0"
 constraintlayout = "2.2.1"
@@ -19,8 +19,12 @@ lifecycleLivedataKtx = "2.10.0"
 lifecycleViewmodelKtx = "2.10.0"
 fragmentKtx = "1.8.9"
 binaryCompatibilityValidator = "0.18.1"
+android-test-runner = "1.7.0"
+roboelectric = "4.16.1"
+mokkery = "3.3.0"
 
 [libraries]
+androidx-core = { module = "androidx.test:core", version.ref = "android-test-runner" }
 kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlinReflect" }
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
 compose-uiTooling = { module = "org.jetbrains.compose.ui:ui-tooling", version.ref = "composeMultiplatform" }
@@ -35,6 +39,7 @@ compose-components-resources = { module = "org.jetbrains.compose.components:comp
 compose-uiToolingPreview = { module = "org.jetbrains.compose.ui:ui-tooling-preview", version.ref = "composeMultiplatform" }
 kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutinesCore" }
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinxCoroutinesCore" }
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinxDatetime" }
 material-icons-core = { module = "org.jetbrains.compose.material:material-icons-core", version.ref = "materialIconsCore" }
 maven-publish-gradlePlugin = { module = "com.vanniktech.maven.publish:com.vanniktech.maven.publish.gradle.plugin", version.ref = "vanniktechMavenPublish" }
@@ -45,10 +50,11 @@ androidx-constraintlayout = { group = "androidx.constraintlayout", name = "const
 androidx-lifecycle-livedata-ktx = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "lifecycleLivedataKtx" }
 androidx-lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }
 androidx-fragment-ktx = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "fragmentKtx" }
-kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 sentinel = { module = "co.rexiox:sentinel", version.ref = "sentinel" }
 sentinel-ui = { module = "co.rexiox:sentinel-ui", version.ref = "sentinel" }
 sentinel-monitor = { module = "co.rexiox:sentinel-monitor", version.ref = "sentinel" }
+androidx-runner = { module = "androidx.test:runner", version.ref = "android-test-runner" }
+roboelectric = { module = "org.robolectric:robolectric", version.ref = "roboelectric" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -62,4 +68,5 @@ android-lint = { id = "com.android.lint", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 android-fusedlibrary = { id = "com.android.fused-library", version.ref = "agp" }
 kotlinx-binary-compatibility-validator = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version.ref = "binaryCompatibilityValidator" }
-
+dev-mokkery = { id = "dev.mokkery", version.ref = "mokkery" }
+sentinel-publish = { id = "sentinel-publish" }

@@ -1,33 +1,28 @@
+import dev.mokkery.gradle.MokkeryGradleExtension
+
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
-    alias(libs.plugins.android.kotlin.multiplatform.library)
-    alias(libs.plugins.android.lint)
-    id("sentinel-publish")
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.dev.mokkery)
+    alias(libs.plugins.sentinel.publish)
 }
 
 group = Config.Publishing.GROUP_ID
 version = Config.Version.NAME
 
 kotlin {
-    android {
-        namespace = "${Config.NAMESPACE}.kit.detector"
-
-        compileSdk {
-            version = release(36) { minorApiLevel = 1 }
-        }
-
-        minSdk = 24
+    androidTarget {
+        publishLibraryVariants()
     }
 
-    val iosTargets = listOf(
+    listOf(
         iosX64(),
         iosArm64(),
         iosSimulatorArm64()
-    )
-
-    iosTargets.forEach { target ->
+    ).forEach { target ->
         target.binaries.framework {
             baseName = "sentinel-kit-detector"
+            isStatic = true
         }
     }
 
@@ -51,10 +46,56 @@ kotlin {
             }
         }
 
-        commonTest.dependencies {
-            implementation(libs.kotlin.test)
+        commonTest {
+            dependencies {
+                implementation(kotlin("test"))
+                implementation(libs.kotlinx.coroutines.test)
+            }
+        }
+
+        iosTest {
+            dependencies {
+                implementation(kotlin("test"))
+            }
+        }
+
+        androidUnitTest {
+            dependencies {
+                implementation(kotlin("test"))
+                implementation(libs.kotlinx.coroutines.test)
+                implementation(libs.roboelectric)
+                implementation(libs.androidx.runner)
+                implementation(libs.androidx.core.ktx)
+                implementation(libs.androidx.core)
+            }
         }
     }
 
-    compilerOptions.freeCompilerArgs.add("-Xexpect-actual-classes")
+    compilerOptions {
+        freeCompilerArgs.add("-Xexpect-actual-classes")
+    }
+}
+
+android {
+    namespace = "${Config.NAMESPACE}.kit.detector"
+    compileSdk = 36
+
+    defaultConfig {
+        minSdk = 24
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    lint {
+        abortOnError = false
+        checkReleaseBuilds = true
+    }
+}
+
+extensions.configure<MokkeryGradleExtension> {
+    stubs.allowConcreteClassInstantiation.set(true)
+    stubs.allowClassInheritance.set(true)
 }

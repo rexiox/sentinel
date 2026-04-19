@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalForeignApi::class)
+
 package sentinel.kit.detector
 
 import kotlinx.cinterop.ExperimentalForeignApi
@@ -6,9 +8,8 @@ import sentinel.core.detector.Threat
 import sentinel.core.violation.IosViolation
 import sentinel.detector.isDebuggerAttached
 
-class DebugDetector : SecurityDetector {
+open class DebugDetector : SecurityDetector {
 
-    @OptIn(ExperimentalForeignApi::class)
     override fun detect(): List<Threat> = buildList {
         if (isDebuggerAttached()) {
             add(element = Threat(violation = IosViolation.Debugger.DebuggerAttached))

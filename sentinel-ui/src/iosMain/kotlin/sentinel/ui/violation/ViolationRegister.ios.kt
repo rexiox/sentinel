@@ -5,6 +5,7 @@ import sentinel.core.violation.SecurityViolation
 
 actual fun getViolations(): List<SecurityViolation> = listOf(
     IosViolation.Jailbreak.Sandbox(),
+    IosViolation.Jailbreak.SystemPaths(),
     IosViolation.Jailbreak.SuspiciousSymlinks(),
     IosViolation.Jailbreak.AppInstalled(),
     IosViolation.Jailbreak.URLSchemes(),

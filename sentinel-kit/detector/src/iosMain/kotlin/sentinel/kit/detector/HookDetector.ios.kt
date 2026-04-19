@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalForeignApi::class)
+
 package sentinel.kit.detector
 
 import kotlinx.cinterop.COpaquePointer
@@ -13,47 +15,37 @@ import sentinel.detector.scanMemorySignatures
 import sentinel.detector.verifyLoadedImages
 import sentinel.kit.detector.constant.DetectorConst
 
-class HookDetector : SecurityDetector {
+open class HookDetector : SecurityDetector {
 
-    @OptIn(ExperimentalForeignApi::class)
     private val systemFunctionAddresses: Map<String, COpaquePointer?> by lazy {
         DetectorConst.CRITICAL_SYSTEM_FUNCTIONS.associateWith { funcName ->
             dlsym(__handle = RTLD_DEFAULT, __symbol = funcName)
         }
     }
 
-    @OptIn(ExperimentalForeignApi::class)
     override fun detect(): List<Threat> = buildList {
         if (verifyLoadedImages()) {
             add(
-                element = Threat(
-                    violation = IosViolation.Hook.FrameworkDetected(name = "Frida")
-                )
+                element = Threat(violation = IosViolation.Hook.FrameworkDetected(name = "Frida"))
             )
         }
 
         if (scanMemorySignatures()) {
             add(
-                element = Threat(
-                    violation = IosViolation.Hook.FrameworkDetected(name = "Frida-Memory")
-                )
+                element = Threat(violation = IosViolation.Hook.FrameworkDetected(name = "Frida-Memory"))
             )
         }
 
         if (checkReservedPort()) {
             add(
-                element = Threat(
-                    violation = IosViolation.Hook.FrameworkDetected(name = "Frida-Port")
-                )
+                element = Threat(violation = IosViolation.Hook.FrameworkDetected(name = "Frida-Port"))
             )
         }
 
         systemFunctionAddresses.forEach { (funcName, funcAddr) ->
             if (funcAddr != null && isInstructionTampered(func_ptr = funcAddr)) {
                 add(
-                    element = Threat(
-                        violation = IosViolation.Hook.InlineHookDetected(name = funcName)
-                    )
+                    element = Threat(violation = IosViolation.Hook.InlineHookDetected(name = funcName))
                 )
             }
         }

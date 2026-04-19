@@ -10,12 +10,16 @@ object RootRuntime {
 
     private external fun init(instance: RootRuntime)
 
-    fun onRootDetected() {
-        Runtime.onViolationDetected(violation = AndroidViolation.Root.Detected)
+    fun initialize() {
+        loadLibrary()
+        init(this)
     }
 
-    fun initialize() {
+    private fun loadLibrary() {
         System.loadLibrary("sentinel-root")
-        init(this)
+    }
+
+    fun onRootDetected() {
+        Runtime.onViolationDetected(violation = AndroidViolation.Root.Detected)
     }
 }

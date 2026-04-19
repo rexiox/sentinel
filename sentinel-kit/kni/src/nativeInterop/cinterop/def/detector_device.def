@@ -1,4 +1,4 @@
-headers = tamper.h hook.h debugger.h
+headers = jailbreak.h tamper.h hook.h debugger.h
 package = sentinel.detector
 staticLibraries = libnative_detector.a
 

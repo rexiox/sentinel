@@ -2,7 +2,7 @@ plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.android.kotlin.multiplatform.library)
     alias(libs.plugins.android.lint)
-    id("sentinel-publish")
+    alias(libs.plugins.sentinel.publish)
 }
 
 group = Config.Publishing.GROUP_ID
@@ -39,8 +39,6 @@ kotlin {
             baseName = xcfName
         }
     }
-
-    sourceSets { }
 
     compilerOptions.freeCompilerArgs.add("-Xexpect-actual-classes")
 }

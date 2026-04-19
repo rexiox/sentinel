@@ -10,12 +10,16 @@ object HookRuntime {
 
     private external fun init(instance: HookRuntime)
 
-    fun onHookDetected() {
-        Runtime.onViolationDetected(violation = AndroidViolation.Hook.Detected)
+    fun initialize() {
+        loadLibrary()
+        init(this)
     }
 
-    fun initialize() {
+    private fun loadLibrary() {
         System.loadLibrary("sentinel-hook")
-        init(this)
+    }
+
+    fun onHookDetected() {
+        Runtime.onViolationDetected(violation = AndroidViolation.Hook.Detected)
     }
 }

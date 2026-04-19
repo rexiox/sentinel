@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalForeignApi::class)
+
 package sentinel.kit.detector
 
 import kotlinx.cinterop.ExperimentalForeignApi
@@ -8,12 +10,11 @@ import sentinel.core.violation.IosViolation
 import sentinel.detector.verifyBundleId
 import sentinel.detector.verifyProvisioningHash
 
-class TamperDetector(
-    val bundleId: List<Byte>?,
-    val appIntegrity: List<Byte>?,
+open class TamperDetector(
+    open val bundleId: List<Byte>?,
+    open val appIntegrity: List<Byte>?,
 ) : SecurityDetector {
 
-    @OptIn(ExperimentalForeignApi::class)
     override fun detect(): List<Threat> = buildList {
         val bundleBytes = bundleId?.toByteArray() ?: byteArrayOf()
         val hashBytes = appIntegrity?.toByteArray() ?: byteArrayOf()

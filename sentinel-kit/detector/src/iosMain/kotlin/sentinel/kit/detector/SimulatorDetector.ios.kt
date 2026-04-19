@@ -7,7 +7,7 @@ import sentinel.core.detector.Threat
 import sentinel.core.violation.IosViolation
 import sentinel.kit.detector.constant.DetectorConst
 
-class SimulatorDetector : SecurityDetector {
+open class SimulatorDetector : SecurityDetector {
 
     override fun detect(): List<Threat> = buildList {
         if (isSimulator()) {
@@ -15,7 +15,7 @@ class SimulatorDetector : SecurityDetector {
         }
     }
 
-    private fun isSimulator(): Boolean {
+    internal fun isSimulator(): Boolean {
         val model = UIDevice.currentDevice.model
         val env = NSProcessInfo.processInfo.environment
         val hasSimulatorEnv = DetectorConst.SIMULATOR_KEYS.any { key -> env[key] != null }

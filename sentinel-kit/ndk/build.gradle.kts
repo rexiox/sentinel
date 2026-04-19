@@ -1,6 +1,6 @@
 plugins {
     alias(libs.plugins.android.library)
-    id("sentinel-publish")
+    alias(libs.plugins.sentinel.publish)
 }
 
 android {

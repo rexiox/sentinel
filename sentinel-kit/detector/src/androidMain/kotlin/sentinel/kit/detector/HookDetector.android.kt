@@ -4,15 +4,19 @@ import sentinel.core.detector.SecurityDetector
 import sentinel.core.detector.Threat
 import sentinel.core.violation.AndroidViolation
 
-class HookDetector : SecurityDetector {
+open class HookDetector : SecurityDetector {
 
     init {
+        loadLibrary()
+    }
+
+    open fun loadLibrary() {
         System.loadLibrary("sentinel-hook")
     }
 
-    external fun isFridaDetected(): Boolean
+    open external fun isFridaDetected(): Boolean
 
-    external fun checkStackTraceManually(): String?
+    open external fun checkStackTraceManually(): String?
 
     override fun detect(): List<Threat> {
         val name = checkStackTraceManually()

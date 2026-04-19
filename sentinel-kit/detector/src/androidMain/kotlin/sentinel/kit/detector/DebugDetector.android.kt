@@ -5,19 +5,23 @@ import sentinel.core.detector.SecurityDetector
 import sentinel.core.detector.Threat
 import sentinel.core.violation.AndroidViolation
 
-class DebugDetector(
+open class DebugDetector(
     private val context: Context,
 ) : SecurityDetector {
 
     init {
+        loadLibrary()
+    }
+
+    open fun loadLibrary() {
         System.loadLibrary("sentinel-debugger")
     }
 
-    external fun isDebuggerAttached(): Boolean
+    open external fun isDebuggerAttached(): Boolean
 
-    external fun isPackageDebuggable(context: Context): Boolean
+    open external fun isPackageDebuggable(context: Context): Boolean
 
-    external fun checkTestKeys(): Boolean
+    open external fun checkTestKeys(): Boolean
 
     override fun detect(): List<Threat> = buildList {
         if (isDebuggerAttached()) {

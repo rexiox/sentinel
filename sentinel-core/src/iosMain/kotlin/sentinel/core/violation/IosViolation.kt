@@ -11,7 +11,11 @@ sealed class IosViolation(
             override val detail: String? = appId
         }
 
-        data class SuspiciousSymlinks(val path: String? = null) : Jailbreak(severity = 85) {
+        data class SystemPaths(val path: String? = null) : Jailbreak(severity = 85) {
+            override val detail: String? = path
+        }
+
+        data class SuspiciousSymlinks(val path: String? = null) : Jailbreak(severity = 80) {
             override val detail: String? = path
         }
 

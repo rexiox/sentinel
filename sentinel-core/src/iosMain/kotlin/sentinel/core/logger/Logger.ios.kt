@@ -39,9 +39,11 @@ actual object SentinelLogger {
                         val name = violation::class.simpleName ?: "Unknown Violation"
 
                         val detail = when (violation) {
+                            is IosViolation.Jailbreak.Sandbox -> "App Id: ${violation.detail.orEmpty()}"
+                            is IosViolation.Jailbreak.SystemPaths -> "System Path: ${violation.detail.orEmpty()}"
+                            is IosViolation.Jailbreak.SuspiciousSymlinks -> "Path: ${violation.detail.orEmpty()}"
                             is IosViolation.Jailbreak.AppInstalled -> "App Id: ${violation.detail.orEmpty()}"
                             is IosViolation.Jailbreak.URLSchemes -> "URL Scheme: ${violation.detail.orEmpty()}"
-                            is IosViolation.Jailbreak.SuspiciousSymlinks -> "Path: ${violation.detail.orEmpty()}"
                             is IosViolation.Hook.FrameworkDetected -> "Framework: ${violation.detail ?: "Unknown"}"
                             is IosViolation.Simulator.Detected -> "Name: ${violation.detail ?: "Unknown"}"
                             is IosViolation.Location.MockAppInstalled -> "Apps: ${violation.detail}"

@@ -10,12 +10,16 @@ object DebugRuntime {
 
     private external fun init(instance: DebugRuntime)
 
-    fun onDebuggerDetected() {
-        Runtime.onViolationDetected(violation = AndroidViolation.Debugger.Detected)
+    fun initialize() {
+        loadLibrary()
+        init(this)
     }
 
-    fun initialize() {
+    private fun loadLibrary() {
         System.loadLibrary("sentinel-debugger")
-        init(this)
+    }
+
+    fun onDebuggerDetected() {
+        Runtime.onViolationDetected(violation = AndroidViolation.Debugger.Detected)
     }
 }

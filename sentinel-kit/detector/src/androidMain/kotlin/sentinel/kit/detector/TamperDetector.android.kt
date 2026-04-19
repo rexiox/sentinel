@@ -5,22 +5,26 @@ import sentinel.core.detector.SecurityDetector
 import sentinel.core.detector.Threat
 import sentinel.core.violation.AndroidViolation
 
-class TamperDetector(
+open class TamperDetector(
     private val context: Context,
     private val appId: List<Byte>?,
     private val appIntegrity: List<Byte>?,
 ) : SecurityDetector {
 
     init {
+        loadLibrary()
+    }
+
+    open fun loadLibrary() {
         System.loadLibrary("sentinel-tamper")
     }
 
-    private external fun verifyPackage(
+    open external fun verifyPackage(
         context: Context,
         expectedPackage: ByteArray,
     ): Boolean
 
-    private external fun verifySignature(
+    open external fun verifySignature(
         context: Context,
         expectedPackage: ByteArray,
         expectedPackageSignature: ByteArray,

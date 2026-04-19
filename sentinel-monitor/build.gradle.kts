@@ -5,7 +5,7 @@ plugins {
     alias(libs.plugins.android.kotlin.multiplatform.library)
     alias(libs.plugins.compose.multiplatform)
     alias(libs.plugins.compose.compiler)
-    id("sentinel-publish")
+    alias(libs.plugins.sentinel.publish)
 }
 
 group = Config.Publishing.GROUP_ID

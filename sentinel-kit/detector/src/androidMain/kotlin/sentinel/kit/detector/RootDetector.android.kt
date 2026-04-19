@@ -5,21 +5,25 @@ import sentinel.core.detector.SecurityDetector
 import sentinel.core.detector.Threat
 import sentinel.core.violation.AndroidViolation
 
-class RootDetector(
+open class RootDetector(
     private val context: Context,
 ) : SecurityDetector {
 
     init {
+        loadLibrary()
+    }
+
+    open fun loadLibrary() {
         System.loadLibrary("sentinel-root")
     }
 
-    external fun checkApps(context: Context): Boolean
+    open external fun checkApps(context: Context): Boolean
 
-    external fun checkBinaries(): Boolean
+    open external fun checkBinaries(): Boolean
 
-    external fun checkMounts(): Boolean
+    open external fun checkMounts(): Boolean
 
-    external fun checkSuCommand(): Boolean
+    open external fun checkSuCommand(): Boolean
 
     override fun detect(): List<Threat> = buildList {
         if (checkApps(context = context)) {
