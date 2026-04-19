@@ -113,7 +113,7 @@ class JailbreakDetectorTest {
 
         val result = mockDetector.detect()
 
-        assertEquals(4, result.size)
+        assertEquals(5, result.size)
         assertTrue(result.any { it.violation is IosViolation.Jailbreak.Sandbox })
         assertTrue(result.any { it.violation is IosViolation.Jailbreak.SystemPaths })
         assertTrue(result.any { it.violation is IosViolation.Jailbreak.SuspiciousSymlinks })
