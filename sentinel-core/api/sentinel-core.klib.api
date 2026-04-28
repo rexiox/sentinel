@@ -45,6 +45,8 @@ abstract class sentinel.core.report/SecurityReport { // sentinel.core.report/Sec
         final fun <get-riskLevel>(): sentinel.core.type/RiskLevel // sentinel.core.report/SecurityReport.riskLevel.<get-riskLevel>|<get-riskLevel>(){}[0]
     final val severity // sentinel.core.report/SecurityReport.severity|{}severity[0]
         final fun <get-severity>(): kotlin/Int // sentinel.core.report/SecurityReport.severity.<get-severity>|<get-severity>(){}[0]
+    open val isCompromised // sentinel.core.report/SecurityReport.isCompromised|{}isCompromised[0]
+        open fun <get-isCompromised>(): kotlin/Boolean // sentinel.core.report/SecurityReport.isCompromised.<get-isCompromised>|<get-isCompromised>(){}[0]
     open val isDebugged // sentinel.core.report/SecurityReport.isDebugged|{}isDebugged[0]
         open fun <get-isDebugged>(): kotlin/Boolean // sentinel.core.report/SecurityReport.isDebugged.<get-isDebugged>|<get-isDebugged>(){}[0]
     open val isEmulator // sentinel.core.report/SecurityReport.isEmulator|{}isEmulator[0]

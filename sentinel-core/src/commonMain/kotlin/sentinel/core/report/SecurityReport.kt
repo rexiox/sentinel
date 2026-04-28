@@ -9,6 +9,9 @@ abstract class SecurityReport(
     open val threshold: Int,
     open val timestamp: Long,
 ) {
+    open val isCompromised: Boolean
+        get() = isRooted || isJailbroken
+
     open val isRooted: Boolean = false
 
     open val isJailbroken: Boolean = false

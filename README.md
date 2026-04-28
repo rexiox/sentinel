@@ -8,7 +8,8 @@
 [![KMP](https://img.shields.io/badge/KMP-000000?style=for-the-badge&logo=kotlin&logoColor=ffffff)](#)
 [![Android](https://img.shields.io/badge/Android-000000?style=for-the-badge&logo=android&logoColor=ffffff)](https://developer.android.com/)
 [![iOS](https://img.shields.io/badge/iOS-000000?style=for-the-badge&logo=apple&logoColor=ffffff)](https://developer.apple.com/)
-[![Version](https://img.shields.io/badge/1.7.0.beta-000000?style=for-the-badge&logo=stackblitz)](#)
+[![klibs](https://img.shields.io/badge/klibs-000000?style=for-the-badge&logo=kotlin&logoColor=ffffff)](https://klibs.io/project/rexiox/sentinel)
+[![Version](https://img.shields.io/badge/1.8.0-000000?style=for-the-badge&logo=stackblitz)](#)
 
 **Sentinel** is a lightweight, modular Kotlin Multiplatform security toolkit designed to analyze
 runtime environments and detect potential security threats in real time on both Android and iOS.
@@ -91,7 +92,7 @@ against multiple threat types.
 ## Quick Start
 
 ```gradle
-implementation("co.rexiox:sentinel:1.7.0-beta")
+implementation("co.rexiox:sentinel:1.8.0")
 ```
 
 You can use the following method to print the appId and appIntegrity values required for your
@@ -167,6 +168,7 @@ println("Total Risk Score: ${report.severity} / ${report.threshold}")
 println("Threat Count: ${report.threats.size}")
 println("Timestamp: ${report.timestamp}")
 
+if (report.isCompromised) println("Device integrity failed (Root/Jailbreak detected).")
 if (report.isRooted) println("Root detected")
 if (report.isJailbroken) println("Jailbreak detected")
 if (report.isTampered) println("App tampering detected")
@@ -239,7 +241,7 @@ suspicious activities in real-time and reports these threats.
 https://github.com/user-attachments/assets/acfb35ac-61c4-492e-ae42-a7576f2badb1
 
 ```gradle
-implementation("co.rexiox:sentinel-monitor:1.7.0-beta")
+implementation("co.rexiox:sentinel-monitor:1.8.0")
 ```
 
 ```kotlin
