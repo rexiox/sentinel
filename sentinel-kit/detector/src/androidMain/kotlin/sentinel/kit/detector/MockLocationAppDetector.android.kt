@@ -29,25 +29,38 @@ class MockLocationAppDetector(
 
     private fun detectMockLocationPackages(): List<String> {
         val packageManager = context.packageManager
-        val installedPackages = packageManager.getInstalledPackages()
+        val packagesWithPermission = packageManager.getSafeInstalledPackages()
+        val result = ArrayList<String>(8)
 
-        return installedPackages.filter { packageInfo ->
-            val packageName = packageInfo.packageName
-            val hasMockLocationPackage = packageName in DetectorConst.MOCK_LOCATION_PACKAGES
-            val hasMockPermission =
-                packageInfo.requestedPermissions?.contains(ACCESS_MOCK_LOCATION_PERMISSION) == true
-            val isNotSelf = packageName != context.packageName
+        for (i in 0 until packagesWithPermission.size) {
+            val packageName = packagesWithPermission[i].packageName
+            if (packageName != context.packageName) {
+                result.add(packageName)
+            }
+        }
 
-            (hasMockLocationPackage || hasMockPermission) && isNotSelf
-        }.map(PackageInfo::packageName)
+        val knownApps = DetectorConst.MOCK_LOCATION_PACKAGES.toList()
+        for (i in 0 until knownApps.size) {
+            val pName = knownApps[i]
+            if (pName !in result) {
+                try {
+                    packageManager.getPackageInfo(pName, 0)
+                    result.add(pName)
+                } catch (_: Exception) { }
+            }
+        }
+
+        return result
     }
 
-    private fun PackageManager.getInstalledPackages(): List<PackageInfo> {
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            getInstalledPackages(PackageManager.PackageInfoFlags.of(0))
+    private fun PackageManager.getSafeInstalledPackages(): List<PackageInfo> {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            getPackagesHoldingPermissions(
+                arrayOf(ACCESS_MOCK_LOCATION_PERMISSION),
+                PackageManager.PackageInfoFlags.of(0)
+            )
         } else {
-            @Suppress("DEPRECATION")
-            getInstalledPackages(0)
+            getPackagesHoldingPermissions(arrayOf(ACCESS_MOCK_LOCATION_PERMISSION), 0)
         }
     }
 
