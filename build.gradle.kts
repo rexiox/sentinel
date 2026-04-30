@@ -15,6 +15,7 @@ plugins {
 apiValidation {
     ignoredProjects.addAll(
         elements = listOf(
+            "sentinel-benchmark",
             "sample",
             "composeApp",
             "android"

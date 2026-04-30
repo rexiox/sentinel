@@ -28,6 +28,7 @@ include(":sentinel-kit")
 include(":sentinel-kit:kni")
 include(":sentinel-kit:ndk")
 include(":sentinel-kit:detector")
+include(":sentinel-benchmark")
 
 include(":sample")
 include(":sample:android")
