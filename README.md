@@ -15,7 +15,7 @@
 runtime environments and detect potential security threats in real time on both Android and iOS.
 
 <p align="center">
-  <img alt="image" src=".github/art/header.png" />
+  <img alt="image" src=".github/art/header.svg" />
 </p>
 </div>
 
