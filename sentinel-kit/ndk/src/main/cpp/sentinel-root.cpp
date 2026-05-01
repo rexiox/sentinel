@@ -78,12 +78,19 @@ bool internal_check_mounts() {
 }
 
 bool internal_check_su_command() {
+  if (access("/system/bin/su", F_OK) == 0)
+    return true;
+  if (access("/system/xbin/su", F_OK) == 0)
+    return true;
+
   FILE *pipe = popen("which su", "r");
   if (!pipe)
     return false;
-  char line[128];
-  bool found = (fgets(line, sizeof(line), pipe) != nullptr);
+
+  char buf[128];
+  bool found = fgets(buf, sizeof(buf), pipe) != nullptr;
   pclose(pipe);
+
   return found;
 }
 
@@ -147,7 +154,7 @@ void *integrity_monitor(void *arg) {
     }
 
     set_violation_status(current_violation);
-    sleep(3);
+    sleep(30);
   }
 
   return nullptr;
