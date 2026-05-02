@@ -61,7 +61,7 @@ android {
         minSdk = 24
         targetSdk = 36
         versionCode = 8
-        versionName = "1.8.1"
+        versionName = "1.8.2"
     }
 
     packaging {
