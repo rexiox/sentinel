@@ -9,7 +9,7 @@
 [![Android](https://img.shields.io/badge/Android-000000?style=for-the-badge&logo=android&logoColor=ffffff)](https://developer.android.com/)
 [![iOS](https://img.shields.io/badge/iOS-000000?style=for-the-badge&logo=apple&logoColor=ffffff)](https://developer.apple.com/)
 [![klibs](https://img.shields.io/badge/klibs-000000?style=for-the-badge&logo=kotlin&logoColor=ffffff)](https://klibs.io/project/rexiox/sentinel)
-[![Version](https://img.shields.io/badge/1.8.2-000000?style=for-the-badge&logo=stackblitz)](#)
+[![Version](https://img.shields.io/badge/1.8.2-000000?style=for-the-badge&logo=stackblitz&logoColor=ec141e)](#)
 
 **Sentinel** is a lightweight, modular Kotlin Multiplatform security toolkit designed to analyze
 runtime environments and detect potential security threats in real time on both Android and iOS.
