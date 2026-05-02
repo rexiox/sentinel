@@ -117,6 +117,11 @@ benchmark {
     }
 }
 
+darwinBenchmark {
+    xcodeProjectName.set("AndroidXDarwinBenchmarks")
+    scheme.set("AndroidXDarwinBenchmarks")
+}
+
 tasks.register("generateAndroidBenchmarkPerformanceReport") {
     group = "reporting"
     description = "Analyses JSON benchmark results and generates a Markdown performance report."
