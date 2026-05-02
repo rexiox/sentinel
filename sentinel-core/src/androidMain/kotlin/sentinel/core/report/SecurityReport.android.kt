@@ -11,7 +11,17 @@ class AndroidSecurityReport(
     threshold = threshold,
     timestamp = System.currentTimeMillis()
 ) {
-    override val isRooted: Boolean get() = threats.any { it.violation is AndroidViolation.Root }
+
+    override val isRooted: Boolean
+        get() {
+            val score = threats
+                .map(Threat::violation)
+                .filterIsInstance<AndroidViolation.Root>()
+                .sumOf(AndroidViolation.Root::severity)
+
+            return score >= 90
+        }
+
     override val isTampered: Boolean get() = threats.any { it.violation is AndroidViolation.Tamper }
     override val isHooked: Boolean get() = threats.any { it.violation is AndroidViolation.Hook }
     override val isEmulator: Boolean get() = threats.any { it.violation is AndroidViolation.Emulator }
