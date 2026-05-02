@@ -10,6 +10,7 @@ plugins {
     alias(libs.plugins.kotlin.android) apply false
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.kotlinx.binary.compatibility.validator)
+    alias(libs.plugins.androidx.benchmark.darwin) apply false
 }
 
 apiValidation {

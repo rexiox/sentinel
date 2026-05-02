@@ -32,7 +32,7 @@ the [Contributor Covenant](https://www.contributor-covenant.org/version/2/1/code
 
 1. Fork the repository
 2. Clone your fork: `git clone https://github.com/rexiox/sentinel.git`
-3. Create a branch: `git checkout -b feature/my-improvement`
+3. Create a branch: `git checkout -b feat/branch`
 4. Make your changes
 5. Open a Pull Request against `main`
 

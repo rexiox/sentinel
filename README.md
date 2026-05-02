@@ -267,6 +267,11 @@ Instead:
 - Takes the highest severity per category
 - Produces a realistic risk score
 
+
+## Benchmark
+
+Detailed benchmark reports are available at the following link: [Benchmark Report](sentinel-benchmark/report/performance)
+
 ## License
 
 ```
