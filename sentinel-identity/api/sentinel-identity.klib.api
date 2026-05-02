@@ -7,7 +7,7 @@
 
 // Library unique name: <co.rexiox:sentinel-identity>
 final class sentinel.identity/Identity : sentinel.core.identity/Identity { // sentinel.identity/Identity|null[0]
-    constructor <init>(kotlin/Any? = ...) // sentinel.identity/Identity.<init>|<init>(kotlin.Any?){}[0]
+    constructor <init>() // sentinel.identity/Identity.<init>|<init>(){}[0]
 
     final val appId // sentinel.identity/Identity.appId|{}appId[0]
         final fun <get-appId>(): kotlin/String // sentinel.identity/Identity.appId.<get-appId>|<get-appId>(){}[0]
@@ -17,4 +17,8 @@ final class sentinel.identity/Identity : sentinel.core.identity/Identity { // se
         final fun <get-deviceId>(): kotlin/String // sentinel.identity/Identity.deviceId.<get-deviceId>|<get-deviceId>(){}[0]
     final val platform // sentinel.identity/Identity.platform|{}platform[0]
         final fun <get-platform>(): kotlin/String // sentinel.identity/Identity.platform.<get-platform>|<get-platform>(){}[0]
+
+    final object Companion { // sentinel.identity/Identity.Companion|null[0]
+        final fun getInstance(kotlin/Any? = ...): sentinel.core.identity/Identity // sentinel.identity/Identity.Companion.getInstance|getInstance(kotlin.Any?){}[0]
+    }
 }
