@@ -10,10 +10,12 @@ sealed class AndroidViolation(
         object Detected : Root(severity = 0)
 
         data class AppInstalled(val packageName: String? = null) : Root(severity = 65) {
+
             override val detail: String? = packageName
         }
 
         data class SuspiciousMount(val mountPoint: String? = null) : Root(severity = 75) {
+
             override val detail: String? = mountPoint
         }
 
@@ -36,6 +38,7 @@ sealed class AndroidViolation(
         object Detected : Hook(severity = 0)
 
         data class FrameworkDetected(val name: String? = null) : Hook(severity = 100) {
+
             override val detail: String? = name
         }
     }
@@ -43,6 +46,7 @@ sealed class AndroidViolation(
     sealed class Emulator(severity: Int) : AndroidViolation(severity = severity) {
 
         data class Detected(val name: String? = null) : Emulator(severity = 25) {
+
             override val detail: String? = name
         }
     }
@@ -63,6 +67,7 @@ sealed class AndroidViolation(
         object MockSettingEnabled : Location(severity = 50)
 
         data class MockAppInstalled(val packages: List<String>) : Location(severity = 60) {
+
             override val detail: String = packages.toString()
         }
     }

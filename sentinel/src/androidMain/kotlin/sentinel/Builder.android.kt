@@ -2,7 +2,7 @@ package sentinel
 
 import android.content.Context
 import sentinel.core.detector.SecurityDetector
-import sentinel.identity.Identity
+import sentinel.identity.Identity.Companion.getInstance as IdentityInstance
 
 actual class Builder {
 
@@ -34,7 +34,7 @@ fun Sentinel.Companion.configure(
     context: Context,
     block: Builder.() -> Unit,
 ): Sentinel {
-    Sentinel.Identity = lazy { Identity(context = context) }.value
+    Sentinel.Identity = IdentityInstance(context = context)
 
     return Builder()
         .setContext(context = context)

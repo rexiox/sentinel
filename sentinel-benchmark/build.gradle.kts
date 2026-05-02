@@ -167,6 +167,14 @@ tasks.register("generateAndroidBenchmarkPerformanceReport") {
         }
         md.append("\n---\n")
 
+        val deviceName = build?.let {
+            "${it["brand"]}_${it["model"]}"
+        } ?: "unknown_device"
+
+        val safeDeviceName = deviceName
+            .replace("\\s+".toRegex(), "_")
+            .replace("[^A-Za-z0-9_]".toRegex(), "")
+
         val categories = listOf(
             "Memory Allocation" to "Memory",
             "Cold Start Performance" to "ColdStart",
@@ -262,7 +270,7 @@ tasks.register("generateAndroidBenchmarkPerformanceReport") {
         md.append("| **Acceptable** | 🟠 | 70ms – 120ms | **Perception Threshold** | Slight delay measurable but not disturbing. |\n")
         md.append("| **Critical** | 🔴 | > 120ms | **Human Perception** | Startup latency becomes noticeable. |\n\n")
 
-        val fileName = "${fileTimestamp}_android.md"
+        val fileName = "${fileTimestamp}_${safeDeviceName}_android.md"
         val reportFile = File(projectReportDir, fileName)
 
         if (!projectReportDir.exists()) projectReportDir.mkdirs()

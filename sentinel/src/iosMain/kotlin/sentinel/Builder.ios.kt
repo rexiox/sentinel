@@ -1,7 +1,7 @@
 package sentinel
 
 import sentinel.core.detector.SecurityDetector
-import sentinel.identity.Identity
+import sentinel.identity.Identity.Companion.getInstance as IdentityInstance
 
 actual class Builder {
 
@@ -27,7 +27,7 @@ actual class Builder {
 fun Sentinel.Companion.configure(
     block: Builder.() -> Unit,
 ): Sentinel {
-    Sentinel.Identity = lazy { Identity() }.value
+    Sentinel.Identity = IdentityInstance()
 
     return Builder()
         .apply(block = block)

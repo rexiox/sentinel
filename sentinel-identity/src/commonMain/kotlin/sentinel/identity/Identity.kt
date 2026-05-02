@@ -2,7 +2,7 @@ package sentinel.identity
 
 import sentinel.core.identity.Identity
 
-expect class Identity(context: Any? = null) : Identity {
+expect class Identity : Identity {
 
     override val deviceId: String
 
@@ -11,4 +11,9 @@ expect class Identity(context: Any? = null) : Identity {
     override val appIntegrity: String?
 
     override val platform: String
+
+    companion object {
+
+        fun getInstance(context: Any? = null): Identity
+    }
 }

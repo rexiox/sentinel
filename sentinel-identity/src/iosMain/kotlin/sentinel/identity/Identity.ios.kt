@@ -1,13 +1,11 @@
 package sentinel.identity
 
-import platform.UIKit.UIDevice
 import platform.Foundation.NSBundle
+import platform.UIKit.UIDevice
 import sentinel.core.identity.Identity
 import sentinel.identity.hash.getProvisioningHash
 
-actual class Identity actual constructor(
-    context: Any?,
-) : Identity {
+actual class Identity : Identity {
 
     actual override val deviceId: String = UIDevice.currentDevice.identifierForVendor?.UUIDString.orEmpty()
 
@@ -16,4 +14,13 @@ actual class Identity actual constructor(
     actual override val appIntegrity: String? = getProvisioningHash()
 
     actual override val platform: String = "iOS".lowercase()
+
+    actual companion object {
+
+        private val instance by lazy(LazyThreadSafetyMode.SYNCHRONIZED) {
+            Identity()
+        }
+
+        actual fun getInstance(context: Any?): Identity = instance
+    }
 }

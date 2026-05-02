@@ -8,22 +8,27 @@ sealed class IosViolation(
     sealed class Jailbreak(severity: Int) : IosViolation(severity = severity) {
 
         data class Sandbox(val appId: String? = null) : Jailbreak(severity = 100) {
+
             override val detail: String? = appId
         }
 
         data class SystemPaths(val path: String? = null) : Jailbreak(severity = 85) {
+
             override val detail: String? = path
         }
 
         data class SuspiciousSymlinks(val path: String? = null) : Jailbreak(severity = 80) {
+
             override val detail: String? = path
         }
 
         data class AppInstalled(val appId: String? = null) : Jailbreak(severity = 70) {
+
             override val detail: String? = appId
         }
 
         data class URLSchemes(val urlScheme: String? = null) : Jailbreak(severity = 35) {
+
             override val detail: String? = urlScheme
         }
     }
@@ -40,10 +45,12 @@ sealed class IosViolation(
         object Detected : Hook(severity = 0)
 
         data class FrameworkDetected(val name: String? = null) : Hook(severity = 100) {
+
             override val detail: String? = name
         }
 
         data class InlineHookDetected(val name: String? = null) : Hook(severity = 90) {
+
             override val detail: String? = name
         }
     }
@@ -61,6 +68,7 @@ sealed class IosViolation(
     sealed class Location(severity: Int) : IosViolation(severity = severity) {
 
         data class MockAppInstalled(val packages: List<String>) : Location(severity = 60) {
+
             override val detail: String = packages.toString()
         }
     }
