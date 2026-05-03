@@ -65,3 +65,8 @@ Sentinel is a **detection** library, not a prevention library. By design:
   R8/ProGuard) in production
 - Server-side validation (Play Integrity API, App Attest) should be used alongside Sentinel for
   defense in depth
+- The cTrust - Counter-Based Security Mechanism Between Mobile Application and API Services thesis
+  proposes a counter-based application verification approach between mobile applications and backend
+  services. See
+  also: [cTrust - Counter-Based Security Mechanism Between Mobile Application and API Services](https://tez.yok.gov.tr/UlusalTezMerkezi/tezDetay.jsp?id=wyK2VC-zf_BsEItql0qMPA) -
+  a counter-based application verification model between mobile apps and backend services.
