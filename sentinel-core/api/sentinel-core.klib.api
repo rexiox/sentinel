@@ -277,10 +277,18 @@ sealed class sentinel.core.violation/IosViolation : sentinel.core.violation/Secu
     }
 }
 
+final object sentinel.core.handler/ExceptionHandler { // sentinel.core.handler/ExceptionHandler|null[0]
+    final inline fun <#A1: kotlin/Any?> safely(kotlin/String, kotlin/Function0<#A1>): #A1? // sentinel.core.handler/ExceptionHandler.safely|safely(kotlin.String;kotlin.Function0<0:0>){0§<kotlin.Any?>}[0]
+}
+
 final object sentinel.core.logger/SentinelLogger { // sentinel.core.logger/SentinelLogger|null[0]
     final fun print(kotlin/String = ..., kotlin/Any) // sentinel.core.logger/SentinelLogger.print|print(kotlin.String;kotlin.Any){}[0]
+    final fun print(kotlin/String = ..., kotlin/Any, kotlin/Throwable) // sentinel.core.logger/SentinelLogger.print|print(kotlin.String;kotlin.Any;kotlin.Throwable){}[0]
     final fun report(sentinel.core.report/SecurityReport) // sentinel.core.logger/SentinelLogger.report|report(sentinel.core.report.SecurityReport){}[0]
 }
+
+final const val sentinel.core.logger/SENTINEL_TAG // sentinel.core.logger/SENTINEL_TAG|{}SENTINEL_TAG[0]
+    final fun <get-SENTINEL_TAG>(): kotlin/String // sentinel.core.logger/SENTINEL_TAG.<get-SENTINEL_TAG>|<get-SENTINEL_TAG>(){}[0]
 
 final fun (kotlin/String?).sentinel.core.ext/toByteList(): kotlin.collections/List<kotlin/Byte> // sentinel.core.ext/toByteList|toByteList@kotlin.String?(){}[0]
 final fun sentinel.core.violation/getGroupName(sentinel.core.violation/SecurityViolation): kotlin/String // sentinel.core.violation/getGroupName|getGroupName(sentinel.core.violation.SecurityViolation){}[0]
