@@ -3,6 +3,7 @@ package sentinel.kit.detector
 import android.content.Context
 import sentinel.core.detector.SecurityDetector
 import sentinel.core.detector.Threat
+import sentinel.core.handler.ExceptionHandler
 import sentinel.core.violation.AndroidViolation
 
 open class RootDetector(
@@ -10,7 +11,9 @@ open class RootDetector(
 ) : SecurityDetector {
 
     init {
-        loadLibrary()
+        ExceptionHandler.safely(context = "RootDetector.init") {
+            loadLibrary()
+        }
     }
 
     open fun loadLibrary() {

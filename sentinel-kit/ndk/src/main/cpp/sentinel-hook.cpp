@@ -118,11 +118,18 @@ void *integrity_monitor(void *arg) {
 
 extern "C" {
 
-JNIEXPORT void JNICALL Java_sentinel_kit_runtime_HookRuntime_init(
-    JNIEnv *env, jobject thiz, jobject instance) {
-  g_detector_obj = env->NewGlobalRef(instance);
-  jclass clazz = env->GetObjectClass(g_detector_obj);
-  g_callback_method = env->GetMethodID(clazz, "onHookDetected", "()V");
+JNIEXPORT void JNICALL
+Java_sentinel_kit_runtime_HookRuntime_init(JNIEnv *env, jobject thiz, jobject instance) {
+  if (g_detector_obj != nullptr) {
+    env->DeleteGlobalRef(g_detector_obj);
+    g_detector_obj = nullptr;
+  }
+
+  if (instance != nullptr) {
+    g_detector_obj = env->NewGlobalRef(instance);
+    jclass clazz = env->GetObjectClass(g_detector_obj);
+    g_callback_method = env->GetMethodID(clazz, "onHookDetected", "()V");
+  }
 }
 
 JNIEXPORT jboolean JNICALL

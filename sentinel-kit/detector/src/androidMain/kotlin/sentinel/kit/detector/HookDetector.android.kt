@@ -2,12 +2,15 @@ package sentinel.kit.detector
 
 import sentinel.core.detector.SecurityDetector
 import sentinel.core.detector.Threat
+import sentinel.core.handler.ExceptionHandler
 import sentinel.core.violation.AndroidViolation
 
 open class HookDetector : SecurityDetector {
 
     init {
-        loadLibrary()
+        ExceptionHandler.safely(context = "HookDetector.init") {
+            loadLibrary()
+        }
     }
 
     open fun loadLibrary() {

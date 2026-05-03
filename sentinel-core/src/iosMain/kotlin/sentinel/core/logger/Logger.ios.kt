@@ -11,6 +11,11 @@ actual object SentinelLogger {
         println("[$tag] $msg")
     }
 
+    actual fun print(tag: String, msg: Any, throwable: Throwable) {
+        println("[$tag] $msg")
+        println(throwable.stackTraceToString())
+    }
+
     actual fun report(report: SecurityReport) {
         if (report is IosSecurityReport) {
             println("╔══════════════════════════════════════════════════════")

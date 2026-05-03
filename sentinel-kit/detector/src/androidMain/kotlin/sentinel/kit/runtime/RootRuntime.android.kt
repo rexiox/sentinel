@@ -2,6 +2,7 @@
 
 package sentinel.kit.runtime
 
+import sentinel.core.handler.ExceptionHandler
 import sentinel.core.violation.AndroidViolation
 import sentinel.runtime.Runtime
 import kotlin.concurrent.atomics.ExperimentalAtomicApi
@@ -11,8 +12,10 @@ object RootRuntime {
     private external fun init(instance: RootRuntime)
 
     fun initialize() {
-        loadLibrary()
-        init(this)
+        ExceptionHandler.safely(context = "RootRuntime.initialize") {
+            loadLibrary()
+            init(this)
+        }
     }
 
     private fun loadLibrary() {
