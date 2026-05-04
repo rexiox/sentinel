@@ -96,7 +96,7 @@ against multiple threat types.
 ## Quick Start
 
 ```gradle
-implementation("co.rexiox:sentinel:1.8.4.beta")
+implementation("co.rexiox:sentinel:1.8.4-beta")
 ```
 
 You can use the following method to print the appId and appIntegrity values required for your
@@ -249,7 +249,7 @@ suspicious activities in real-time and reports these threats.
 https://github.com/user-attachments/assets/acfb35ac-61c4-492e-ae42-a7576f2badb1
 
 ```gradle
-implementation("co.rexiox:sentinel-monitor:1.8.4.beta")
+implementation("co.rexiox:sentinel-monitor:1.8.4-beta")
 ```
 
 ```kotlin
