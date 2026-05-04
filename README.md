@@ -99,6 +99,10 @@ You can use the following method to print the appId and appIntegrity values requ
 security or configuration processes and assign them to the relevant fields within the config as a
 ByteList:
 
+- `appId`: Package name for Android, Bundle Identifier for iOS
+- `appIntegrity`: Package signature for Android, unique digital fingerprint of the Provisioning
+  Profile file for iOS
+
 ```kotlin
 SentinelLogger.print(tag = "APP_ID", msg = Sentinel.Identity.appId.toByteList())
 SentinelLogger.print(tag = "APP_INTEGRITY", msg = Sentinel.Identity.appIntegrity.toByteList())
@@ -259,18 +263,18 @@ SentinelMonitor.start(
 
 ## Risk Scoring
 
-Sentinel does NOT simply sum threats.
-
-Instead:
+Sentinel employs a weighted risk assessment instead of a basic summation approach
 
 - Groups threats by category
 - Takes the highest severity per category
 - Produces a realistic risk score
 
+This approach prevents artificial risk inflation and provides a more accurate security assessment.
 
 ## Benchmark
 
-Detailed benchmark reports are available at the following link: [Benchmark Report](sentinel-benchmark/report/performance)
+Detailed benchmark reports are available at the following
+link: [Benchmark Report](sentinel-benchmark/report/performance)
 
 ## License
 

@@ -126,7 +126,10 @@ tasks.register("generateAndroidBenchmarkPerformanceReport") {
     group = "reporting"
     description = "Analyses JSON benchmark results and generates a Markdown performance report."
 
-    val projectReportDir = project.layout.projectDirectory.dir("report/performance").asFile
+    val version = "v1.8.3"
+    val projectReportDir = project.layout.projectDirectory.dir(
+        "report/performance/${version.replace(".", "_")}/"
+    ).asFile
     val benchmarkDir = project.layout.buildDirectory
         .dir("outputs/connected_android_test_additional_output/releaseAndroidTest/connected")
 
