@@ -1,93 +1,23 @@
 changelog:
-  categories:
-    - title: 'New Features'
-      labels:
-        - 'enhancement'
-        - 'feature'
-        - 'feat'
-
-    - title: 'Bug Fixes'
-      labels:
-        - 'bug'
-        - 'fix'
-
-    - title: 'Documentation'
-      labels:
-        - 'documentation'
-        - 'docs'
-
-    - title: 'Performance Improvements'
-      labels:
-        - 'performance'
-        - 'perf'
-
-    - title: 'Tests'
-      labels:
-        - 'test'
-        - 'tests'
-
-    - title: 'Refactoring'
-      labels:
-        - 'refactor'
-        - 'refactoring'
-
-    - title: 'Build & CI/CD'
-      labels:
-        - 'build'
-        - 'ci'
-        - 'cd'
-
-    - title: 'Maintenance & Chores'
-      labels:
-        - 'chore'
-        - 'maintenance'
-        - 'dependencies'
-        - 'task'
-
   exclude:
     labels:
-      - 'ignore'
-      - 'skip-changelog'
-      - 'no-changelog'
-    authors:
-      - 'dependabot'
-      - 'dependabot[bot]'
-
-  autolabeler:
-    - label: 'feat'
-      title:
-        - '/^feat(\(.*\))?:/i'
-    - label: 'fix'
-      title:
-        - '/^fix(\(.*\))?:/i'
-    - label: 'docs'
-      title:
-        - '/^docs(\(.*\))?:/i'
-        - '/^update:.*README/i'
-    - label: 'perf'
-      title:
-        - '/^perf(\(.*\))?:/i'
-    - label: 'test'
-      title:
-        - '/^test(\(.*\))?:/i'
-    - label: 'refactor'
-      title:
-        - '/^refactor(\(.*\))?:/i'
-    - label: 'build'
-      title:
-        - '/^build(\(.*\))?:/i'
-    - label: 'chore'
-      title:
-        - '/^chore(\(.*\))?:/i'
-        - '/^update:/i'
-
-  template: |
-    ## What's Changed
-    
-    $CHANGES
-    
-    **Full Changelog**: https://github.com/$OWNER/$REPOSITORY/compare/$PREVIOUS_TAG...$CURRENT_TAG
-
-  change-template: '- $TITLE @$AUTHOR (#$NUMBER)'
-  include-contributors: true
-  hide-categories-without-changes: true
+      - ignore-for-release
+  categories:
+    - title: New Features
+      labels:
+        - feature
+        - enhancement
+    - title: Bug Fixes
+      labels:
+        - bug
+        - fix
+    - title: Performance
+      labels:
+        - perf
+        - test
+    - title: Documentation
+      labels:
+        - documentation
+    - title: "All Changes"
+      labels:
+        - "*"

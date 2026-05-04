@@ -9,7 +9,7 @@
 [![Android](https://img.shields.io/badge/Android-000000?style=for-the-badge&logo=android&logoColor=ffffff)](https://developer.android.com/)
 [![iOS](https://img.shields.io/badge/iOS-000000?style=for-the-badge&logo=apple&logoColor=ffffff)](https://developer.apple.com/)
 [![klibs](https://img.shields.io/badge/klibs-000000?style=for-the-badge&logo=kotlin&logoColor=ffffff)](https://klibs.io/project/rexiox/sentinel)
-[![Version](https://img.shields.io/badge/1.8.3-000000?style=for-the-badge&logo=stackblitz&logoColor=ec141e)](#)
+[![Version](https://img.shields.io/badge/1.8.4--beta-000000?style=for-the-badge&logo=stackblitz&logoColor=ec141e)](#)
 
 **Sentinel** is a lightweight, modular Kotlin Multiplatform security toolkit designed to analyze
 runtime environments and detect potential security threats in real time on both Android and iOS.
@@ -19,11 +19,15 @@ runtime environments and detect potential security threats in real time on both 
 </p>
 </div>
 
+> [!CAUTION]
+> **Development Stage Notice**: Sentinel is currently in active development and testing phase. API
+> structures may change, and new features are being added regularly. Caution is advised when using
+> in production environments.
+
 ## Why Sentinel?
 
-Most mobile apps rely only on server-side security, but attacks happen on the client.
-
-Sentinel provides real-time, on-device threat detection with minimal performance overhead.
+Most mobile apps rely only on server-side security, but attacks happen on the client. Sentinel
+provides real-time, on-device threat detection with minimal performance overhead.
 
 ☑️️ Detect compromised devices (root / jailbreak)  
 ☑️️ Detect runtime manipulation (Frida, Xposed (Android))  
@@ -92,7 +96,7 @@ against multiple threat types.
 ## Quick Start
 
 ```gradle
-implementation("co.rexiox:sentinel:1.8.3")
+implementation("co.rexiox:sentinel:1.8.4.beta")
 ```
 
 You can use the following method to print the appId and appIntegrity values required for your
@@ -245,7 +249,7 @@ suspicious activities in real-time and reports these threats.
 https://github.com/user-attachments/assets/acfb35ac-61c4-492e-ae42-a7576f2badb1
 
 ```gradle
-implementation("co.rexiox:sentinel-monitor:1.8.3")
+implementation("co.rexiox:sentinel-monitor:1.8.4.beta")
 ```
 
 ```kotlin
