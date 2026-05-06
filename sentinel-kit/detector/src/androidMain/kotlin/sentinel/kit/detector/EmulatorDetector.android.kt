@@ -1,49 +1,33 @@
 package sentinel.kit.detector
 
-import android.os.Build
 import sentinel.core.detector.SecurityDetector
 import sentinel.core.detector.Threat
+import sentinel.core.handler.ExceptionHandler
 import sentinel.core.violation.AndroidViolation
-import sentinel.kit.detector.constant.DetectorConst
-import java.io.File
 
-class EmulatorDetector : SecurityDetector {
+open class EmulatorDetector : SecurityDetector {
 
-    override fun detect(): List<Threat> {
-        val (pipe, prop) = isEmulator()
-
-        return buildList {
-            if (pipe != null) {
-                add(
-                    element = Threat(
-                        violation = AndroidViolation.Emulator.Detected(name = "Pipe: $pipe")
-                    )
-                )
-            }
-
-            if (prop != null) {
-                add(
-                    element = Threat(
-                        violation = AndroidViolation.Emulator.Detected(name = "Prop: $prop")
-                    )
-                )
-            }
+    init {
+        ExceptionHandler.safely(context = "EmulatorDetector.init") {
+            loadLibrary()
         }
     }
 
-    private fun isEmulator(): Pair<String?, String?> {
-        val buildDetails = (
-                Build.FINGERPRINT
-                        + Build.DEVICE
-                        + Build.MODEL
-                        + Build.BRAND
-                        + Build.PRODUCT
-                        + Build.MANUFACTURER
-                        + Build.HARDWARE
-                ).lowercase()
+    open fun loadLibrary() {
+        System.loadLibrary("sentinel-emulator")
+    }
 
-        val pipe = DetectorConst.EMULATOR_PIPES.firstOrNull { File(it).exists() }
-        val prop = DetectorConst.EMULATOR_PROPS.firstOrNull(predicate = buildDetails::contains)
-        return Pair(pipe, prop)
+    open external fun getEmulatorDetectionReason(): String?
+
+    override fun detect(): List<Threat> {
+        val reason = getEmulatorDetectionReason()
+
+        return when {
+            !reason.isNullOrBlank() -> {
+                listOf(Threat(violation = AndroidViolation.Emulator.Detected(name = reason)))
+            }
+
+            else -> emptyList()
+        }
     }
 }

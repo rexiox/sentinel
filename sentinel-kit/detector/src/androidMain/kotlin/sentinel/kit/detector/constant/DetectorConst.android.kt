@@ -2,21 +2,6 @@ package sentinel.kit.detector.constant
 
 internal object DetectorConst {
 
-    val EMULATOR_PIPES: List<String> = listOf(
-        "/dev/socket/qemud",
-        "/dev/qemu_pipe"
-    )
-
-    val EMULATOR_PROPS: List<String> = listOf(
-        "google_sdk",
-        "emulator",
-        "android_sdk",
-        "genymotion",
-        "goldfish",
-        "vbox86",
-        "sdk_gphone"
-    )
-
     val MOCK_LOCATION_PACKAGES = setOf(
         "com.lexa.fakegps",
         "com.theappninjas.fakegpsjoystick",

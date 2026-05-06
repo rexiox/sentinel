@@ -45,7 +45,7 @@ class MainActivity : ComponentActivity() {
                         appId = Sentinel.Identity.appId.toByteList()
                         appIntegrity = Sentinel.Identity.appIntegrity.toByteList()
                         threshold = 20
-                        // isLoggingEnabled = true
+                        isLoggingEnabled = true
                     }
 
                     all()

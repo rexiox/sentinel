@@ -1,8 +1,10 @@
-@file:OptIn(ExperimentalWasmDsl::class)
+@file:OptIn(ExperimentalWasmDsl::class, ExperimentalKotlinGradlePluginApi::class)
 
 import groovy.json.JsonSlurper
 import kotlinx.benchmark.gradle.benchmark
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
+import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSetTree
 import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFramework
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -11,8 +13,8 @@ import kotlin.math.sqrt
 
 plugins {
     kotlin("multiplatform")
-    id("com.android.library")
     kotlin("plugin.allopen") version "2.3.20"
+    id("com.android.library")
     id("org.jetbrains.kotlinx.benchmark") version "0.4.16"
     id("androidx.benchmark") version "1.4.1" apply false
     id("androidx.benchmark.darwin")
@@ -25,7 +27,9 @@ allOpen {
 kotlin {
     val xcf = XCFramework("AndroidXDarwinBenchmarks")
 
-    androidTarget("android") {}
+    androidTarget("android") {
+        instrumentedTestVariant.sourceSetTree.set(KotlinSourceSetTree.test)
+    }
 
     listOf(
         iosX64(),
@@ -56,6 +60,14 @@ kotlin {
 
         val androidMain by getting {
             dependsOn(commonBenchmark)
+            dependencies {
+                implementation(libs.androidx.runner)
+                implementation(libs.androidx.junit.ktx)
+                implementation(libs.androidx.benchmark.junit4)
+            }
+        }
+
+        val androidInstrumentedTest by getting {
             dependencies {
                 implementation(libs.androidx.runner)
                 implementation(libs.androidx.junit.ktx)
@@ -126,7 +138,7 @@ tasks.register("generateAndroidBenchmarkPerformanceReport") {
     group = "reporting"
     description = "Analyses JSON benchmark results and generates a Markdown performance report."
 
-    val version = "v1.8.4-beta"
+    val version = "v1.8.4.beta"
     val projectReportDir = project.layout.projectDirectory.dir(
         "report/performance/${version.replace(".", "_")}/"
     ).asFile

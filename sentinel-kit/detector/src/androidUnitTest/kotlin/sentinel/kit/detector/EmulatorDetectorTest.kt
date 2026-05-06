@@ -1,84 +1,63 @@
 package sentinel.kit.detector
 
-import android.os.Build
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.util.ReflectionHelpers
 import sentinel.core.violation.AndroidViolation
 
 @RunWith(RobolectricTestRunner::class)
 class EmulatorDetectorTest {
 
-    private lateinit var detector: EmulatorDetector
-
-    @Before
-    fun setUp() {
-        detector = EmulatorDetector()
-    }
-
     @Test
-    fun `detect returns empty list on legitimate hardware`() {
-        setBuildFields(
-            brand = "google",
-            manufacturer = "Google",
-            model = "Pixel 6",
-            hardware = "tensor"
-        )
+    fun `detect should return empty list when no emulator detected`() {
+        val detector = createDetector(reason = null)
 
         val result = detector.detect()
+
         assertTrue(result.isEmpty())
     }
 
     @Test
-    fun `detect identifies emulator via build properties`() {
-        setBuildFields(brand = "emulator", device = "emulator")
+    fun `detect should return empty list when reason is blank`() {
+        val detector = createDetector(reason = "  ")
+
+        val result = detector.detect()
+
+        assertTrue(result.isEmpty())
+    }
+
+    @Test
+    fun `detect should identify emulator when reason is provided`() {
+        val expectedReason = "Genymotion"
+        val detector = createDetector(reason = expectedReason)
 
         val result = detector.detect()
 
         assertEquals(1, result.size)
         val violation = result.first().violation as AndroidViolation.Emulator.Detected
-        assertTrue(violation.name.orEmpty().contains("Prop:"))
+        assertEquals(expectedReason, violation.name)
     }
 
     @Test
-    fun `isEmulator detection is case-insensitive`() {
-        setBuildFields(brand = "GOOGLE_SDK")
+    fun `checkEmulatorReason should be called during detect`() {
+        var isMethodCalled = false
 
-        val result = detector.detect()
+        val detector = object : EmulatorDetector() {
+            override fun loadLibrary() = Unit
+            override fun getEmulatorDetectionReason(): String? {
+                isMethodCalled = true
+                return null
+            }
+        }
 
-        assertTrue("Should detect 'google_sdk' regardless of case", result.isNotEmpty())
+        detector.detect()
+        assertTrue(isMethodCalled)
     }
 
-    @Test
-    fun `detect identifies specific emulator brands`() {
-        setBuildFields(manufacturer = "Genymotion", hardware = "vbox86")
-
-        val result = detector.detect()
-
-        assertEquals(1, result.size)
-        val violation = result.first().violation as AndroidViolation.Emulator.Detected
-        assertTrue(violation.name.orEmpty().contains("vbox86") || violation.name.orEmpty().contains("genymotion"))
-    }
-
-    private fun setBuildFields(
-        fingerprint: String = "unknown",
-        device: String = "unknown",
-        model: String = "unknown",
-        brand: String = "unknown",
-        product: String = "unknown",
-        manufacturer: String = "unknown",
-        hardware: String = "unknown",
-    ) {
-        ReflectionHelpers.setStaticField(Build::class.java, "FINGERPRINT", fingerprint)
-        ReflectionHelpers.setStaticField(Build::class.java, "DEVICE", device)
-        ReflectionHelpers.setStaticField(Build::class.java, "MODEL", model)
-        ReflectionHelpers.setStaticField(Build::class.java, "BRAND", brand)
-        ReflectionHelpers.setStaticField(Build::class.java, "PRODUCT", product)
-        ReflectionHelpers.setStaticField(Build::class.java, "MANUFACTURER", manufacturer)
-        ReflectionHelpers.setStaticField(Build::class.java, "HARDWARE", hardware)
+    private fun createDetector(reason: String?): EmulatorDetector = object : EmulatorDetector() {
+        override fun loadLibrary() = Unit
+        override fun getEmulatorDetectionReason(): String? = reason
     }
 }
