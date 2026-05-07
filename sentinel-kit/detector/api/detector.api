@@ -7,9 +7,11 @@ public class sentinel/kit/detector/DebugDetector : sentinel/core/detector/Securi
 	public fun loadLibrary ()V
 }
 
-public final class sentinel/kit/detector/EmulatorDetector : sentinel/core/detector/SecurityDetector {
+public class sentinel/kit/detector/EmulatorDetector : sentinel/core/detector/SecurityDetector {
 	public fun <init> ()V
 	public fun detect ()Ljava/util/List;
+	public fun getEmulatorDetectionReason ()Ljava/lang/String;
+	public fun loadLibrary ()V
 }
 
 public class sentinel/kit/detector/HookDetector : sentinel/core/detector/SecurityDetector {
