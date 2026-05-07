@@ -47,7 +47,8 @@ internal fun SentinelHeader(
     ) {
         SentinelPackageCard(
             appId = appId,
-            appIntegrity = appIntegrity
+            appIntegrity = appIntegrity,
+            riskLevel = riskLevel
         )
 
         SentinelRiskLevelCard(

@@ -21,12 +21,15 @@ import co.rexiox.sentinel.ui.resources.app_signature
 import co.rexiox.sentinel.ui.resources.ic_sentinel_launcher
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+import sentinel.core.type.RiskLevel
+import sentinel.ui.ext.getLogoColorFilter
 
 @Composable
 internal fun SentinelPackageCard(
     modifier: Modifier = Modifier,
     appId: String,
-    appIntegrity: String
+    appIntegrity: String,
+    riskLevel: RiskLevel,
 ) {
     Card(
         modifier = modifier
@@ -52,7 +55,8 @@ internal fun SentinelPackageCard(
                     .padding(top = 32.dp)
                     .size(size = 64.dp),
                 painter = painterResource(resource = Res.drawable.ic_sentinel_launcher),
-                contentDescription = null
+                colorFilter = riskLevel.getLogoColorFilter(),
+                contentDescription = "logo"
             )
 
             Spacer(modifier = Modifier.height(height = 16.dp))
