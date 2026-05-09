@@ -65,25 +65,25 @@ tasks.register("generateAndroidBenchmarkPerformanceReport") {
 
         val categories = listOf(
             "Runtime Performance (Inspect Only)" to { name: String ->
-                name.startsWith("benchmarkInspect") && !name.contains("Warmup")
+                name.replace("EMULATOR_","").startsWith("benchmarkInspect") && !name.contains("Warmup")
             },
             "Cold Start Performance" to { name: String ->
-                name.startsWith("benchmarkColdStart")
+                name.replace("EMULATOR_","").startsWith("benchmarkColdStart")
             },
             "Initialization Only" to { name: String ->
-                name.startsWith("benchmarkInitialization")
+                name.replace("EMULATOR_","").startsWith("benchmarkInitialization")
             },
             "Memory Allocation Tests" to { name: String ->
-                name.startsWith("benchmarkMemory")
+                name.replace("EMULATOR_","").startsWith("benchmarkMemory")
             },
             "Instance Reuse Tests" to { name: String ->
-                name.startsWith("benchmarkReuse")
+                name.replace("EMULATOR_","").startsWith("benchmarkReuse")
             },
             "Edge Cases" to { name: String ->
-                name.contains("Empty") || name.contains("Concurrent")
+                name.replace("EMULATOR_","").contains("Empty") || name.contains("Concurrent")
             },
             "Manual Warmup Tests" to { name: String ->
-                name.contains("Warmup")
+                name.replace("EMULATOR_","").contains("Warmup")
             }
         )
 
