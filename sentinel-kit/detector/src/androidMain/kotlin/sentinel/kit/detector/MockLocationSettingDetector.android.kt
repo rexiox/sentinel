@@ -12,11 +12,7 @@ class MockLocationSettingDetector(
 
     override fun detect(): List<Threat> = buildList {
         if (isMockLocationSettingEnabled()) {
-            add(
-                element = Threat(
-                    violation = AndroidViolation.Location.MockSettingEnabled
-                )
-            )
+            add(element = Threat(violation = AndroidViolation.Location.MockSettingEnabled))
         }
     }
 

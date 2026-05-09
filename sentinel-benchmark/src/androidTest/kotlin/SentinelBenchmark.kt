@@ -39,68 +39,88 @@ class SentinelBenchmark {
         }
     }
 
-    private fun runBenchmark(configBlock: Builder.() -> Unit) {
-        val sentinelInstance = createSentinel(configBlock)
+    // INSPECT ONLY BENCHMARKS
+
+    @Test
+    fun benchmarkInspectRootOnly() {
+        val sentinel = createSentinel { root() }
+
         benchmarkRule.measureRepeated {
             runBlocking {
-                sentinelInstance.inspect()
+                sentinel.inspect()
             }
         }
     }
 
     @Test
-    fun benchmarkInspectRootOnly() = runBenchmark { root() }
-
-    @Test
-    fun benchmarkInspectTamperOnly() = runBenchmark { tamper() }
-
-    @Test
-    fun benchmarkInspectHookOnly() = runBenchmark { hook() }
-
-    @Test
-    fun benchmarkInspectEmulatorOnly() = runBenchmark { emulator() }
-
-    @Test
-    fun benchmarkInspectDebugOnly() = runBenchmark { debug() }
-
-    @Test
-    fun benchmarkInspectLocationOnly() = runBenchmark { location() }
-
-    @Test
-    fun benchmarkInspectAllModules() = runBenchmark { all() }
-
-    @Test
-    fun benchmarkColdStartAll() {
-        benchmarkRule.measureRepeated {
-            createSentinel { all() }
-        }
-    }
-
-    @Test
-    fun benchmarkColdStartRoot() {
-        benchmarkRule.measureRepeated {
-            createSentinel { root() }
-        }
-    }
-
-    @Test
-    fun benchmarkInspectWithWarmup() {
-        val sentinelInstance = createSentinel { all() }
-
-        repeat(5) {
-            runBlocking { sentinelInstance.inspect() }
-        }
+    fun benchmarkInspectTamperOnly() {
+        val sentinel = createSentinel { tamper() }
 
         benchmarkRule.measureRepeated {
             runBlocking {
-                sentinelInstance.inspect()
+                sentinel.inspect()
             }
         }
     }
 
     @Test
-    fun benchmarkSequentialModules() {
-        val sentinelInstance = createSentinel {
+    fun benchmarkInspectHookOnly() {
+        val sentinel = createSentinel { hook() }
+
+        benchmarkRule.measureRepeated {
+            runBlocking {
+                sentinel.inspect()
+            }
+        }
+    }
+
+    @Test
+    fun benchmarkInspectEmulatorOnly() {
+        val sentinel = createSentinel { emulator() }
+
+        benchmarkRule.measureRepeated {
+            runBlocking {
+                sentinel.inspect()
+            }
+        }
+    }
+
+    @Test
+    fun benchmarkInspectDebugOnly() {
+        val sentinel = createSentinel { debug() }
+
+        benchmarkRule.measureRepeated {
+            runBlocking {
+                sentinel.inspect()
+            }
+        }
+    }
+
+    @Test
+    fun benchmarkInspectLocationOnly() {
+        val sentinel = createSentinel { location() }
+
+        benchmarkRule.measureRepeated {
+            runBlocking {
+                sentinel.inspect()
+            }
+        }
+    }
+
+    @Test
+    fun benchmarkInspectAllModules() {
+        val sentinel = createSentinel { all() }
+
+        benchmarkRule.measureRepeated {
+            runBlocking {
+                sentinel.inspect()
+            }
+        }
+    }
+
+    @Test
+    fun benchmarkInspectSequentialModules() {
+        val sentinel = createSentinel {
             root()
             tamper()
             hook()
@@ -108,16 +128,280 @@ class SentinelBenchmark {
 
         benchmarkRule.measureRepeated {
             runBlocking {
-                sentinelInstance.inspect()
+                sentinel.inspect()
+            }
+        }
+    }
+
+    // COLD START BENCHMARKS
+
+    @Test
+    fun benchmarkColdStartRoot() {
+        benchmarkRule.measureRepeated {
+            runBlocking {
+                val sentinel = createSentinel { root() }
+                sentinel.inspect()
             }
         }
     }
 
     @Test
-    fun benchmarkMemoryAllocation() {
+    fun benchmarkColdStartTamper() {
         benchmarkRule.measureRepeated {
             runBlocking {
-                createSentinel { all() }.inspect()
+                val sentinel = createSentinel { tamper() }
+                sentinel.inspect()
+            }
+        }
+    }
+
+    @Test
+    fun benchmarkColdStartHook() {
+        benchmarkRule.measureRepeated {
+            runBlocking {
+                val sentinel = createSentinel { hook() }
+                sentinel.inspect()
+            }
+        }
+    }
+
+    @Test
+    fun benchmarkColdStartEmulator() {
+        benchmarkRule.measureRepeated {
+            runBlocking {
+                val sentinel = createSentinel { emulator() }
+                sentinel.inspect()
+            }
+        }
+    }
+
+    @Test
+    fun benchmarkColdStartDebug() {
+        benchmarkRule.measureRepeated {
+            runBlocking {
+                val sentinel = createSentinel { debug() }
+                sentinel.inspect()
+            }
+        }
+    }
+
+    @Test
+    fun benchmarkColdStartLocation() {
+        benchmarkRule.measureRepeated {
+            runBlocking {
+                val sentinel = createSentinel { location() }
+                sentinel.inspect()
+            }
+        }
+    }
+
+    @Test
+    fun benchmarkColdStartAll() {
+        benchmarkRule.measureRepeated {
+            runBlocking {
+                val sentinel = createSentinel { all() }
+                sentinel.inspect()
+            }
+        }
+    }
+
+    @Test
+    fun benchmarkColdStartSequential() {
+        benchmarkRule.measureRepeated {
+            runBlocking {
+                val sentinel = createSentinel {
+                    root()
+                    tamper()
+                    hook()
+                }
+                sentinel.inspect()
+            }
+        }
+    }
+
+    // INITIALIZATION ONLY BENCHMARKS
+
+    @Test
+    fun benchmarkInitializationRoot() {
+        benchmarkRule.measureRepeated {
+            createSentinel { root() }
+        }
+    }
+
+    @Test
+    fun benchmarkInitializationTamper() {
+        benchmarkRule.measureRepeated {
+            createSentinel { tamper() }
+        }
+    }
+
+    @Test
+    fun benchmarkInitializationHook() {
+        benchmarkRule.measureRepeated {
+            createSentinel { hook() }
+        }
+    }
+
+    @Test
+    fun benchmarkInitializationEmulator() {
+        benchmarkRule.measureRepeated {
+            createSentinel { emulator() }
+        }
+    }
+
+    @Test
+    fun benchmarkInitializationDebug() {
+        benchmarkRule.measureRepeated {
+            createSentinel { debug() }
+        }
+    }
+
+    @Test
+    fun benchmarkInitializationLocation() {
+        benchmarkRule.measureRepeated {
+            createSentinel { location() }
+        }
+    }
+
+    @Test
+    fun benchmarkInitializationAll() {
+        benchmarkRule.measureRepeated {
+            createSentinel { all() }
+        }
+    }
+
+    @Test
+    fun benchmarkInitializationSequential() {
+        benchmarkRule.measureRepeated {
+            createSentinel {
+                root()
+                tamper()
+                hook()
+            }
+        }
+    }
+
+    // WARMUP BENCHMARKS
+
+    @Test
+    fun benchmarkInspectWithManualWarmup() {
+        val sentinel = createSentinel { all() }
+
+        repeat(3) {
+            runBlocking {
+                sentinel.inspect()
+            }
+        }
+
+        benchmarkRule.measureRepeated {
+            runBlocking {
+                sentinel.inspect()
+            }
+        }
+    }
+
+    // MEMORY PRESSURE BENCHMARKS
+
+    @Test
+    fun benchmarkMemoryAllocationSingle() {
+        benchmarkRule.measureRepeated {
+            runBlocking {
+                val sentinel = createSentinel { all() }
+                sentinel.inspect()
+            }
+        }
+    }
+
+    @Test
+    fun benchmarkMemoryAllocationMultiple() {
+        benchmarkRule.measureRepeated {
+            runBlocking {
+                val instances = mutableListOf<Sentinel>()
+
+                repeat(5) {
+                    instances.add(createSentinel { all() })
+                }
+
+                instances.forEach { it.inspect() }
+
+                instances.clear()
+            }
+        }
+    }
+
+    @Test
+    fun benchmarkMemoryPressureHeavy() {
+        benchmarkRule.measureRepeated {
+            runBlocking {
+                val instances = mutableListOf<Sentinel>()
+
+                repeat(10) { i ->
+                    instances.add(
+                        when (i % 6) {
+                            0 -> createSentinel { root() }
+                            1 -> createSentinel { tamper() }
+                            2 -> createSentinel { hook() }
+                            3 -> createSentinel { emulator() }
+                            4 -> createSentinel { debug() }
+                            else -> createSentinel { location() }
+                        }
+                    )
+                }
+
+                instances.forEach { it.inspect() }
+
+                instances.clear()
+            }
+        }
+    }
+
+    // REUSE BENCHMARKS
+
+    @Test
+    fun benchmarkReuseInstance() {
+        val sentinel = createSentinel { all() }
+
+        benchmarkRule.measureRepeated {
+            runBlocking {
+                repeat(10) {
+                    sentinel.inspect()
+                }
+            }
+        }
+    }
+
+    @Test
+    fun benchmarkReuseSingleInspect() {
+        val sentinel = createSentinel { all() }
+
+        benchmarkRule.measureRepeated {
+            runBlocking {
+                sentinel.inspect()
+            }
+        }
+    }
+
+    // EDGE CASE BENCHMARKS
+
+    @Test
+    fun benchmarkEmptyConfiguration() {
+        benchmarkRule.measureRepeated {
+            runBlocking {
+                val sentinel = createSentinel { }
+                sentinel.inspect()
+            }
+        }
+    }
+
+    @Test
+    fun benchmarkAllModulesConcurrent() {
+        val sentinel = createSentinel { all() }
+
+        benchmarkRule.measureRepeated {
+            runBlocking {
+                sentinel.inspect()
+                sentinel.inspect()
+                sentinel.inspect()
             }
         }
     }
