@@ -8,6 +8,11 @@
 #include <unistd.h>
 #include <vector>
 
+static jclass g_pm_class = nullptr;
+static jclass g_context_class = nullptr;
+static jmethodID g_getPackageManagerID = nullptr;
+static jmethodID g_getPackageInfoID = nullptr;
+
 static JavaVM *g_vm = nullptr;
 static jobject g_detector_obj = nullptr;
 static jmethodID g_callback_method = nullptr;
@@ -78,34 +83,34 @@ bool internal_check_mounts() {
 }
 
 bool internal_check_su_command() {
-  if (access("/system/bin/su", F_OK) == 0)
-    return true;
-  if (access("/system/xbin/su", F_OK) == 0)
-    return true;
+  const char* su_paths[] = {"/system/bin/su",
+                            "/system/xbin/su",
+                            "/sbin/su"};
 
-  FILE *pipe = popen("which su", "r");
-  if (!pipe)
-    return false;
-
-  char buf[128];
-  bool found = fgets(buf, sizeof(buf), pipe) != nullptr;
-  pclose(pipe);
-
-  return found;
+  for (const char* path : su_paths) {
+    if (access(path, F_OK) == 0) return true;
+  }
+  return false;
 }
 
 bool internal_check_apps(JNIEnv *env, jobject context) {
-  jclass contextClass = env->GetObjectClass(context);
-  jmethodID getPackageManager = env->GetMethodID(contextClass, "getPackageManager","()Landroid/content/pm/PackageManager;");
-  jobject packageManager = env->CallObjectMethod(context, getPackageManager);
+  if (context == nullptr || g_getPackageManagerID == nullptr || g_getPackageInfoID == nullptr) {
+    return JNI_FALSE;
+  }
 
-  jclass pmClass = env->GetObjectClass(packageManager);
-  jmethodID getPackageInfo = env->GetMethodID(pmClass, "getPackageInfo","(Ljava/lang/String;I)Landroid/content/pm/PackageInfo;");
+  jobject packageManager =env->CallObjectMethod(context, g_getPackageManagerID);
 
-  for (auto &pkgName : ROOT_PACKAGES) {
+  if (env->ExceptionCheck() || !packageManager) {
+    env->ExceptionClear();
+    return JNI_FALSE;
+  }
+
+  bool found = false;
+
+  for (const char *pkgName : ROOT_PACKAGES) {
     jstring jPkg = env->NewStringUTF(pkgName);
+    jobject pkgInfo =env->CallObjectMethod(packageManager, g_getPackageInfoID, jPkg, 0);
 
-    jobject pkgInfo = env->CallObjectMethod(packageManager, getPackageInfo, jPkg, 0);
     if (env->ExceptionCheck()) {
       env->ExceptionClear();
       pkgInfo = nullptr;
@@ -113,11 +118,16 @@ bool internal_check_apps(JNIEnv *env, jobject context) {
 
     env->DeleteLocalRef(jPkg);
 
-    if (pkgInfo != nullptr)
-      return JNI_TRUE;
+    if (pkgInfo != nullptr) {
+      env->DeleteLocalRef(pkgInfo);
+      found = true;
+      break;
+    }
   }
 
-  return JNI_FALSE;
+  env->DeleteLocalRef(packageManager);
+
+  return found ? JNI_TRUE : JNI_FALSE;
 }
 
 void report_root_violation() {
@@ -144,8 +154,7 @@ void *integrity_monitor(void *arg) {
     bool current_violation = false;
     const char *reason = nullptr;
 
-    if (internal_check_binaries() || internal_check_mounts() ||
-        internal_check_su_command()) {
+    if (internal_check_binaries() || internal_check_mounts() || internal_check_su_command()) {
       current_violation = true;
     }
 
@@ -195,6 +204,20 @@ JNIEXPORT jboolean JNICALL Java_sentinel_kit_detector_RootDetector_checkApps(JNI
 
 JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm, void *reserved) {
   g_vm = vm;
+  JNIEnv *env;
+  if (vm->GetEnv((void **)&env, JNI_VERSION_1_6) != JNI_OK) return JNI_ERR;
+
+  jclass localContextClass = env->FindClass("android/content/Context");
+  g_context_class = (jclass)env->NewGlobalRef(localContextClass);
+  g_getPackageManagerID = env->GetMethodID(g_context_class, "getPackageManager", "()Landroid/content/pm/PackageManager;");
+
+  jclass localPmClass = env->FindClass("android/content/pm/PackageManager");
+  g_pm_class = (jclass)env->NewGlobalRef(localPmClass);
+  g_getPackageInfoID = env->GetMethodID(g_pm_class, "getPackageInfo", "(Ljava/lang/String;I)Landroid/content/pm/PackageInfo;");
+
+  env->DeleteLocalRef(localContextClass);
+  env->DeleteLocalRef(localPmClass);
+
   return JNI_VERSION_1_6;
 }
 }
