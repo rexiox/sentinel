@@ -1,3 +1,4 @@
+#include "sentinel-obfuscate.hpp"
 #include <fstream>
 #include <jni.h>
 #include <pthread.h>
@@ -10,14 +11,6 @@ static jobject g_detector_obj = nullptr;
 static jmethodID g_callback_method = nullptr;
 static bool g_last_memory_violation = false;
 static bool g_last_stack_violation = false;
-
-const std::vector<std::string> HOOK_PACKAGES = {
-    "de.robv.android.xposed",
-    "com.topjohnwu.lsposed",
-    "org.meowcat.edxposed.manager",
-    "com.saurik.substrate",
-    "com.devadvance.rootcloak",
-    "com.devadvance.rootcloakplus"};
 
 void sentinel_report_violation() {
   if (g_vm && g_detector_obj && g_callback_method) {
@@ -79,7 +72,10 @@ bool internal_check_stack_trace(JNIEnv *env) {
     std::string className(classNameCStr);
 
     for (const auto &hookPkg : HOOK_PACKAGES) {
-      if (className.find(hookPkg) != std::string::npos) {
+      if (hookPkg == nullptr)
+        return false;
+
+      if (className.find(transform(hookPkg)) != std::string::npos) {
         env->ReleaseStringUTFChars(classNameObj, classNameCStr);
         env->DeleteLocalRef(element);
         return true;

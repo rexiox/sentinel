@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.dev.mokkery)
     alias(libs.plugins.sentinel.publish)
+    alias(libs.plugins.sentinel.obfuscate)
 }
 
 group = Config.Publishing.GROUP_ID
@@ -98,4 +99,8 @@ android {
 extensions.configure<MokkeryGradleExtension> {
     stubs.allowConcreteClassInstantiation.set(true)
     stubs.allowClassInheritance.set(true)
+}
+
+tasks.register("obfuscate") {
+    dependsOn("generateObfuscated")
 }

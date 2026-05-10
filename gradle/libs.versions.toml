@@ -77,4 +77,5 @@ android-fusedlibrary = { id = "com.android.fused-library", version.ref = "agp" }
 kotlinx-binary-compatibility-validator = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version.ref = "binaryCompatibilityValidator" }
 dev-mokkery = { id = "dev.mokkery", version.ref = "mokkery" }
 sentinel-publish = { id = "sentinel-publish" }
+sentinel-obfuscate = { id = "sentinel-obfuscate" }
 androidx-benchmark-darwin = { id = "androidx.benchmark.darwin", version.ref = "androidxBenchmarkDarwin" }

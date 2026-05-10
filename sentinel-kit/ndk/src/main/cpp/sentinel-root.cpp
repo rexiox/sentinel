@@ -1,3 +1,4 @@
+#include "sentinel-obfuscate.hpp"
 #include <cstdio>
 #include <cstdlib>
 #include <fcntl.h>
@@ -19,34 +20,6 @@ static jmethodID g_callback_method = nullptr;
 static bool g_violation_reported = false;
 static pthread_mutex_t g_mutex = PTHREAD_MUTEX_INITIALIZER;
 
-const std::vector<std::string> ROOT_BINARIES = {"/system/bin/su",
-                                                "/system/xbin/su",
-                                                "/sbin/su",
-                                                "/data/local/xbin/su",
-                                                "/data/local/bin/su",
-                                                "/system/sd/xbin/su",
-                                                "/system/bin/failsafe/su",
-                                                "/data/adb/magisk",
-                                                "/data/adb/ksu",
-                                                "/data/adb/ap",
-                                                "/data/adb/magisk.db"};
-
-const char *ROOT_PACKAGES[] = {"com.noshufou.android.su",
-                               "eu.chainfire.supersu",
-                               "com.koushikdutta.superuser",
-                               "com.thirdparty.superuser",
-                               "com.yellowes.su",
-                               "com.topjohnwu.magisk",
-                               "com.kingroot.kinguser",
-                               "com.zhiqupk.root.global"};
-
-const std::vector<std::string> SUSPICIOUS_MOUNTS = {
-    "magisk",
-    "core/img",
-    "mirror",
-    "history",
-    "init.magisk"};
-
 void set_violation_status(bool status) {
   pthread_mutex_lock(&g_mutex);
   g_violation_reported = status;
@@ -56,7 +29,7 @@ void set_violation_status(bool status) {
 bool internal_check_binaries() {
   struct stat buffer{};
   for (const auto &path : ROOT_BINARIES) {
-    if (stat(path.c_str(), &buffer) == 0)
+    if (stat(transform(path).c_str(), &buffer) == 0)
       return true;
   }
 
@@ -74,8 +47,11 @@ bool internal_check_mounts() {
     return false;
   buf[n] = '\0';
   std::string mounts(buf);
-  for (const auto &mnt : SUSPICIOUS_MOUNTS) {
-    if (mounts.find(mnt) != std::string::npos)
+  for (const auto &mnt : ROOT_SUSPICIOUS_MOUNTS) {
+    if (mnt == nullptr)
+      return false;
+
+    if (mounts.find(transform(mnt)) != std::string::npos)
       return true;
   }
 
@@ -83,12 +59,9 @@ bool internal_check_mounts() {
 }
 
 bool internal_check_su_command() {
-  const char* su_paths[] = {"/system/bin/su",
-                            "/system/xbin/su",
-                            "/sbin/su"};
-
-  for (const char* path : su_paths) {
-    if (access(path, F_OK) == 0) return true;
+  for (const char *path : ROOT_SU_PATHS) {
+    if (access(transform(path).c_str(), F_OK) == 0)
+      return true;
   }
   return false;
 }
@@ -108,7 +81,7 @@ bool internal_check_apps(JNIEnv *env, jobject context) {
   bool found = false;
 
   for (const char *pkgName : ROOT_PACKAGES) {
-    jstring jPkg = env->NewStringUTF(pkgName);
+    jstring jPkg = env->NewStringUTF(transform(pkgName).c_str());
     jobject pkgInfo =env->CallObjectMethod(packageManager, g_getPackageInfoID, jPkg, 0);
 
     if (env->ExceptionCheck()) {
