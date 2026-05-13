@@ -41,6 +41,7 @@ provides real-time, on-device threat detection with minimal performance overhead
     <tr>
       <th align="center" style="padding: 10px;">Android</th>
       <th align="center" style="padding: 10px;">iOS</th>
+      <th align="center" style="padding: 10px;"></th>
     </tr>
   </thead>
   <tbody>
@@ -50,6 +51,9 @@ provides real-time, on-device threat detection with minimal performance overhead
       </td>
       <td align="center" style="padding: 5px;">
         <img src=".github/art/iOS.gif" width="240" alt="iOS Demo">
+      </td>
+      <td align="center" style="padding: 5px;">
+        <img src=".github/art/sentinel-monitor.gif" width="240" alt="iOS Demo">
       </td>
     </tr>
     <tr>
@@ -61,6 +65,11 @@ provides real-time, on-device threat detection with minimal performance overhead
       <td align="center" style="padding: 10px;">
         <a href="https://apps.apple.com/us/app/">
           <img src=".github/art/app-store-badge.svg" height="40" alt="App Store">
+        </a>
+      </td>
+      <td align="center" style="padding: 10px;">
+        <a href=".github/release/">
+          <img src=".github/art/github-badge.png" height="40" alt="GitHub">
         </a>
       </td>
     </tr>
