@@ -114,7 +114,7 @@ Java_sentinel_kit_detector_EmulatorDetector_getEmulatorDetectionReason(JNIEnv *e
 
   reason += checkPipesAndFiles();
   reason += checkEmulatorProperties();
-  reason += checkCpuInfo();
+  // reason += checkCpuInfo();
   reason += checkExtraApps();
 
   if (reason.empty()) return nullptr;
