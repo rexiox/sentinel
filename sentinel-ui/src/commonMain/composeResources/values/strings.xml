@@ -8,8 +8,11 @@
     <string name="app_hash">Hash</string>
 
     <string name="nav_bar_dashboard_item">Dashboard</string>
-    <string name="nav_bar_monitor_item">Monitor</string>
+    <string name="nav_bar_scan_item">Scan</string>
     <string name="nav_bar_about_item">About</string>
+
+    <string name="scan_text">SCAN</string>
+    <string name="sentinel_monitor_text">Monitor</string>
 
     <string name="security_status_safe">Device Secure</string>
     <string name="security_status_risky">Security Breach!</string>
@@ -18,6 +21,7 @@
     <string name="security_desc_risky">Unauthorized access or tampering detected.</string>
 
     <string name="risk_level">Risk Level</string>
+    <string name="threshold">Threshold</string>
     <string name="severity">Severity</string>
     <string name="total_severity">Total Violation Severity</string>
     <string name="detectors">Detectors</string>
@@ -44,4 +48,14 @@
     <string name="about_license_label">License</string>
     <string name="about_license_url_text">MIT License</string>
     <string name="about_license_url">https://github.com/rexiox/sentinel/blob/main/LICENSE</string>
+
+    <string name="info_device_integrity_title">Device Integrity</string>
+    <string name="info_tamper_title">Tampered</string>
+    <string name="info_hook_title">Hooked</string>
+    <string name="info_emulator_and_simulator_title">Emulator / Simulator</string>
+    <string name="info_debugger_title">Debugged</string>
+
+    <string name="safe_text">SAFE</string>
+    <string name="detected_text">DETECTED</string>
+
 </resources>

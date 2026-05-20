@@ -12,7 +12,15 @@ fun RiskLevel.getLevelColor(): Color = when (this) {
     RiskLevel.HIGH -> Color(0xFFEA1B22)
 }
 
-fun RiskLevel.getLogoColorFilter(): ColorFilter? = when (this) {
+fun RiskLevel?.getWaveColor(): Color = when (this) {
+    RiskLevel.SAFE -> Color(0x654CAF50)
+    RiskLevel.LOW -> Color(0x51FFC107)
+    RiskLevel.MEDIUM -> Color(0x56FF9800)
+    RiskLevel.HIGH -> Color(0x63EA1B22)
+    null -> Color(0xFF4C4C4C)
+}.copy(alpha = 1f)
+
+fun RiskLevel?.getLogoColorFilter(): ColorFilter? = when (this) {
     RiskLevel.SAFE -> ColorFilter.colorMatrix(
         ColorMatrix(
             values = floatArrayOf(
@@ -47,4 +55,15 @@ fun RiskLevel.getLogoColorFilter(): ColorFilter? = when (this) {
     )
 
     RiskLevel.HIGH -> null
+
+    else -> ColorFilter.colorMatrix(
+        ColorMatrix(
+            values = floatArrayOf(
+                0.2126f, 0.7152f, 0.0722f, 0f, 0f,
+                0.2126f, 0.7152f, 0.0722f, 0f, 0f,
+                0.2126f, 0.7152f, 0.0722f, 0f, 0f,
+                0f, 0f, 0f, 1f, 0f
+            )
+        )
+    )
 }

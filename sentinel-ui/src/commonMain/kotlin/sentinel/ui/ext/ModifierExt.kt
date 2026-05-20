@@ -18,7 +18,7 @@ fun Modifier.sentinelGradientBackground(riskLevel: RiskLevel?): Modifier {
         drawRect(
             brush = Brush.radialGradient(
                 colors = listOf(
-                    baseColor.copy(alpha = 0.4f),
+                    baseColor.copy(alpha = 0.7f),
                     Color.Transparent
                 ),
                 center = Offset(
@@ -32,7 +32,7 @@ fun Modifier.sentinelGradientBackground(riskLevel: RiskLevel?): Modifier {
         drawRect(
             brush = Brush.radialGradient(
                 colors = listOf(
-                    baseColor.copy(alpha = 0.3f),
+                    baseColor.copy(alpha = 0.4f),
                     Color.Transparent
                 ),
                 center = Offset(
@@ -41,6 +41,40 @@ fun Modifier.sentinelGradientBackground(riskLevel: RiskLevel?): Modifier {
                 ),
                 radius = size.width * 0.8f
             )
+        )
+    }
+}
+
+fun RiskLevel?.getGradientColors(): List<Color> = when (this) {
+    RiskLevel.SAFE -> listOf(
+        Color(0xFF0F9015),
+        Color(0xFF0A6110),
+        Color(0xFF0D2B0F)
+    )
+
+    RiskLevel.LOW -> listOf(
+        Color(0xFFA57C02),
+        Color(0xFF68500A),
+        Color(0xFF2B2000)
+    )
+
+    RiskLevel.MEDIUM -> listOf(
+        Color(0xFF935C0B),
+        Color(0xFF864F01),
+        Color(0xFF331E00)
+    )
+
+    RiskLevel.HIGH -> listOf(
+        Color(0xFF8C1014),
+        Color(0xFF6A0D12),
+        Color(0xFF7D0A0E)
+    )
+
+    else -> {
+        listOf(
+            Color(0xFF131313),
+            Color(0xFF111111),
+            Color(0xFF000000)
         )
     }
 }

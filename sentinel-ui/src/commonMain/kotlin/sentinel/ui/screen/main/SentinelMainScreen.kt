@@ -14,6 +14,7 @@ import sentinel.ui.component.SentinelNavigationBar
 import sentinel.ui.screen.about.SentinelAboutScreen
 import sentinel.ui.screen.dashboard.SentinelDashboardScreen
 import sentinel.ui.screen.main.tab.SentinelTab
+import sentinel.ui.screen.scan.SentinelScanScreen
 
 @Composable
 fun SentinelMainScreen(
@@ -24,7 +25,7 @@ fun SentinelMainScreen(
     appIntegrity: String,
     onMonitorStart: () -> Unit,
 ) {
-    var selectedTab by remember { mutableStateOf(SentinelTab.Dashboard) }
+    var selectedTab by remember { mutableStateOf(SentinelTab.Scan) }
     val onTabSelected = remember { { tab: SentinelTab -> selectedTab = tab } }
 
     Scaffold(
@@ -41,16 +42,18 @@ fun SentinelMainScreen(
             modifier = Modifier.fillMaxSize()
         ) {
             when (selectedTab) {
-                SentinelTab.Dashboard,
-                SentinelTab.Monitor -> {
-                    if (selectedTab == SentinelTab.Monitor) {
-                        onMonitorStart()
-                    }
-
+                SentinelTab.Dashboard -> {
                     SentinelDashboardScreen(
                         sentinel = sentinel,
                         appId = appId,
                         appIntegrity = appIntegrity,
+                    )
+                }
+
+                SentinelTab.Scan -> {
+                    SentinelScanScreen(
+                        sentinel = sentinel,
+                        onMonitorStart = onMonitorStart
                     )
                 }
 

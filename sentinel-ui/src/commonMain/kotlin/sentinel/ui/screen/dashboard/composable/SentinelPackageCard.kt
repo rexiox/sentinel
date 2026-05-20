@@ -1,12 +1,10 @@
 package sentinel.ui.screen.dashboard.composable
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -18,11 +16,8 @@ import androidx.compose.ui.unit.dp
 import co.rexiox.sentinel.ui.resources.Res
 import co.rexiox.sentinel.ui.resources.app_id
 import co.rexiox.sentinel.ui.resources.app_signature
-import co.rexiox.sentinel.ui.resources.ic_sentinel_launcher
-import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import sentinel.core.type.RiskLevel
-import sentinel.ui.ext.getLogoColorFilter
 
 @Composable
 internal fun SentinelPackageCard(
@@ -50,14 +45,9 @@ internal fun SentinelPackageCard(
                 .padding(all = 20.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Image(
-                modifier = Modifier
-                    .padding(top = 32.dp)
-                    .size(size = 64.dp),
-                painter = painterResource(resource = Res.drawable.ic_sentinel_launcher),
-                colorFilter = riskLevel.getLogoColorFilter(),
-                contentDescription = "logo"
-            )
+            Spacer(modifier = Modifier.height(height = 16.dp))
+
+            SentinelLogo(riskLevel = riskLevel)
 
             Spacer(modifier = Modifier.height(height = 16.dp))
 

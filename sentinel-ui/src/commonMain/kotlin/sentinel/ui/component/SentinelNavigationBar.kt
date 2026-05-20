@@ -50,10 +50,10 @@ import androidx.compose.ui.unit.dp
 import co.rexiox.sentinel.ui.resources.Res
 import co.rexiox.sentinel.ui.resources.ic_nav_bar_about
 import co.rexiox.sentinel.ui.resources.ic_nav_bar_home
-import co.rexiox.sentinel.ui.resources.ic_nav_bar_monitor
+import co.rexiox.sentinel.ui.resources.ic_nav_bar_scan
 import co.rexiox.sentinel.ui.resources.nav_bar_about_item
 import co.rexiox.sentinel.ui.resources.nav_bar_dashboard_item
-import co.rexiox.sentinel.ui.resources.nav_bar_monitor_item
+import co.rexiox.sentinel.ui.resources.nav_bar_scan_item
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
 import sentinel.ui.screen.main.tab.SentinelTab
@@ -92,7 +92,7 @@ internal fun SentinelNavigationBar(
                     edgeTreatment = BlurredEdgeTreatment.Unbounded
                 )
                 .background(
-                    color = Color.Black.copy(alpha = 0.9f),
+                    color = Color.Black.copy(alpha = 0.1f),
                     shape = CircleShape
                 )
         )
@@ -104,8 +104,8 @@ internal fun SentinelNavigationBar(
                 .background(
                     brush = Brush.verticalGradient(
                         colors = listOf(
-                            Color.White.copy(alpha = 0.08f),
-                            Color.White.copy(alpha = 0.03f)
+                            Color.Black.copy(alpha = 0.08f),
+                            Color.Black.copy(alpha = 0.03f)
                         )
                     ),
                     shape = CircleShape
@@ -197,8 +197,8 @@ internal fun SentinelNavigationBar(
                                 vectorResource(resource = Res.drawable.ic_nav_bar_home)
                             }
 
-                            SentinelTab.Monitor -> {
-                                vectorResource(resource = Res.drawable.ic_nav_bar_monitor)
+                            SentinelTab.Scan -> {
+                                vectorResource(resource = Res.drawable.ic_nav_bar_scan)
                             }
 
                             else -> {
@@ -207,7 +207,7 @@ internal fun SentinelNavigationBar(
                         },
                         label = when (tab) {
                             SentinelTab.Dashboard -> stringResource(resource = Res.string.nav_bar_dashboard_item)
-                            SentinelTab.Monitor -> stringResource(resource = Res.string.nav_bar_monitor_item)
+                            SentinelTab.Scan -> stringResource(resource = Res.string.nav_bar_scan_item)
                             SentinelTab.About -> stringResource(resource = Res.string.nav_bar_about_item)
                         },
                         onClick = {
@@ -230,7 +230,7 @@ private fun SentinelNavigationBarItem(
 ) {
     val contentColor by animateColorAsState(
         targetValue = if (selected) {
-            MaterialTheme.colorScheme.primary
+            Color.White
         } else {
             Color.White.copy(alpha = 0.5f)
         },
