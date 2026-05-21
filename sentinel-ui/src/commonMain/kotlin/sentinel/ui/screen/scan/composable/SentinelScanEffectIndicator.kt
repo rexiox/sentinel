@@ -21,7 +21,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
@@ -29,8 +28,10 @@ import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import sentinel.core.type.RiskLevel
 import sentinel.ui.component.SentinelCard
 import sentinel.ui.component.SentinelChip
+import sentinel.ui.ext.getWaveColor
 import sentinel.ui.screen.scan.model.ScanDetectionResult
 import kotlin.math.PI
 import kotlin.math.cos
@@ -39,6 +40,7 @@ import kotlin.math.sin
 @Composable
 internal fun SentinelScanEffectIndicator(
     modifier: Modifier = Modifier,
+    riskLevel: RiskLevel?,
     results: List<ScanDetectionResult>,
     showResults: Boolean = false,
     rippleCount: Int = 6,
@@ -68,7 +70,7 @@ internal fun SentinelScanEffectIndicator(
                     val scale = remember { Animatable(0f) }
                     val alphaAnim = remember { Animatable(0f) }
 
-                    LaunchedEffect(showResults) {
+                    LaunchedEffect(result.type) {
                         delay(timeMillis = (100..300).random().toLong())
 
                         launch {
@@ -80,6 +82,7 @@ internal fun SentinelScanEffectIndicator(
                                 )
                             )
                         }
+
                         launch {
                             alphaAnim.animateTo(
                                 targetValue = 1f,
@@ -119,7 +122,7 @@ internal fun SentinelScanEffectIndicator(
                                 modifier = Modifier
                                     .size(size = 8.dp)
                                     .background(
-                                        color = Color.Red.copy(alpha = 0.3f),
+                                        color = riskLevel.getWaveColor().copy(alpha = 0.3f),
                                         shape = CircleShape
                                     )
                             )

@@ -57,14 +57,14 @@ internal fun SentinelScanScreen(
         }
     }
 
-    fun updateDetectionsFromReport(currentReport: SecurityReport?) {
-        currentReport ?: return
+    fun updateDetectionsFromReport(report: SecurityReport?) {
+        report ?: return
 
         scanDetectionResults.clear()
 
-        if (currentReport.isCompromised) {
+        if (report.isCompromised) {
             addDetectionIfNotExist(
-                type = if (currentReport.isRooted) {
+                type = if (report.isRooted) {
                     ScanDetectionType.ROOT
                 } else {
                     ScanDetectionType.JAILBREAK
@@ -73,23 +73,23 @@ internal fun SentinelScanScreen(
             )
         }
 
-        if (currentReport.isTampered) {
+        if (report.isTampered) {
             addDetectionIfNotExist(
                 type = ScanDetectionType.TAMPER,
                 position = Offset(0.4f, 145f)
             )
         }
 
-        if (currentReport.isHooked) {
+        if (report.isHooked) {
             addDetectionIfNotExist(
                 type = ScanDetectionType.HOOK,
                 position = Offset(1.75f, 250f)
             )
         }
 
-        if (currentReport.isEmulator || currentReport.isSimulator) {
+        if (report.isEmulator || report.isSimulator) {
             addDetectionIfNotExist(
-                type = if (currentReport.isEmulator) {
+                type = if (report.isEmulator) {
                     ScanDetectionType.EMULATOR
                 } else {
                     ScanDetectionType.SIMULATOR
@@ -98,7 +98,7 @@ internal fun SentinelScanScreen(
             )
         }
 
-        if (currentReport.isDebugged) {
+        if (report.isDebugged) {
             addDetectionIfNotExist(
                 type = ScanDetectionType.DEBUGGER,
                 position = Offset(3.0f, 275f)
@@ -108,7 +108,7 @@ internal fun SentinelScanScreen(
 
     val refreshReport: suspend () -> Unit = {
         report = sentinel.inspect()
-        updateDetectionsFromReport(report)
+        updateDetectionsFromReport(report = report)
     }
 
     LaunchedEffect(Unit) {
@@ -210,6 +210,7 @@ internal fun SentinelScanScreen(
 
         SentinelScanEffectIndicator(
             results = scanDetectionResults,
+            riskLevel = report?.riskLevel,
             showResults = showResults
         )
     }
