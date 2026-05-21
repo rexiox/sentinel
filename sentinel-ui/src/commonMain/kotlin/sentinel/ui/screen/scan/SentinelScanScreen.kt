@@ -184,7 +184,7 @@ internal fun SentinelScanScreen(
                     SentinelChip(
                         modifier = Modifier
                             .align(alignment = Alignment.TopEnd)
-                            .padding(vertical = 12.dp),
+                            .padding(vertical = 18.dp),
                         vector = vectorResource(resource = Res.drawable.ic_nav_bar_monitor),
                         onClick = onMonitorStart
                     )
