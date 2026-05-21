@@ -70,7 +70,11 @@ internal fun SentinelScanScreen(
                 scope.launch { refreshReport() }
                 addDetectionIfNotExist(
                     result = ScanDetectionResult(
-                        type = ScanDetectionType.ROOT,
+                        type = if (report?.isRooted == true) {
+                            ScanDetectionType.ROOT
+                        } else {
+                            ScanDetectionType.JAILBREAK
+                        },
                         position = Offset(0.3f, 50f),
                         icon = Icons.Default.Warning,
                     )
@@ -103,7 +107,11 @@ internal fun SentinelScanScreen(
                 scope.launch { refreshReport() }
                 addDetectionIfNotExist(
                     result = ScanDetectionResult(
-                        type = ScanDetectionType.EMULATOR,
+                        type = if (report?.isEmulator == true) {
+                            ScanDetectionType.EMULATOR
+                        } else {
+                            ScanDetectionType.SIMULATOR
+                        },
                         position = Offset(1.4f, 305f),
                         icon = Icons.Default.CheckCircle,
                     )

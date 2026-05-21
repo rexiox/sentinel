@@ -13,7 +13,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.painterResource
 import sentinel.core.type.RiskLevel
-import sentinel.ui.ext.getLogoColorFilter
 import sentinel.ui.ext.getSentinelRiskLogo
 
 @Composable
@@ -33,7 +32,6 @@ internal fun SentinelLogo(
             )
             .clip(shape = shape),
         painter = painterResource(resource = riskLevel.getSentinelRiskLogo()),
-        colorFilter = riskLevel.getLogoColorFilter(),
         contentScale = ContentScale.Crop,
         contentDescription = "logo"
     )
