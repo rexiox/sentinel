@@ -60,8 +60,8 @@ android {
         applicationId = "com.rs.sentinel"
         minSdk = 24
         targetSdk = 36
-        versionCode = 10
-        versionName = "1.8.5-beta"
+        versionCode = 11
+        versionName = "1.8.6-beta"
     }
 
     packaging {
