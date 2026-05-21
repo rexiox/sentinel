@@ -29,7 +29,7 @@ internal fun SentinelPackageCard(
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .padding(top = 24.dp)
+            .padding(top = 32.dp)
             .padding(horizontal = 16.dp),
         shape = RoundedCornerShape(size = 8.dp),
         elevation = CardDefaults.cardElevation(
