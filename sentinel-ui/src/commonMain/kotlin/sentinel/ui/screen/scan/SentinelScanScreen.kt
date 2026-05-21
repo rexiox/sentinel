@@ -5,10 +5,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AddCircle
-import androidx.compose.material.icons.filled.CheckCircle
-import androidx.compose.material.icons.filled.Warning
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -50,88 +46,99 @@ internal fun SentinelScanScreen(
     var showResults by remember { mutableStateOf(false) }
     val scanDetectionResults = remember { mutableStateListOf<ScanDetectionResult>() }
 
-    val refreshReport = suspend {
-        report = sentinel.inspect()
-    }
-
-    fun addDetectionIfNotExist(result: ScanDetectionResult) {
-        if (scanDetectionResults.none { it.type == result.type }) {
-            scanDetectionResults.add(result)
+    fun addDetectionIfNotExist(type: ScanDetectionType, position: Offset) {
+        if (scanDetectionResults.none { it.type == type }) {
+            scanDetectionResults.add(
+                ScanDetectionResult(
+                    type = type,
+                    position = position
+                )
+            )
         }
     }
 
+    fun updateDetectionsFromReport(currentReport: SecurityReport?) {
+        currentReport ?: return
+
+        scanDetectionResults.clear()
+
+        if (currentReport.isCompromised) {
+            addDetectionIfNotExist(
+                type = if (currentReport.isRooted) {
+                    ScanDetectionType.ROOT
+                } else {
+                    ScanDetectionType.JAILBREAK
+                },
+                position = Offset(0.3f, 50f)
+            )
+        }
+
+        if (currentReport.isTampered) {
+            addDetectionIfNotExist(
+                type = ScanDetectionType.TAMPER,
+                position = Offset(0.4f, 145f)
+            )
+        }
+
+        if (currentReport.isHooked) {
+            addDetectionIfNotExist(
+                type = ScanDetectionType.HOOK,
+                position = Offset(1.75f, 250f)
+            )
+        }
+
+        if (currentReport.isEmulator || currentReport.isSimulator) {
+            addDetectionIfNotExist(
+                type = if (currentReport.isEmulator) {
+                    ScanDetectionType.EMULATOR
+                } else {
+                    ScanDetectionType.SIMULATOR
+                },
+                position = Offset(1.4f, 305f)
+            )
+        }
+
+        if (currentReport.isDebugged) {
+            addDetectionIfNotExist(
+                type = ScanDetectionType.DEBUGGER,
+                position = Offset(3.0f, 275f)
+            )
+        }
+    }
+
+    val refreshReport: suspend () -> Unit = {
+        report = sentinel.inspect()
+        updateDetectionsFromReport(report)
+    }
+
     LaunchedEffect(Unit) {
-        delay(3000)
+        delay(timeMillis = 3000)
 
         refreshReport()
 
         sentinel.runtime {
             onCompromised {
                 scope.launch { refreshReport() }
-                addDetectionIfNotExist(
-                    result = ScanDetectionResult(
-                        type = if (report?.isRooted == true) {
-                            ScanDetectionType.ROOT
-                        } else {
-                            ScanDetectionType.JAILBREAK
-                        },
-                        position = Offset(0.3f, 50f),
-                        icon = Icons.Default.Warning,
-                    )
-                )
             }
 
             onTampered {
                 scope.launch { refreshReport() }
-                addDetectionIfNotExist(
-                    result = ScanDetectionResult(
-                        type = ScanDetectionType.TAMPER,
-                        position = Offset(0.4f, 145f),
-                        icon = Icons.Default.CheckCircle,
-                    )
-                )
             }
 
             onHooked {
                 scope.launch { refreshReport() }
-                addDetectionIfNotExist(
-                    result = ScanDetectionResult(
-                        type = ScanDetectionType.HOOK,
-                        position = Offset(1.75f, 250f),
-                        icon = Icons.Default.AddCircle,
-                    )
-                )
             }
 
             onSimulated {
                 scope.launch { refreshReport() }
-                addDetectionIfNotExist(
-                    result = ScanDetectionResult(
-                        type = if (report?.isEmulator == true) {
-                            ScanDetectionType.EMULATOR
-                        } else {
-                            ScanDetectionType.SIMULATOR
-                        },
-                        position = Offset(1.4f, 305f),
-                        icon = Icons.Default.CheckCircle,
-                    )
-                )
             }
 
             onDebugged {
                 scope.launch { refreshReport() }
-                addDetectionIfNotExist(
-                    result = ScanDetectionResult(
-                        type = ScanDetectionType.DEBUGGER,
-                        position = Offset(3.0f, 275f),
-                        icon = Icons.Default.CheckCircle,
-                    )
-                )
             }
 
             onSafe {
                 scope.launch { refreshReport() }
-                scanDetectionResults.clear()
             }
 
             onCritical { _ ->
@@ -153,7 +160,10 @@ internal fun SentinelScanScreen(
                 drawRect(
                     brush = Brush.radialGradient(
                         colors = report?.riskLevel.getGradientColors(),
-                        center = Offset(x = size.width * 0.5f, y = size.height * 0.3f),
+                        center = Offset(
+                            x = size.width * 0.5f,
+                            y = size.height * 0.3f
+                        ),
                         radius = size.maxDimension * 0.8f
                     ),
                 )
