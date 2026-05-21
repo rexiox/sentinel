@@ -37,7 +37,7 @@ internal fun SentinelDetectors(
                 groupName = groupName,
                 severity = groupSeverity,
                 hasDetected = hasDetected,
-                threats = violations.map { Threat(violation = it) },
+                threats = violations.map(::Threat),
                 detectedClasses = detected
             )
         }

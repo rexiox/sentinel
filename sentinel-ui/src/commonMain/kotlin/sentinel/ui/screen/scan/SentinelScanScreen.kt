@@ -82,7 +82,7 @@ internal fun SentinelScanScreen(
                 addDetectionIfNotExist(
                     result = ScanDetectionResult(
                         type = ScanDetectionType.TAMPER,
-                        position = Offset(0.4f, 135f),
+                        position = Offset(0.4f, 145f),
                         icon = Icons.Default.CheckCircle,
                     )
                 )
@@ -145,17 +145,15 @@ internal fun SentinelScanScreen(
                 drawRect(
                     brush = Brush.radialGradient(
                         colors = report?.riskLevel.getGradientColors(),
-                        center = center,
-                        radius = size.maxDimension
+                        center = Offset(x = size.width * 0.5f, y = size.height * 0.3f),
+                        radius = size.maxDimension * 0.8f
                     ),
                 )
             }
     ) {
         SentinelScanEffect(
             modifier = Modifier.fillMaxSize(),
-            isActive = true,
             baseColor = report?.riskLevel.getWaveColor(),
-            maxAlpha = 0.95f,
             content = {
                 Box(
                     modifier = Modifier

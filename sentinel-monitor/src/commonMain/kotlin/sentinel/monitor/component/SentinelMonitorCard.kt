@@ -77,7 +77,7 @@ internal fun SentinelMonitorCard(report: SecurityReport, onClick: () -> Unit) {
 
         HorizontalDivider(
             thickness = 0.5.dp,
-            color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.3f)
+            color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.1f)
         )
     }
 }

@@ -25,6 +25,9 @@ import androidx.compose.ui.unit.dp
 import co.rexiox.sentinel.monitor.resources.Res
 import co.rexiox.sentinel.monitor.resources.analysis_date
 import co.rexiox.sentinel.monitor.resources.detected_threats
+import co.rexiox.sentinel.monitor.resources.device_integrity
+import co.rexiox.sentinel.monitor.resources.integrity_fail
+import co.rexiox.sentinel.monitor.resources.integrity_pass
 import co.rexiox.sentinel.monitor.resources.no_threats_detected
 import co.rexiox.sentinel.monitor.resources.report_number
 import co.rexiox.sentinel.monitor.resources.risk_status
@@ -47,7 +50,7 @@ internal fun SentinelMonitorDetailContent(report: SecurityReport) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(
-                top = 12.dp,
+                top = 8.dp,
                 bottom = 16.dp
             )
             .padding(horizontal = 16.dp)
@@ -59,7 +62,7 @@ internal fun SentinelMonitorDetailContent(report: SecurityReport) {
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.titleMedium,
             color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.75f),
-            fontWeight = FontWeight.SemiBold
+            fontWeight = FontWeight.Medium,
         )
 
         Card(
@@ -70,7 +73,7 @@ internal fun SentinelMonitorDetailContent(report: SecurityReport) {
                 containerColor = statusColor.copy(alpha = 0.1f)
             ),
             border = BorderStroke(
-                width = 1.dp,
+                width = 0.5.dp,
                 color = statusColor.copy(alpha = 0.5f)
             ),
             elevation = CardDefaults.elevatedCardElevation(
@@ -85,10 +88,23 @@ internal fun SentinelMonitorDetailContent(report: SecurityReport) {
                     label = stringResource(resource = Res.string.report_number),
                     value = "#${report.hashCode()}",
                 )
+
                 SentinelMonitorDetailItem(
                     label = stringResource(resource = Res.string.analysis_date),
                     value = report.timestamp.formatTimestamp()
                 )
+
+                SentinelMonitorDetailItem(
+                    label = stringResource(resource = Res.string.device_integrity),
+                    value = stringResource(
+                        resource = if (report.isCompromised) {
+                            Res.string.integrity_fail
+                        } else {
+                            Res.string.integrity_pass
+                        }
+                    )
+                )
+
                 SentinelMonitorDetailItem(
                     label = stringResource(resource = Res.string.risk_status),
                     value = report.riskLevel.name,
@@ -107,7 +123,7 @@ internal fun SentinelMonitorDetailContent(report: SecurityReport) {
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.titleMedium,
             color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.75f),
-            fontWeight = FontWeight.SemiBold,
+            fontWeight = FontWeight.Medium,
         )
 
         if (report.threats.isEmpty()) {

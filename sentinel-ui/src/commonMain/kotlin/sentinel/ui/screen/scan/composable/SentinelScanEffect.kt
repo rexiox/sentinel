@@ -23,17 +23,17 @@ internal fun SentinelScanEffect(
     isActive: Boolean = true,
     baseColor: Color = Color(0xFF393939),
     rippleCount: Int = 6,
-    maxAlpha: Float = 0.6f,
+    maxAlpha: Float = 1f,
     animationDuration: Int = 2000,
     content: @Composable (() -> Unit)? = null,
 ) {
-    val alphaStates = remember { List(size = rippleCount) { Animatable(initialValue = 0.1f) } }
+    val alphaStates = remember { List(size = rippleCount) { Animatable(initialValue = 0.2f) } }
 
     LaunchedEffect(isActive) {
         if (isActive) {
             alphaStates.forEachIndexed { index, anim ->
                 launch {
-                    delay(index * 300L)
+                    delay(index * 200L)
 
                     while (isActive) {
                         anim.animateTo(
@@ -44,7 +44,7 @@ internal fun SentinelScanEffect(
                             )
                         )
                         anim.animateTo(
-                            targetValue = 0.1f,
+                            targetValue = 0.2f,
                             animationSpec = tween(
                                 durationMillis = animationDuration / 2,
                                 easing = LinearEasing
@@ -77,7 +77,7 @@ internal fun SentinelScanEffect(
                         color = baseColor.copy(alpha = currentAlpha),
                         radius = radius,
                         center = center,
-                        style = Stroke(width = 1.5f)
+                        style = Stroke(width = 2f)
                     )
                 }
             }

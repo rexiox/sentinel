@@ -1,10 +1,8 @@
 package sentinel.ui.screen.dashboard.composable
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -17,8 +15,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -35,15 +31,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import sentinel.core.violation.SecurityViolation
-import sentinel.core.detector.Threat
-import org.jetbrains.compose.resources.painterResource
-import org.jetbrains.compose.resources.stringResource
 import co.rexiox.sentinel.ui.resources.Res
 import co.rexiox.sentinel.ui.resources.ic_circle_check
 import co.rexiox.sentinel.ui.resources.ic_circle_error
 import co.rexiox.sentinel.ui.resources.severity
 import co.rexiox.sentinel.ui.resources.total_severity
+import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
+import sentinel.core.detector.Threat
+import sentinel.core.violation.SecurityViolation
+import sentinel.ui.component.SentinelCard
 import kotlin.reflect.KClass
 
 @Composable
@@ -56,7 +53,7 @@ internal fun SentinelDetectCard(
 ) {
     var expanded by remember { mutableStateOf(false) }
 
-    Card(
+    SentinelCard(
         modifier = Modifier
             .fillMaxWidth()
             .padding(
@@ -64,84 +61,71 @@ internal fun SentinelDetectCard(
                 vertical = 8.dp
             )
             .clickable { expanded = !expanded },
-        shape = RoundedCornerShape(
-            size = 8.dp
-        ),
-        elevation = CardDefaults.cardElevation(
-            defaultElevation = 0.dp
-        ),
-        colors = CardDefaults.cardColors(
-            containerColor = Color.Transparent
-        ),
-        border = BorderStroke(
-            width = 0.5.dp,
-            brush = Brush.linearGradient(colors = colors.borderGradient)
-        )
+        shape = RoundedCornerShape(size = 8.dp)
     ) {
-        Box(
+        Column(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(
-                    brush = Brush.verticalGradient(colors = colors.backgroundGradient)
-                )
+                    brush = Brush.verticalGradient(colors = colors.backgroundGradient),
+                    shape = RoundedCornerShape(size = 8.dp)
+                ),
         ) {
-            Column {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(all = 16.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Text(
-                        text = detectorName,
-                        style = MaterialTheme.typography.titleSmall,
-                        color = colors.textColor,
-                        fontWeight = FontWeight.SemiBold
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(all = 16.dp),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = detectorName,
+                    style = MaterialTheme.typography.titleSmall,
+                    color = colors.textColor,
+                    fontWeight = FontWeight.SemiBold
+                )
+
+                Icon(
+                    modifier = Modifier.size(size = 16.dp),
+                    imageVector = if (expanded) {
+                        Icons.Default.KeyboardArrowUp
+                    } else {
+                        Icons.Default.KeyboardArrowDown
+                    },
+                    tint = colors.textColor,
+                    contentDescription = null,
+                )
+            }
+
+            if (expanded) {
+                threats.forEachIndexed { _, threat ->
+                    val threatName = threat.violation::class.simpleName.orEmpty()
+                    val severity = threat.violation.severity
+                    val isDetected = detected.contains(threat.violation::class)
+                    val isDangerColors = colors == DangerCardColors
+
+                    HorizontalDivider(
+                        thickness = 0.3.dp,
+                        color = colors.textColor.copy(alpha = 0.2f)
                     )
 
-                    Icon(
-                        modifier = Modifier.size(size = 16.dp),
-                        imageVector = if (expanded) {
-                            Icons.Default.KeyboardArrowUp
-                        } else {
-                            Icons.Default.KeyboardArrowDown
-                        },
-                        tint = colors.textColor,
-                        contentDescription = null,
+                    SentinelDetectItemCard(
+                        title = threatName,
+                        value = "${stringResource(resource = Res.string.severity)}: $severity",
+                        isDangerColors = isDangerColors,
+                        isDetected = isDetected,
+                        colors = colors
                     )
                 }
 
-                if (expanded) {
-                    threats.forEachIndexed { _, threat ->
-                        val threatName = threat.violation::class.simpleName.orEmpty()
-                        val severity = threat.violation.severity
-                        val isDetected = detected.contains(threat.violation::class)
-                        val isDangerColors = colors == DangerCardColors
-
-                        HorizontalDivider(
-                            thickness = 0.3.dp,
-                            color = colors.textColor.copy(alpha = 0.2f)
-                        )
-
-                        SentinelDetectItemCard(
-                            title = threatName,
-                            value = "${stringResource(resource = Res.string.severity)}: $severity",
-                            isDangerColors = isDangerColors,
-                            isDetected = isDetected,
-                            colors = colors
-                        )
-                    }
-
-                    if (threats.isNotEmpty()) {
-                        SentinelDetectItemCard(
-                            modifier = Modifier.background(
-                                color = MaterialTheme.colorScheme.background.copy(alpha = 0.25f)
-                            ),
-                            value = "${stringResource(resource = Res.string.total_severity)}: $detectorSeverity",
-                            colors = colors
-                        )
-                    }
+                if (threats.isNotEmpty()) {
+                    SentinelDetectItemCard(
+                        modifier = Modifier.background(
+                            color = MaterialTheme.colorScheme.background.copy(alpha = 0.25f)
+                        ),
+                        value = "${stringResource(resource = Res.string.total_severity)}: $detectorSeverity",
+                        colors = colors
+                    )
                 }
             }
         }
