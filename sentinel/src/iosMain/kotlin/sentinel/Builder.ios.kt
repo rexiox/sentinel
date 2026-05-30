@@ -11,7 +11,11 @@ actual class Builder {
     actual fun config(block: Config.() -> Unit): Config = config.apply(block = block)
 
     actual fun addDetector(detector: SecurityDetector) = apply {
-        detectors.add(element = detector)
+        val isAlreadyAdded = detectors.any { it::class == detector::class }
+
+        if (!isAlreadyAdded) {
+            detectors.add(element = detector)
+        }
     }
 
     actual fun build(): Sentinel = config

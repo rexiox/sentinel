@@ -46,7 +46,7 @@ internal fun SentinelScanScreen(
     var showResults by remember { mutableStateOf(false) }
     val scanDetectionResults = remember { mutableStateListOf<ScanDetectionResult>() }
 
-    fun addDetectionIfNotExist(type: ScanDetectionType, position: Offset) {
+    fun addDetection(type: ScanDetectionType, position: Offset) {
         if (scanDetectionResults.none { it.type == type }) {
             scanDetectionResults.add(
                 ScanDetectionResult(
@@ -63,7 +63,7 @@ internal fun SentinelScanScreen(
         scanDetectionResults.clear()
 
         if (report.isCompromised) {
-            addDetectionIfNotExist(
+            addDetection(
                 type = if (report.isRooted) {
                     ScanDetectionType.ROOT
                 } else {
@@ -74,21 +74,21 @@ internal fun SentinelScanScreen(
         }
 
         if (report.isTampered) {
-            addDetectionIfNotExist(
+            addDetection(
                 type = ScanDetectionType.TAMPER,
                 position = Offset(0.4f, 145f)
             )
         }
 
         if (report.isHooked) {
-            addDetectionIfNotExist(
+            addDetection(
                 type = ScanDetectionType.HOOK,
                 position = Offset(1.75f, 250f)
             )
         }
 
         if (report.isEmulator || report.isSimulator) {
-            addDetectionIfNotExist(
+            addDetection(
                 type = if (report.isEmulator) {
                     ScanDetectionType.EMULATOR
                 } else {
@@ -99,7 +99,7 @@ internal fun SentinelScanScreen(
         }
 
         if (report.isDebugged) {
-            addDetectionIfNotExist(
+            addDetection(
                 type = ScanDetectionType.DEBUGGER,
                 position = Offset(3.0f, 275f)
             )
