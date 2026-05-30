@@ -26,7 +26,7 @@
 		</data>
 		<key>compose-resources/composeResources/co.rexiox.sentinel.monitor.resources/values/strings.commonMain.cvr</key>
 		<data>
-		xcr/UXxLYUO4rKjaLdEfRsBIq+A=
+		nchQDACDGCboaeh9zMyoZq9YPZA=
 		</data>
 		<key>compose-resources/composeResources/co.rexiox.sentinel.ui.resources/drawable-hdpi/ic_sentinel_launcher.png</key>
 		<data>
@@ -122,15 +122,39 @@
 		</data>
 		<key>compose-resources/composeResources/co.rexiox.sentinel.ui.resources/drawable/ic_nav_bar_home.xml</key>
 		<data>
-		EqQ04RnNTDe/xyer/7kl7AvKczs=
+		utJe7x7M6dqOQOKdyCLdKB7TDZY=
 		</data>
 		<key>compose-resources/composeResources/co.rexiox.sentinel.ui.resources/drawable/ic_nav_bar_monitor.xml</key>
 		<data>
 		r0cTOxmJu/reljCzaasf/quqIsY=
 		</data>
+		<key>compose-resources/composeResources/co.rexiox.sentinel.ui.resources/drawable/ic_nav_bar_scan.xml</key>
+		<data>
+		4QLSYAmYNEwCoJ+3LAw3Q1wQD6Q=
+		</data>
+		<key>compose-resources/composeResources/co.rexiox.sentinel.ui.resources/drawable/ic_sentinel.png</key>
+		<data>
+		4Stsl5UQAGZc+KXP6x8bEPUhoRc=
+		</data>
+		<key>compose-resources/composeResources/co.rexiox.sentinel.ui.resources/drawable/ic_sentinel_dark.png</key>
+		<data>
+		smFYpRx0qUJBh8eaiM4PXHF8F3U=
+		</data>
 		<key>compose-resources/composeResources/co.rexiox.sentinel.ui.resources/drawable/ic_sentinel_launcher.png</key>
 		<data>
 		9zZJ1poh6lk1RHR6RYrkX7egy30=
+		</data>
+		<key>compose-resources/composeResources/co.rexiox.sentinel.ui.resources/drawable/ic_sentinel_risk_low.png</key>
+		<data>
+		qaNHy76+ns6bsP5xUGipakMaHAg=
+		</data>
+		<key>compose-resources/composeResources/co.rexiox.sentinel.ui.resources/drawable/ic_sentinel_risk_medium.png</key>
+		<data>
+		PprGuM4qslZPHlBRpv/OybcdA40=
+		</data>
+		<key>compose-resources/composeResources/co.rexiox.sentinel.ui.resources/drawable/ic_sentinel_risk_safe.png</key>
+		<data>
+		OFpXUc+Cu9R9gqXfsQejIq2Hy1o=
 		</data>
 		<key>compose-resources/composeResources/co.rexiox.sentinel.ui.resources/font/inter_bold.ttf</key>
 		<data>
@@ -150,7 +174,7 @@
 		</data>
 		<key>compose-resources/composeResources/co.rexiox.sentinel.ui.resources/values/strings.commonMain.cvr</key>
 		<data>
-		ugo26zfWvYNzG1+wG6o84caNJNk=
+		44fjHydJBohqJo/jVwG5YFR41S0=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -180,7 +204,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			3U3h+zzfg70Vzua1+iemfA/sCTpizZPBgVTmQtqyL0U=
+			BXN53h6YpNP8quhQA75mNM9+geQFcXpKI1Kh/GWQcnA=
 			</data>
 		</dict>
 		<key>compose-resources/composeResources/co.rexiox.sentinel.ui.resources/drawable-hdpi/ic_sentinel_launcher.png</key>
@@ -348,7 +372,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			75hlsJiyjx+78Auie9/0hyzXmouxA13rD1jemDye8Ms=
+			VDpaUkx9LrOSzT7f8QfwjKfRXxzIuikSLd0wBabInKE=
 			</data>
 		</dict>
 		<key>compose-resources/composeResources/co.rexiox.sentinel.ui.resources/drawable/ic_nav_bar_monitor.xml</key>
@@ -358,11 +382,53 @@
 			Qkuy0SIoiKFGSBhkmU8RmjhIhzvlv/kHVHfXM1Cy+Xs=
 			</data>
 		</dict>
+		<key>compose-resources/composeResources/co.rexiox.sentinel.ui.resources/drawable/ic_nav_bar_scan.xml</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			4cI0R3xP3CAL2kEsyNhD/5StHxMQMcTpT7J7H2q1kJs=
+			</data>
+		</dict>
+		<key>compose-resources/composeResources/co.rexiox.sentinel.ui.resources/drawable/ic_sentinel.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			HrSTiD7bjkQhRosyZIv97HzyZfjA18WIPjmoYbgfSKA=
+			</data>
+		</dict>
+		<key>compose-resources/composeResources/co.rexiox.sentinel.ui.resources/drawable/ic_sentinel_dark.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			2KXeGrTrvhGbM1aaUbi8+1oalwrtAd2GouDIjH9d9zg=
+			</data>
+		</dict>
 		<key>compose-resources/composeResources/co.rexiox.sentinel.ui.resources/drawable/ic_sentinel_launcher.png</key>
 		<dict>
 			<key>hash2</key>
 			<data>
 			U9Wi4gqL+wUPvCKna4ZppHDrTXTpFvYUIMj3+p8i26A=
+			</data>
+		</dict>
+		<key>compose-resources/composeResources/co.rexiox.sentinel.ui.resources/drawable/ic_sentinel_risk_low.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			uebhZ9DVlyTA2jc362LOQGpIGjnwfp9SK9VgYADh0a4=
+			</data>
+		</dict>
+		<key>compose-resources/composeResources/co.rexiox.sentinel.ui.resources/drawable/ic_sentinel_risk_medium.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			g/cO6vJK79HvTxShzujYyOdwXQR4VIhxoPR5p3Kx1eU=
+			</data>
+		</dict>
+		<key>compose-resources/composeResources/co.rexiox.sentinel.ui.resources/drawable/ic_sentinel_risk_safe.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			Xf+LlVLMccgok8F8/Xj8kDk5egVkC6PlxSgqd25Rqlw=
 			</data>
 		</dict>
 		<key>compose-resources/composeResources/co.rexiox.sentinel.ui.resources/font/inter_bold.ttf</key>
@@ -397,7 +463,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			f1UyFcxjHYhoVrFNw/eM1M9+2+cpW7/hyo9Xyxh25Jw=
+			MSvS9d8cVfZ4BanI42Xi8NSc+CG4PQGmFdceudbPSx8=
 			</data>
 		</dict>
 	</dict>
