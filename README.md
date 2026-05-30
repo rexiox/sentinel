@@ -24,6 +24,11 @@ runtime environments and detect potential security threats in real time on both 
 > structures may change, and new features are being added regularly. Caution is advised when using
 > in production environments.
 
+## Documentation
+
+For detailed usage guides, API references, and integration steps, please visit our official
+documentation: **[Sentinel Documentation](https://sentinel.rexiox.co/)**
+
 ## Why Sentinel?
 
 Most mobile apps rely only on server-side security, but attacks happen on the client. Sentinel
