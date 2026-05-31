@@ -16,8 +16,8 @@ tasks.register("generateObfuscated") {
 
         fun xorAndHex(text: String, key: Int): String {
             return text.trim().map { char ->
-                val xored = char.code xor key
-                "\\x${xored.toString(16).padStart(2, '0')}"
+                val xorResult = char.code xor key
+                "\\x${xorResult.toString(16).padStart(2, '0')}"
             }.joinToString("")
         }
 
@@ -52,56 +52,55 @@ tasks.register("generateObfuscated") {
                 val hexLines = linesList.joinToString(",\n    ") { "\"${xorAndHex(it, maskKey)}\"" }
                 val nullTerminator = if (platform == "android") "" else "NULL\n"
 
-                "static const char* $varName[] = {\n    ${if (hexLines.isEmpty()) "" else hexLines + ","}\n    $nullTerminator};"
+                "static const char* $varName[] = {\n    ${if (hexLines.isEmpty()) "" else "$hexLines,"}\n    $nullTerminator};"
             }.joinToString("\n\n")
 
             val transformFunction = if (platform == "android") {
-    """
-    #ifdef __cplusplus
-    extern "C" {
-    #endif
-        static std::string transform(const char *str) {
-            if (!str) return "";
-            std::string result(str);
-            for (size_t i = 0; i < result.length(); i++) {
-                result[i] ^= MASK_KEY;
-            }
-            return result;
-        }
-    
-    #ifdef __cplusplus
-    }""".trimIndent()
-    } else {
-    """
-    #ifdef __cplusplus
-    extern "C" {
-    #endif
-    
-    static inline void transform(char *str) {
-        if (!str) return;
-        for (int i = 0; str[i] != '\0'; i++) {
-            str[i] ^= (char)MASK_KEY;
-        }
-    }
-    
-    #ifdef __cplusplus
-    }""".trimIndent()
+                """
+                    #ifdef __cplusplus
+                    extern "C" {
+                    #endif
+                        static std::string transform(const char *str) {
+                            if (!str) return "";
+                            std::string result(str);
+                            for (size_t i = 0; i < result.length(); i++) {
+                                result[i] ^= MASK_KEY;
+                            }
+                            return result;
+                        }
+                    
+                    #ifdef __cplusplus
+                    }""".trimIndent()
+            } else {
+                """
+                    #ifdef __cplusplus
+                    extern "C" {
+                    #endif
+                    
+                    static inline void transform(char *str) {
+                        if (!str) return;
+                        for (int i = 0; str[i] != '\0'; i++) {
+                            str[i] ^= (char)MASK_KEY;
+                        }
+                    }
+                    
+                    #ifdef __cplusplus
+                    }""".trimIndent()
             }
 
             val fileContent = """
-#include ${if (platform == "android") "<string>" else "<unistd.h>"}
-#ifndef SENTINEL_OBFUSCATE_HPP
-#define SENTINEL_OBFUSCATE_HPP
-
-#define MASK_KEY ${String.format("0x%02X", maskKey)}
-
-$generatedArrays
-
-
-$transformFunction
-
-#endif
-#endif
+            #include ${if (platform == "android") "<string>" else "<unistd.h>"}
+            #ifndef SENTINEL_OBFUSCATE_HPP
+            #define SENTINEL_OBFUSCATE_HPP
+            
+            #define MASK_KEY ${String.format("0x%02X", maskKey)}
+            
+            $generatedArrays
+            
+            $transformFunction
+            
+            #endif
+            #endif
             """.trim().trimIndent()
 
             val outputFile = File(outputPath)
