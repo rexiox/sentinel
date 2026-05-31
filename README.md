@@ -9,7 +9,7 @@
 [![Android](https://img.shields.io/badge/Android-000000?style=for-the-badge&logo=android&logoColor=ffffff)](https://developer.android.com/)
 [![iOS](https://img.shields.io/badge/iOS-000000?style=for-the-badge&logo=apple&logoColor=ffffff)](https://developer.apple.com/)
 [![klibs](https://img.shields.io/badge/klibs-000000?style=for-the-badge&logo=kotlin&logoColor=ffffff)](https://klibs.io/project/rexiox/sentinel)
-[![Version](https://img.shields.io/badge/1.8.6--beta-000000?style=for-the-badge&logo=stackblitz&logoColor=ec141e)](#)
+[![Version](https://img.shields.io/badge/1.8.7--beta-000000?style=for-the-badge&logo=stackblitz&logoColor=ec141e)](#)
 
 **Sentinel** is a lightweight, modular Kotlin Multiplatform security toolkit designed to analyze
 runtime environments and detect potential security threats in real time on both Android and iOS.
@@ -110,7 +110,7 @@ against multiple threat types.
 ## Quick Start
 
 ```gradle
-implementation("co.rexiox:sentinel:1.8.6-beta")
+implementation("co.rexiox:sentinel:1.8.7-beta")
 ```
 
 You can use the following method to print the appId and appIntegrity values required for your
@@ -263,7 +263,7 @@ suspicious activities in real-time and reports these threats.
 https://github.com/user-attachments/assets/00502b7b-5955-4fef-b00b-ccaa57311790
 
 ```gradle
-implementation("co.rexiox:sentinel-monitor:1.8.6-beta")
+implementation("co.rexiox:sentinel-monitor:1.8.7-beta")
 ```
 
 ```kotlin
