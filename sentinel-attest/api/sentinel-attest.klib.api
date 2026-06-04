@@ -1,0 +1,284 @@
+// Klib ABI Dump
+// Targets: [iosArm64, iosSimulatorArm64, iosX64]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <co.rexiox:sentinel-attest>
+final enum class sentinel.attest.exception/AttestationErrorCode : kotlin/Enum<sentinel.attest.exception/AttestationErrorCode> { // sentinel.attest.exception/AttestationErrorCode|null[0]
+    enum entry ATTESTATION_FAILED // sentinel.attest.exception/AttestationErrorCode.ATTESTATION_FAILED|null[0]
+    enum entry EXECUTE // sentinel.attest.exception/AttestationErrorCode.EXECUTE|null[0]
+    enum entry NOT_SUPPORTED // sentinel.attest.exception/AttestationErrorCode.NOT_SUPPORTED|null[0]
+
+    final val entries // sentinel.attest.exception/AttestationErrorCode.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<sentinel.attest.exception/AttestationErrorCode> // sentinel.attest.exception/AttestationErrorCode.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): sentinel.attest.exception/AttestationErrorCode // sentinel.attest.exception/AttestationErrorCode.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<sentinel.attest.exception/AttestationErrorCode> // sentinel.attest.exception/AttestationErrorCode.values|values#static(){}[0]
+}
+
+abstract fun interface sentinel.attest.provider/NonceProvider { // sentinel.attest.provider/NonceProvider|null[0]
+    abstract suspend fun get(): kotlin/String // sentinel.attest.provider/NonceProvider.get|get(){}[0]
+}
+
+abstract interface sentinel.attest.provider/AttestProvider { // sentinel.attest.provider/AttestProvider|null[0]
+    abstract suspend fun getToken(kotlin/String): kotlin/String // sentinel.attest.provider/AttestProvider.getToken|getToken(kotlin.String){}[0]
+}
+
+abstract interface sentinel.attest.sender/AttestationSender { // sentinel.attest.sender/AttestationSender|null[0]
+    abstract fun onCompleted() // sentinel.attest.sender/AttestationSender.onCompleted|onCompleted(){}[0]
+    abstract fun onFailure(sentinel.attest.result/AttestationResult.Error) // sentinel.attest.sender/AttestationSender.onFailure|onFailure(sentinel.attest.result.AttestationResult.Error){}[0]
+    abstract fun verify(sentinel.attest.result/EncryptedAttestation) // sentinel.attest.sender/AttestationSender.verify|verify(sentinel.attest.result.EncryptedAttestation){}[0]
+}
+
+final class sentinel.attest.builder/AttestBuilder { // sentinel.attest.builder/AttestBuilder|null[0]
+    constructor <init>() // sentinel.attest.builder/AttestBuilder.<init>|<init>(){}[0]
+
+    final var provider // sentinel.attest.builder/AttestBuilder.provider|{}provider[0]
+        final fun <get-provider>(): sentinel.attest.provider/AttestProvider // sentinel.attest.builder/AttestBuilder.provider.<get-provider>|<get-provider>(){}[0]
+        final fun <set-provider>(sentinel.attest.provider/AttestProvider) // sentinel.attest.builder/AttestBuilder.provider.<set-provider>|<set-provider>(sentinel.attest.provider.AttestProvider){}[0]
+    final var publicKey // sentinel.attest.builder/AttestBuilder.publicKey|{}publicKey[0]
+        final fun <get-publicKey>(): kotlin/String // sentinel.attest.builder/AttestBuilder.publicKey.<get-publicKey>|<get-publicKey>(){}[0]
+        final fun <set-publicKey>(kotlin/String) // sentinel.attest.builder/AttestBuilder.publicKey.<set-publicKey>|<set-publicKey>(kotlin.String){}[0]
+
+    final fun build(): sentinel.attest/AttestConfig // sentinel.attest.builder/AttestBuilder.build|build(){}[0]
+    final fun callbacks(kotlin/Function1<sentinel.attest.builder/AttestCallbackBuilder, kotlin/Unit>) // sentinel.attest.builder/AttestBuilder.callbacks|callbacks(kotlin.Function1<sentinel.attest.builder.AttestCallbackBuilder,kotlin.Unit>){}[0]
+    final fun nonce(sentinel.attest.provider/NonceProvider) // sentinel.attest.builder/AttestBuilder.nonce|nonce(sentinel.attest.provider.NonceProvider){}[0]
+}
+
+final class sentinel.attest.builder/AttestCallbackBuilder { // sentinel.attest.builder/AttestCallbackBuilder|null[0]
+    constructor <init>() // sentinel.attest.builder/AttestCallbackBuilder.<init>|<init>(){}[0]
+
+    final fun build(): sentinel.attest.builder/AttestCallbacks // sentinel.attest.builder/AttestCallbackBuilder.build|build(){}[0]
+    final fun onComplete(kotlin/Function0<kotlin/Unit>) // sentinel.attest.builder/AttestCallbackBuilder.onComplete|onComplete(kotlin.Function0<kotlin.Unit>){}[0]
+    final fun onError(kotlin/Function1<sentinel.attest.result/AttestationResult.Error, kotlin/Unit>) // sentinel.attest.builder/AttestCallbackBuilder.onError|onError(kotlin.Function1<sentinel.attest.result.AttestationResult.Error,kotlin.Unit>){}[0]
+    final fun verify(kotlin/Function1<sentinel.attest.result/EncryptedAttestation, kotlin/Unit>) // sentinel.attest.builder/AttestCallbackBuilder.verify|verify(kotlin.Function1<sentinel.attest.result.EncryptedAttestation,kotlin.Unit>){}[0]
+}
+
+final class sentinel.attest.builder/AttestCallbacks { // sentinel.attest.builder/AttestCallbacks|null[0]
+    constructor <init>(kotlin/Function1<sentinel.attest.result/EncryptedAttestation, kotlin/Unit>, kotlin/Function1<sentinel.attest.result/AttestationResult.Error, kotlin/Unit>, kotlin/Function0<kotlin/Unit>) // sentinel.attest.builder/AttestCallbacks.<init>|<init>(kotlin.Function1<sentinel.attest.result.EncryptedAttestation,kotlin.Unit>;kotlin.Function1<sentinel.attest.result.AttestationResult.Error,kotlin.Unit>;kotlin.Function0<kotlin.Unit>){}[0]
+
+    final val onComplete // sentinel.attest.builder/AttestCallbacks.onComplete|{}onComplete[0]
+        final fun <get-onComplete>(): kotlin/Function0<kotlin/Unit> // sentinel.attest.builder/AttestCallbacks.onComplete.<get-onComplete>|<get-onComplete>(){}[0]
+    final val onError // sentinel.attest.builder/AttestCallbacks.onError|{}onError[0]
+        final fun <get-onError>(): kotlin/Function1<sentinel.attest.result/AttestationResult.Error, kotlin/Unit> // sentinel.attest.builder/AttestCallbacks.onError.<get-onError>|<get-onError>(){}[0]
+    final val verify // sentinel.attest.builder/AttestCallbacks.verify|{}verify[0]
+        final fun <get-verify>(): kotlin/Function1<sentinel.attest.result/EncryptedAttestation, kotlin/Unit> // sentinel.attest.builder/AttestCallbacks.verify.<get-verify>|<get-verify>(){}[0]
+
+    final fun component1(): kotlin/Function1<sentinel.attest.result/EncryptedAttestation, kotlin/Unit> // sentinel.attest.builder/AttestCallbacks.component1|component1(){}[0]
+    final fun component2(): kotlin/Function1<sentinel.attest.result/AttestationResult.Error, kotlin/Unit> // sentinel.attest.builder/AttestCallbacks.component2|component2(){}[0]
+    final fun component3(): kotlin/Function0<kotlin/Unit> // sentinel.attest.builder/AttestCallbacks.component3|component3(){}[0]
+    final fun copy(kotlin/Function1<sentinel.attest.result/EncryptedAttestation, kotlin/Unit> = ..., kotlin/Function1<sentinel.attest.result/AttestationResult.Error, kotlin/Unit> = ..., kotlin/Function0<kotlin/Unit> = ...): sentinel.attest.builder/AttestCallbacks // sentinel.attest.builder/AttestCallbacks.copy|copy(kotlin.Function1<sentinel.attest.result.EncryptedAttestation,kotlin.Unit>;kotlin.Function1<sentinel.attest.result.AttestationResult.Error,kotlin.Unit>;kotlin.Function0<kotlin.Unit>){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // sentinel.attest.builder/AttestCallbacks.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // sentinel.attest.builder/AttestCallbacks.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // sentinel.attest.builder/AttestCallbacks.toString|toString(){}[0]
+}
+
+final class sentinel.attest.crypto/PayloadEncryptor { // sentinel.attest.crypto/PayloadEncryptor|null[0]
+    constructor <init>(kotlin/String) // sentinel.attest.crypto/PayloadEncryptor.<init>|<init>(kotlin.String){}[0]
+
+    final fun encrypt(sentinel.attest.result/AttestationPayload): sentinel.attest.result/EncryptedAttestation // sentinel.attest.crypto/PayloadEncryptor.encrypt|encrypt(sentinel.attest.result.AttestationPayload){}[0]
+}
+
+final class sentinel.attest.exception/AttestationException : kotlin/Exception { // sentinel.attest.exception/AttestationException|null[0]
+    constructor <init>(sentinel.attest.exception/AttestationErrorCode, kotlin/String, kotlin/Throwable? = ...) // sentinel.attest.exception/AttestationException.<init>|<init>(sentinel.attest.exception.AttestationErrorCode;kotlin.String;kotlin.Throwable?){}[0]
+
+    final val code // sentinel.attest.exception/AttestationException.code|{}code[0]
+        final fun <get-code>(): sentinel.attest.exception/AttestationErrorCode // sentinel.attest.exception/AttestationException.code.<get-code>|<get-code>(){}[0]
+}
+
+final class sentinel.attest.provider/DefaultAttestProvider : sentinel.attest.provider/AttestProvider { // sentinel.attest.provider/DefaultAttestProvider|null[0]
+    constructor <init>() // sentinel.attest.provider/DefaultAttestProvider.<init>|<init>(){}[0]
+
+    final suspend fun getToken(kotlin/String): kotlin/String // sentinel.attest.provider/DefaultAttestProvider.getToken|getToken(kotlin.String){}[0]
+}
+
+final class sentinel.attest.provider/DefaultNonceProvider : sentinel.attest.provider/NonceProvider { // sentinel.attest.provider/DefaultNonceProvider|null[0]
+    constructor <init>() // sentinel.attest.provider/DefaultNonceProvider.<init>|<init>(){}[0]
+
+    final suspend fun get(): kotlin/String // sentinel.attest.provider/DefaultNonceProvider.get|get(){}[0]
+}
+
+final class sentinel.attest.result/AttestationPayload { // sentinel.attest.result/AttestationPayload|null[0]
+    constructor <init>(kotlin/String, kotlin/String, sentinel.attest.result/SecurityReportDto, kotlin/String, kotlin/Long) // sentinel.attest.result/AttestationPayload.<init>|<init>(kotlin.String;kotlin.String;sentinel.attest.result.SecurityReportDto;kotlin.String;kotlin.Long){}[0]
+
+    final val attestationToken // sentinel.attest.result/AttestationPayload.attestationToken|{}attestationToken[0]
+        final fun <get-attestationToken>(): kotlin/String // sentinel.attest.result/AttestationPayload.attestationToken.<get-attestationToken>|<get-attestationToken>(){}[0]
+    final val nonce // sentinel.attest.result/AttestationPayload.nonce|{}nonce[0]
+        final fun <get-nonce>(): kotlin/String // sentinel.attest.result/AttestationPayload.nonce.<get-nonce>|<get-nonce>(){}[0]
+    final val platform // sentinel.attest.result/AttestationPayload.platform|{}platform[0]
+        final fun <get-platform>(): kotlin/String // sentinel.attest.result/AttestationPayload.platform.<get-platform>|<get-platform>(){}[0]
+    final val securityReport // sentinel.attest.result/AttestationPayload.securityReport|{}securityReport[0]
+        final fun <get-securityReport>(): sentinel.attest.result/SecurityReportDto // sentinel.attest.result/AttestationPayload.securityReport.<get-securityReport>|<get-securityReport>(){}[0]
+    final val timestamp // sentinel.attest.result/AttestationPayload.timestamp|{}timestamp[0]
+        final fun <get-timestamp>(): kotlin/Long // sentinel.attest.result/AttestationPayload.timestamp.<get-timestamp>|<get-timestamp>(){}[0]
+
+    final fun component1(): kotlin/String // sentinel.attest.result/AttestationPayload.component1|component1(){}[0]
+    final fun component2(): kotlin/String // sentinel.attest.result/AttestationPayload.component2|component2(){}[0]
+    final fun component3(): sentinel.attest.result/SecurityReportDto // sentinel.attest.result/AttestationPayload.component3|component3(){}[0]
+    final fun component4(): kotlin/String // sentinel.attest.result/AttestationPayload.component4|component4(){}[0]
+    final fun component5(): kotlin/Long // sentinel.attest.result/AttestationPayload.component5|component5(){}[0]
+    final fun copy(kotlin/String = ..., kotlin/String = ..., sentinel.attest.result/SecurityReportDto = ..., kotlin/String = ..., kotlin/Long = ...): sentinel.attest.result/AttestationPayload // sentinel.attest.result/AttestationPayload.copy|copy(kotlin.String;kotlin.String;sentinel.attest.result.SecurityReportDto;kotlin.String;kotlin.Long){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // sentinel.attest.result/AttestationPayload.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // sentinel.attest.result/AttestationPayload.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // sentinel.attest.result/AttestationPayload.toString|toString(){}[0]
+
+    final object $serializer : kotlinx.serialization.internal/GeneratedSerializer<sentinel.attest.result/AttestationPayload> { // sentinel.attest.result/AttestationPayload.$serializer|null[0]
+        final val descriptor // sentinel.attest.result/AttestationPayload.$serializer.descriptor|{}descriptor[0]
+            final fun <get-descriptor>(): kotlinx.serialization.descriptors/SerialDescriptor // sentinel.attest.result/AttestationPayload.$serializer.descriptor.<get-descriptor>|<get-descriptor>(){}[0]
+
+        final fun childSerializers(): kotlin/Array<kotlinx.serialization/KSerializer<*>> // sentinel.attest.result/AttestationPayload.$serializer.childSerializers|childSerializers(){}[0]
+        final fun deserialize(kotlinx.serialization.encoding/Decoder): sentinel.attest.result/AttestationPayload // sentinel.attest.result/AttestationPayload.$serializer.deserialize|deserialize(kotlinx.serialization.encoding.Decoder){}[0]
+        final fun serialize(kotlinx.serialization.encoding/Encoder, sentinel.attest.result/AttestationPayload) // sentinel.attest.result/AttestationPayload.$serializer.serialize|serialize(kotlinx.serialization.encoding.Encoder;sentinel.attest.result.AttestationPayload){}[0]
+    }
+
+    final object Companion { // sentinel.attest.result/AttestationPayload.Companion|null[0]
+        final fun serializer(): kotlinx.serialization/KSerializer<sentinel.attest.result/AttestationPayload> // sentinel.attest.result/AttestationPayload.Companion.serializer|serializer(){}[0]
+    }
+}
+
+final class sentinel.attest.result/EncryptedAttestation { // sentinel.attest.result/EncryptedAttestation|null[0]
+    constructor <init>(kotlin/String, kotlin/String, kotlin/String) // sentinel.attest.result/EncryptedAttestation.<init>|<init>(kotlin.String;kotlin.String;kotlin.String){}[0]
+
+    final val encryptedData // sentinel.attest.result/EncryptedAttestation.encryptedData|{}encryptedData[0]
+        final fun <get-encryptedData>(): kotlin/String // sentinel.attest.result/EncryptedAttestation.encryptedData.<get-encryptedData>|<get-encryptedData>(){}[0]
+    final val encryptedKey // sentinel.attest.result/EncryptedAttestation.encryptedKey|{}encryptedKey[0]
+        final fun <get-encryptedKey>(): kotlin/String // sentinel.attest.result/EncryptedAttestation.encryptedKey.<get-encryptedKey>|<get-encryptedKey>(){}[0]
+    final val iv // sentinel.attest.result/EncryptedAttestation.iv|{}iv[0]
+        final fun <get-iv>(): kotlin/String // sentinel.attest.result/EncryptedAttestation.iv.<get-iv>|<get-iv>(){}[0]
+
+    final fun component1(): kotlin/String // sentinel.attest.result/EncryptedAttestation.component1|component1(){}[0]
+    final fun component2(): kotlin/String // sentinel.attest.result/EncryptedAttestation.component2|component2(){}[0]
+    final fun component3(): kotlin/String // sentinel.attest.result/EncryptedAttestation.component3|component3(){}[0]
+    final fun copy(kotlin/String = ..., kotlin/String = ..., kotlin/String = ...): sentinel.attest.result/EncryptedAttestation // sentinel.attest.result/EncryptedAttestation.copy|copy(kotlin.String;kotlin.String;kotlin.String){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // sentinel.attest.result/EncryptedAttestation.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // sentinel.attest.result/EncryptedAttestation.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // sentinel.attest.result/EncryptedAttestation.toString|toString(){}[0]
+
+    final object $serializer : kotlinx.serialization.internal/GeneratedSerializer<sentinel.attest.result/EncryptedAttestation> { // sentinel.attest.result/EncryptedAttestation.$serializer|null[0]
+        final val descriptor // sentinel.attest.result/EncryptedAttestation.$serializer.descriptor|{}descriptor[0]
+            final fun <get-descriptor>(): kotlinx.serialization.descriptors/SerialDescriptor // sentinel.attest.result/EncryptedAttestation.$serializer.descriptor.<get-descriptor>|<get-descriptor>(){}[0]
+
+        final fun childSerializers(): kotlin/Array<kotlinx.serialization/KSerializer<*>> // sentinel.attest.result/EncryptedAttestation.$serializer.childSerializers|childSerializers(){}[0]
+        final fun deserialize(kotlinx.serialization.encoding/Decoder): sentinel.attest.result/EncryptedAttestation // sentinel.attest.result/EncryptedAttestation.$serializer.deserialize|deserialize(kotlinx.serialization.encoding.Decoder){}[0]
+        final fun serialize(kotlinx.serialization.encoding/Encoder, sentinel.attest.result/EncryptedAttestation) // sentinel.attest.result/EncryptedAttestation.$serializer.serialize|serialize(kotlinx.serialization.encoding.Encoder;sentinel.attest.result.EncryptedAttestation){}[0]
+    }
+
+    final object Companion { // sentinel.attest.result/EncryptedAttestation.Companion|null[0]
+        final fun serializer(): kotlinx.serialization/KSerializer<sentinel.attest.result/EncryptedAttestation> // sentinel.attest.result/EncryptedAttestation.Companion.serializer|serializer(){}[0]
+    }
+}
+
+final class sentinel.attest.result/SecurityReportDto { // sentinel.attest.result/SecurityReportDto|null[0]
+    constructor <init>(kotlin/Int, kotlin/String, kotlin/Boolean, kotlin/Boolean, kotlin/Boolean, kotlin/Boolean, kotlin/Boolean, kotlin/Boolean, kotlin.collections/List<kotlin/String>, kotlin/Long) // sentinel.attest.result/SecurityReportDto.<init>|<init>(kotlin.Int;kotlin.String;kotlin.Boolean;kotlin.Boolean;kotlin.Boolean;kotlin.Boolean;kotlin.Boolean;kotlin.Boolean;kotlin.collections.List<kotlin.String>;kotlin.Long){}[0]
+
+    final val isCompromised // sentinel.attest.result/SecurityReportDto.isCompromised|{}isCompromised[0]
+        final fun <get-isCompromised>(): kotlin/Boolean // sentinel.attest.result/SecurityReportDto.isCompromised.<get-isCompromised>|<get-isCompromised>(){}[0]
+    final val isDebugged // sentinel.attest.result/SecurityReportDto.isDebugged|{}isDebugged[0]
+        final fun <get-isDebugged>(): kotlin/Boolean // sentinel.attest.result/SecurityReportDto.isDebugged.<get-isDebugged>|<get-isDebugged>(){}[0]
+    final val isHooked // sentinel.attest.result/SecurityReportDto.isHooked|{}isHooked[0]
+        final fun <get-isHooked>(): kotlin/Boolean // sentinel.attest.result/SecurityReportDto.isHooked.<get-isHooked>|<get-isHooked>(){}[0]
+    final val isMockLocation // sentinel.attest.result/SecurityReportDto.isMockLocation|{}isMockLocation[0]
+        final fun <get-isMockLocation>(): kotlin/Boolean // sentinel.attest.result/SecurityReportDto.isMockLocation.<get-isMockLocation>|<get-isMockLocation>(){}[0]
+    final val isTampered // sentinel.attest.result/SecurityReportDto.isTampered|{}isTampered[0]
+        final fun <get-isTampered>(): kotlin/Boolean // sentinel.attest.result/SecurityReportDto.isTampered.<get-isTampered>|<get-isTampered>(){}[0]
+    final val isVirtualDevice // sentinel.attest.result/SecurityReportDto.isVirtualDevice|{}isVirtualDevice[0]
+        final fun <get-isVirtualDevice>(): kotlin/Boolean // sentinel.attest.result/SecurityReportDto.isVirtualDevice.<get-isVirtualDevice>|<get-isVirtualDevice>(){}[0]
+    final val riskLevel // sentinel.attest.result/SecurityReportDto.riskLevel|{}riskLevel[0]
+        final fun <get-riskLevel>(): kotlin/String // sentinel.attest.result/SecurityReportDto.riskLevel.<get-riskLevel>|<get-riskLevel>(){}[0]
+    final val severity // sentinel.attest.result/SecurityReportDto.severity|{}severity[0]
+        final fun <get-severity>(): kotlin/Int // sentinel.attest.result/SecurityReportDto.severity.<get-severity>|<get-severity>(){}[0]
+    final val threats // sentinel.attest.result/SecurityReportDto.threats|{}threats[0]
+        final fun <get-threats>(): kotlin.collections/List<kotlin/String> // sentinel.attest.result/SecurityReportDto.threats.<get-threats>|<get-threats>(){}[0]
+    final val timestamp // sentinel.attest.result/SecurityReportDto.timestamp|{}timestamp[0]
+        final fun <get-timestamp>(): kotlin/Long // sentinel.attest.result/SecurityReportDto.timestamp.<get-timestamp>|<get-timestamp>(){}[0]
+
+    final fun component1(): kotlin/Int // sentinel.attest.result/SecurityReportDto.component1|component1(){}[0]
+    final fun component10(): kotlin/Long // sentinel.attest.result/SecurityReportDto.component10|component10(){}[0]
+    final fun component2(): kotlin/String // sentinel.attest.result/SecurityReportDto.component2|component2(){}[0]
+    final fun component3(): kotlin/Boolean // sentinel.attest.result/SecurityReportDto.component3|component3(){}[0]
+    final fun component4(): kotlin/Boolean // sentinel.attest.result/SecurityReportDto.component4|component4(){}[0]
+    final fun component5(): kotlin/Boolean // sentinel.attest.result/SecurityReportDto.component5|component5(){}[0]
+    final fun component6(): kotlin/Boolean // sentinel.attest.result/SecurityReportDto.component6|component6(){}[0]
+    final fun component7(): kotlin/Boolean // sentinel.attest.result/SecurityReportDto.component7|component7(){}[0]
+    final fun component8(): kotlin/Boolean // sentinel.attest.result/SecurityReportDto.component8|component8(){}[0]
+    final fun component9(): kotlin.collections/List<kotlin/String> // sentinel.attest.result/SecurityReportDto.component9|component9(){}[0]
+    final fun copy(kotlin/Int = ..., kotlin/String = ..., kotlin/Boolean = ..., kotlin/Boolean = ..., kotlin/Boolean = ..., kotlin/Boolean = ..., kotlin/Boolean = ..., kotlin/Boolean = ..., kotlin.collections/List<kotlin/String> = ..., kotlin/Long = ...): sentinel.attest.result/SecurityReportDto // sentinel.attest.result/SecurityReportDto.copy|copy(kotlin.Int;kotlin.String;kotlin.Boolean;kotlin.Boolean;kotlin.Boolean;kotlin.Boolean;kotlin.Boolean;kotlin.Boolean;kotlin.collections.List<kotlin.String>;kotlin.Long){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // sentinel.attest.result/SecurityReportDto.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // sentinel.attest.result/SecurityReportDto.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // sentinel.attest.result/SecurityReportDto.toString|toString(){}[0]
+
+    final object $serializer : kotlinx.serialization.internal/GeneratedSerializer<sentinel.attest.result/SecurityReportDto> { // sentinel.attest.result/SecurityReportDto.$serializer|null[0]
+        final val descriptor // sentinel.attest.result/SecurityReportDto.$serializer.descriptor|{}descriptor[0]
+            final fun <get-descriptor>(): kotlinx.serialization.descriptors/SerialDescriptor // sentinel.attest.result/SecurityReportDto.$serializer.descriptor.<get-descriptor>|<get-descriptor>(){}[0]
+
+        final fun childSerializers(): kotlin/Array<kotlinx.serialization/KSerializer<*>> // sentinel.attest.result/SecurityReportDto.$serializer.childSerializers|childSerializers(){}[0]
+        final fun deserialize(kotlinx.serialization.encoding/Decoder): sentinel.attest.result/SecurityReportDto // sentinel.attest.result/SecurityReportDto.$serializer.deserialize|deserialize(kotlinx.serialization.encoding.Decoder){}[0]
+        final fun serialize(kotlinx.serialization.encoding/Encoder, sentinel.attest.result/SecurityReportDto) // sentinel.attest.result/SecurityReportDto.$serializer.serialize|serialize(kotlinx.serialization.encoding.Encoder;sentinel.attest.result.SecurityReportDto){}[0]
+    }
+
+    final object Companion { // sentinel.attest.result/SecurityReportDto.Companion|null[0]
+        final val $childSerializers // sentinel.attest.result/SecurityReportDto.Companion.$childSerializers|{}$childSerializers[0]
+
+        final fun serializer(): kotlinx.serialization/KSerializer<sentinel.attest.result/SecurityReportDto> // sentinel.attest.result/SecurityReportDto.Companion.serializer|serializer(){}[0]
+    }
+}
+
+final class sentinel.attest.sender/DefaultAttestationSender : sentinel.attest.sender/AttestationSender { // sentinel.attest.sender/DefaultAttestationSender|null[0]
+    constructor <init>() // sentinel.attest.sender/DefaultAttestationSender.<init>|<init>(){}[0]
+
+    final fun onCompleted() // sentinel.attest.sender/DefaultAttestationSender.onCompleted|onCompleted(){}[0]
+    final fun onFailure(sentinel.attest.result/AttestationResult.Error) // sentinel.attest.sender/DefaultAttestationSender.onFailure|onFailure(sentinel.attest.result.AttestationResult.Error){}[0]
+    final fun verify(sentinel.attest.result/EncryptedAttestation) // sentinel.attest.sender/DefaultAttestationSender.verify|verify(sentinel.attest.result.EncryptedAttestation){}[0]
+}
+
+final class sentinel.attest/AttestConfig { // sentinel.attest/AttestConfig|null[0]
+    constructor <init>(kotlin/String, sentinel.attest.provider/AttestProvider, sentinel.attest.provider/NonceProvider, sentinel.attest.builder/AttestCallbacks) // sentinel.attest/AttestConfig.<init>|<init>(kotlin.String;sentinel.attest.provider.AttestProvider;sentinel.attest.provider.NonceProvider;sentinel.attest.builder.AttestCallbacks){}[0]
+
+    final val attestProvider // sentinel.attest/AttestConfig.attestProvider|{}attestProvider[0]
+        final fun <get-attestProvider>(): sentinel.attest.provider/AttestProvider // sentinel.attest/AttestConfig.attestProvider.<get-attestProvider>|<get-attestProvider>(){}[0]
+    final val callbacks // sentinel.attest/AttestConfig.callbacks|{}callbacks[0]
+        final fun <get-callbacks>(): sentinel.attest.builder/AttestCallbacks // sentinel.attest/AttestConfig.callbacks.<get-callbacks>|<get-callbacks>(){}[0]
+    final val nonceProvider // sentinel.attest/AttestConfig.nonceProvider|{}nonceProvider[0]
+        final fun <get-nonceProvider>(): sentinel.attest.provider/NonceProvider // sentinel.attest/AttestConfig.nonceProvider.<get-nonceProvider>|<get-nonceProvider>(){}[0]
+    final val rsaPublicKey // sentinel.attest/AttestConfig.rsaPublicKey|{}rsaPublicKey[0]
+        final fun <get-rsaPublicKey>(): kotlin/String // sentinel.attest/AttestConfig.rsaPublicKey.<get-rsaPublicKey>|<get-rsaPublicKey>(){}[0]
+
+    final fun component1(): kotlin/String // sentinel.attest/AttestConfig.component1|component1(){}[0]
+    final fun component2(): sentinel.attest.provider/AttestProvider // sentinel.attest/AttestConfig.component2|component2(){}[0]
+    final fun component3(): sentinel.attest.provider/NonceProvider // sentinel.attest/AttestConfig.component3|component3(){}[0]
+    final fun component4(): sentinel.attest.builder/AttestCallbacks // sentinel.attest/AttestConfig.component4|component4(){}[0]
+    final fun copy(kotlin/String = ..., sentinel.attest.provider/AttestProvider = ..., sentinel.attest.provider/NonceProvider = ..., sentinel.attest.builder/AttestCallbacks = ...): sentinel.attest/AttestConfig // sentinel.attest/AttestConfig.copy|copy(kotlin.String;sentinel.attest.provider.AttestProvider;sentinel.attest.provider.NonceProvider;sentinel.attest.builder.AttestCallbacks){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // sentinel.attest/AttestConfig.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // sentinel.attest/AttestConfig.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // sentinel.attest/AttestConfig.toString|toString(){}[0]
+}
+
+final class sentinel.attest/SentinelAttest { // sentinel.attest/SentinelAttest|null[0]
+    final suspend fun execute(sentinel.core.report/SecurityReport) // sentinel.attest/SentinelAttest.execute|execute(sentinel.core.report.SecurityReport){}[0]
+
+    final object Companion { // sentinel.attest/SentinelAttest.Companion|null[0]
+        final fun configure(kotlin/Function1<sentinel.attest.builder/AttestBuilder, kotlin/Unit>): sentinel.attest/SentinelAttest // sentinel.attest/SentinelAttest.Companion.configure|configure(kotlin.Function1<sentinel.attest.builder.AttestBuilder,kotlin.Unit>){}[0]
+    }
+}
+
+sealed class sentinel.attest.result/AttestationResult { // sentinel.attest.result/AttestationResult|null[0]
+    final class Error : sentinel.attest.result/AttestationResult { // sentinel.attest.result/AttestationResult.Error|null[0]
+        constructor <init>(kotlin/Throwable, sentinel.attest.exception/AttestationErrorCode) // sentinel.attest.result/AttestationResult.Error.<init>|<init>(kotlin.Throwable;sentinel.attest.exception.AttestationErrorCode){}[0]
+
+        final val cause // sentinel.attest.result/AttestationResult.Error.cause|{}cause[0]
+            final fun <get-cause>(): kotlin/Throwable // sentinel.attest.result/AttestationResult.Error.cause.<get-cause>|<get-cause>(){}[0]
+        final val code // sentinel.attest.result/AttestationResult.Error.code|{}code[0]
+            final fun <get-code>(): sentinel.attest.exception/AttestationErrorCode // sentinel.attest.result/AttestationResult.Error.code.<get-code>|<get-code>(){}[0]
+
+        final fun component1(): kotlin/Throwable // sentinel.attest.result/AttestationResult.Error.component1|component1(){}[0]
+        final fun component2(): sentinel.attest.exception/AttestationErrorCode // sentinel.attest.result/AttestationResult.Error.component2|component2(){}[0]
+        final fun copy(kotlin/Throwable = ..., sentinel.attest.exception/AttestationErrorCode = ...): sentinel.attest.result/AttestationResult.Error // sentinel.attest.result/AttestationResult.Error.copy|copy(kotlin.Throwable;sentinel.attest.exception.AttestationErrorCode){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // sentinel.attest.result/AttestationResult.Error.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // sentinel.attest.result/AttestationResult.Error.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // sentinel.attest.result/AttestationResult.Error.toString|toString(){}[0]
+    }
+}
+
+final fun (sentinel.core.report/SecurityReport).sentinel.attest.result/toDto(): sentinel.attest.result/SecurityReportDto // sentinel.attest.result/toDto|toDto@sentinel.core.report.SecurityReport(){}[0]

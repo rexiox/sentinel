@@ -5,8 +5,13 @@ pluginManagement {
         google()
         mavenCentral()
         gradlePluginPortal()
+
         maven {
             url = uri("https://androidx.dev/kmp/builds/10385446/artifacts/snapshots/repository")
+        }
+
+        maven {
+            url = uri("https://developer.huawei.com/repo/")
         }
     }
 }
@@ -16,8 +21,13 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+
         maven {
             url = uri("https://androidx.dev/kmp/builds/10385446/artifacts/snapshots/repository")
+        }
+
+        maven {
+            url = uri("https://developer.huawei.com/repo/")
         }
     }
 }
@@ -27,6 +37,8 @@ rootProject.name = "sentinel"
 include(":sentinel")
 include(":sentinel-ui")
 include(":sentinel-core")
+include(":sentinel-crypto")
+include(":sentinel-attest")
 include(":sentinel-monitor")
 include(":sentinel-runtime")
 include(":sentinel-identity")

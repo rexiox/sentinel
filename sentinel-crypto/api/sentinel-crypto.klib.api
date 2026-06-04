@@ -1,0 +1,24 @@
+// Klib ABI Dump
+// Targets: [iosArm64, iosSimulatorArm64, iosX64]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <co.rexiox:sentinel-crypto>
+final class sentinel.crypto.aes/AesEncryptor { // sentinel.crypto.aes/AesEncryptor|null[0]
+    constructor <init>() // sentinel.crypto.aes/AesEncryptor.<init>|<init>(){}[0]
+
+    final fun decrypt(kotlin/String, kotlin/String, kotlin/ByteArray): kotlin/String? // sentinel.crypto.aes/AesEncryptor.decrypt|decrypt(kotlin.String;kotlin.String;kotlin.ByteArray){}[0]
+    final fun encrypt(kotlin/String, kotlin/String, kotlin/ByteArray): kotlin/String? // sentinel.crypto.aes/AesEncryptor.encrypt|encrypt(kotlin.String;kotlin.String;kotlin.ByteArray){}[0]
+    final fun generateIv(): kotlin/ByteArray // sentinel.crypto.aes/AesEncryptor.generateIv|generateIv(){}[0]
+    final fun generateKey(): kotlin/String // sentinel.crypto.aes/AesEncryptor.generateKey|generateKey(){}[0]
+}
+
+final class sentinel.crypto.rsa/RsaEncryptor { // sentinel.crypto.rsa/RsaEncryptor|null[0]
+    constructor <init>(kotlin/String) // sentinel.crypto.rsa/RsaEncryptor.<init>|<init>(kotlin.String){}[0]
+
+    final fun encryptKey(kotlin/String): kotlin/String? // sentinel.crypto.rsa/RsaEncryptor.encryptKey|encryptKey(kotlin.String){}[0]
+}
+
+final fun sentinel.crypto.generator/generateSecureNonce(): kotlin/String // sentinel.crypto.generator/generateSecureNonce|generateSecureNonce(){}[0]

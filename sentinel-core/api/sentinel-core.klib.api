@@ -6,6 +6,19 @@
 // - Show declarations: true
 
 // Library unique name: <co.rexiox:sentinel-core>
+final enum class sentinel.core.type/PlatformType : kotlin/Enum<sentinel.core.type/PlatformType> { // sentinel.core.type/PlatformType|null[0]
+    enum entry ANDROID // sentinel.core.type/PlatformType.ANDROID|null[0]
+    enum entry IOS // sentinel.core.type/PlatformType.IOS|null[0]
+
+    final val entries // sentinel.core.type/PlatformType.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<sentinel.core.type/PlatformType> // sentinel.core.type/PlatformType.entries.<get-entries>|<get-entries>#static(){}[0]
+    final val id // sentinel.core.type/PlatformType.id|{}id[0]
+        final fun <get-id>(): kotlin/String // sentinel.core.type/PlatformType.id.<get-id>|<get-id>(){}[0]
+
+    final fun valueOf(kotlin/String): sentinel.core.type/PlatformType // sentinel.core.type/PlatformType.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<sentinel.core.type/PlatformType> // sentinel.core.type/PlatformType.values|values#static(){}[0]
+}
+
 final enum class sentinel.core.type/RiskLevel : kotlin/Enum<sentinel.core.type/RiskLevel> { // sentinel.core.type/RiskLevel|null[0]
     enum entry HIGH // sentinel.core.type/RiskLevel.HIGH|null[0]
     enum entry LOW // sentinel.core.type/RiskLevel.LOW|null[0]
@@ -290,5 +303,8 @@ final object sentinel.core.logger/SentinelLogger { // sentinel.core.logger/Senti
 final const val sentinel.core.logger/SENTINEL_TAG // sentinel.core.logger/SENTINEL_TAG|{}SENTINEL_TAG[0]
     final fun <get-SENTINEL_TAG>(): kotlin/String // sentinel.core.logger/SENTINEL_TAG.<get-SENTINEL_TAG>|<get-SENTINEL_TAG>(){}[0]
 
+final fun (kotlin/ByteArray).sentinel.core.ext/encodeBase64(): kotlin/String // sentinel.core.ext/encodeBase64|encodeBase64@kotlin.ByteArray(){}[0]
 final fun (kotlin/String?).sentinel.core.ext/toByteList(): kotlin.collections/List<kotlin/Byte> // sentinel.core.ext/toByteList|toByteList@kotlin.String?(){}[0]
+final fun sentinel.core.ext/currentTimeMillis(): kotlin/Long // sentinel.core.ext/currentTimeMillis|currentTimeMillis(){}[0]
+final fun sentinel.core.platform/getPlatform(): sentinel.core.type/PlatformType // sentinel.core.platform/getPlatform|getPlatform(){}[0]
 final fun sentinel.core.violation/getGroupName(sentinel.core.violation/SecurityViolation): kotlin/String // sentinel.core.violation/getGroupName|getGroupName(sentinel.core.violation.SecurityViolation){}[0]

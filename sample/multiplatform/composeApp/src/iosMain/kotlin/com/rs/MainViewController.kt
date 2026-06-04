@@ -5,6 +5,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.ComposeUIViewController
+import com.rs.attest.AppAttestProvider
 import sentinel.Sentinel
 import sentinel.all
 import sentinel.configure
@@ -34,6 +35,7 @@ fun MainViewController() = ComposeUIViewController {
     App(
         navigationBarModifier = Modifier.padding(bottom = 24.dp),
         sentinel = sentinel,
+        attestProvider = AppAttestProvider(),
         appId = Sentinel.Identity.appId,
         appIntegrity = Sentinel.Identity.appIntegrity.orEmpty(),
         onMonitorStart = {

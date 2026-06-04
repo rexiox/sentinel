@@ -5,6 +5,13 @@ plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.compose.multiplatform)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.kotlinx.serialization)
+}
+
+compose.resources {
+    publicResClass = false
+    packageOfResClass = "co.rs.sentinel.resources"
+    generateResClass = auto
 }
 
 kotlin {
@@ -28,15 +35,15 @@ kotlin {
         androidMain.dependencies {
             implementation(libs.compose.uiToolingPreview)
             implementation(libs.androidx.activity.compose)
+            implementation(libs.integrity)
+            implementation(libs.safetydetect)
         }
 
         commonMain.dependencies {
             implementation(project(":sentinel-ui"))
+            implementation(project(":sentinel-crypto"))
+            implementation(project(":sentinel-attest"))
             implementation(project(":sentinel-monitor"))
-
-            // implementation(libs.sentinel)
-            // implementation(libs.sentinel.ui)
-            // implementation(libs.sentinel.monitor)
 
             implementation(libs.compose.runtime)
             implementation(libs.compose.foundation)
@@ -46,6 +53,9 @@ kotlin {
             implementation(libs.compose.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodelCompose)
             implementation(libs.androidx.lifecycle.runtimeCompose)
+            implementation(libs.ktor.client.core)
+            implementation(libs.ktor.client.cio)
+            implementation(libs.kotlinx.serialization.json)
         }
     }
 

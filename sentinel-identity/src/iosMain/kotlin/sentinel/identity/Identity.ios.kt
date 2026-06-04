@@ -3,6 +3,7 @@ package sentinel.identity
 import platform.Foundation.NSBundle
 import platform.UIKit.UIDevice
 import sentinel.core.identity.Identity
+import sentinel.core.platform.getPlatform
 import sentinel.identity.hash.getProvisioningHash
 
 actual class Identity : Identity {
@@ -13,7 +14,7 @@ actual class Identity : Identity {
 
     actual override val appIntegrity: String? = getProvisioningHash()
 
-    actual override val platform: String = "iOS".lowercase()
+    actual override val platform: String = getPlatform().id
 
     actual companion object {
 

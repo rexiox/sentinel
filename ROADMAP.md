@@ -14,8 +14,8 @@ but API structures may evolve as we gather feedback and add new features.
 ### Security Enhancements
 
 - [x] Migrate Emulator detector to NDK C++ for Android
-- [ ] Sentinel Attest: Server-side verification (Play Integrity / App Attest) and Encryption
-- [ ] Sentinel Crypto: RSA+AES encryption
+- [x] Sentinel Attest: Server-side verification (Play Integrity / App Attest) and Encryption
+- [x] Sentinel Crypto: RSA+AES encryption
 - [ ] Screen recording/screenshot detection
 
 ---
