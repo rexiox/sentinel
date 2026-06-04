@@ -12,6 +12,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import com.rs.attest.PlayIntegrityProvider
 import sentinel.Sentinel
 import sentinel.all
 import sentinel.configure
@@ -63,6 +64,7 @@ class MainActivity : ComponentActivity() {
                     .navigationBarsPadding()
                     .padding(bottom = 16.dp),
                 sentinel = sentinel,
+                attestProvider = PlayIntegrityProvider(context = applicationContext),
                 appId = Sentinel.Identity.appId,
                 appIntegrity = Sentinel.Identity.appIntegrity.orEmpty(),
                 onMonitorStart = {

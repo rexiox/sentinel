@@ -2,6 +2,7 @@ package sentinel.identity
 
 import android.content.Context
 import sentinel.core.identity.Identity
+import sentinel.core.platform.getPlatform
 import sentinel.identity.ext.getAndroidId
 import sentinel.identity.ext.getAppSignatureSHA256
 
@@ -15,7 +16,7 @@ actual class Identity private constructor(
 
     actual override val appIntegrity: String? = context.getAppSignatureSHA256()
 
-    actual override val platform: String = "Android"
+    actual override val platform: String = getPlatform().id
 
     actual companion object {
 

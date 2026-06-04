@@ -6,7 +6,11 @@ kotlinReflect = "2.3.10"
 kotlinxBenchmarkRuntime = "0.4.16"
 kotlinxCoroutinesCore = "1.10.2"
 kotlinxDatetime = "0.7.1"
+kotlinxSerializationJson = "1.11.0"
+ktorClientCore = "3.5.0"
+ktorClientCio = "3.5.0"
 materialIconsCore = "1.7.3"
+safetydetect = "6.7.0.305"
 sentinel = "1.8.7-beta"
 vanniktechMavenPublish = "0.34.0"
 androidx-lifecycle = "2.10.0"
@@ -26,6 +30,7 @@ roboelectric = "4.16.1"
 mokkery = "3.3.0"
 junitKtx = "1.3.0"
 androidxBenchmarkDarwin = "1.2.0-SNAPSHOT"
+integrity = "1.6.0"
 
 [libraries]
 androidx-benchmark-junit4 = { module = "androidx.benchmark:benchmark-junit4", version.ref = "benchmarkJunit4" }
@@ -47,6 +52,9 @@ kotlinx-benchmark-runtime = { module = "org.jetbrains.kotlinx:kotlinx-benchmark-
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutinesCore" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinxCoroutinesCore" }
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinxDatetime" }
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
+ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktorClientCio" }
+ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktorClientCore" }
 material-icons-core = { module = "org.jetbrains.compose.material:material-icons-core", version.ref = "materialIconsCore" }
 maven-publish-gradlePlugin = { module = "com.vanniktech.maven.publish:com.vanniktech.maven.publish.gradle.plugin", version.ref = "vanniktechMavenPublish" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -56,12 +64,14 @@ androidx-constraintlayout = { group = "androidx.constraintlayout", name = "const
 androidx-lifecycle-livedata-ktx = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "lifecycleLivedataKtx" }
 androidx-lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }
 androidx-fragment-ktx = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "fragmentKtx" }
+safetydetect = { module = "com.huawei.hms:safetydetect", version.ref = "safetydetect" }
 sentinel = { module = "co.rexiox:sentinel", version.ref = "sentinel" }
 sentinel-ui = { module = "co.rexiox:sentinel-ui", version.ref = "sentinel" }
 sentinel-monitor = { module = "co.rexiox:sentinel-monitor", version.ref = "sentinel" }
 androidx-runner = { module = "androidx.test:runner", version.ref = "android-test-runner" }
 roboelectric = { module = "org.robolectric:robolectric", version.ref = "roboelectric" }
 androidx-junit-ktx = { group = "androidx.test.ext", name = "junit-ktx", version.ref = "junitKtx" }
+integrity = { group = "com.google.android.play", name = "integrity", version.ref = "integrity" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -75,7 +85,8 @@ android-lint = { id = "com.android.lint", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 android-fusedlibrary = { id = "com.android.fused-library", version.ref = "agp" }
 kotlinx-binary-compatibility-validator = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version.ref = "binaryCompatibilityValidator" }
+kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+androidx-benchmark-darwin = { id = "androidx.benchmark.darwin", version.ref = "androidxBenchmarkDarwin" }
 dev-mokkery = { id = "dev.mokkery", version.ref = "mokkery" }
 sentinel-publish = { id = "sentinel-publish" }
 sentinel-obfuscate = { id = "sentinel-obfuscate" }
-androidx-benchmark-darwin = { id = "androidx.benchmark.darwin", version.ref = "androidxBenchmarkDarwin" }
