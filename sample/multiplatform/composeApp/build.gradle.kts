@@ -45,6 +45,11 @@ kotlin {
             implementation(project(":sentinel-attest"))
             implementation(project(":sentinel-monitor"))
 
+            //implementation(libs.sentinel.ui)
+            //implementation(libs.sentinel.crypto)
+            //implementation(libs.sentinel.attest)
+            //implementation(libs.sentinel.monitor)
+
             implementation(libs.compose.runtime)
             implementation(libs.compose.foundation)
             implementation(libs.compose.material3)
@@ -70,8 +75,8 @@ android {
         applicationId = "com.rs.sentinel"
         minSdk = 24
         targetSdk = 36
-        versionCode = 12
-        versionName = "1.8.7-beta"
+        versionCode = 13
+        versionName = "1.9.0-beta"
     }
 
     packaging {

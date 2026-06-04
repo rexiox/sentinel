@@ -11,7 +11,7 @@ ktorClientCore = "3.5.0"
 ktorClientCio = "3.5.0"
 materialIconsCore = "1.7.3"
 safetydetect = "6.7.0.305"
-sentinel = "1.8.7-beta"
+sentinel = "1.9.0-beta"
 vanniktechMavenPublish = "0.34.0"
 androidx-lifecycle = "2.10.0"
 composeMultiplatform = "1.10.3"
@@ -67,6 +67,8 @@ androidx-fragment-ktx = { group = "androidx.fragment", name = "fragment-ktx", ve
 safetydetect = { module = "com.huawei.hms:safetydetect", version.ref = "safetydetect" }
 sentinel = { module = "co.rexiox:sentinel", version.ref = "sentinel" }
 sentinel-ui = { module = "co.rexiox:sentinel-ui", version.ref = "sentinel" }
+sentinel-crypto = { module = "co.rexiox:sentinel-crypto", version.ref = "sentinel" }
+sentinel-attest = { module = "co.rexiox:sentinel-attest", version.ref = "sentinel" }
 sentinel-monitor = { module = "co.rexiox:sentinel-monitor", version.ref = "sentinel" }
 androidx-runner = { module = "androidx.test:runner", version.ref = "android-test-runner" }
 roboelectric = { module = "org.robolectric:robolectric", version.ref = "roboelectric" }

@@ -4,10 +4,10 @@
 
 Only the latest stable release of Sentinel receives security fixes.
 
-| Version | Supported |
-|---------|-----------|
-| 1.8.x   | ✅ Yes     |
-| < 1.8.7-beta | ❌ No      |
+| Version      | Supported |
+|--------------|-----------|
+| 1.9.x        | ✅ Yes     |
+| < 1.9.0-beta | ❌ No      |
 
 ## Reporting a Vulnerability
 

@@ -26,12 +26,6 @@ abstract interface sentinel.attest.provider/AttestProvider { // sentinel.attest.
     abstract suspend fun getToken(kotlin/String): kotlin/String // sentinel.attest.provider/AttestProvider.getToken|getToken(kotlin.String){}[0]
 }
 
-abstract interface sentinel.attest.sender/AttestationSender { // sentinel.attest.sender/AttestationSender|null[0]
-    abstract fun onCompleted() // sentinel.attest.sender/AttestationSender.onCompleted|onCompleted(){}[0]
-    abstract fun onFailure(sentinel.attest.result/AttestationResult.Error) // sentinel.attest.sender/AttestationSender.onFailure|onFailure(sentinel.attest.result.AttestationResult.Error){}[0]
-    abstract fun verify(sentinel.attest.result/EncryptedAttestation) // sentinel.attest.sender/AttestationSender.verify|verify(sentinel.attest.result.EncryptedAttestation){}[0]
-}
-
 final class sentinel.attest.builder/AttestBuilder { // sentinel.attest.builder/AttestBuilder|null[0]
     constructor <init>() // sentinel.attest.builder/AttestBuilder.<init>|<init>(){}[0]
 
@@ -223,14 +217,6 @@ final class sentinel.attest.result/SecurityReportDto { // sentinel.attest.result
 
         final fun serializer(): kotlinx.serialization/KSerializer<sentinel.attest.result/SecurityReportDto> // sentinel.attest.result/SecurityReportDto.Companion.serializer|serializer(){}[0]
     }
-}
-
-final class sentinel.attest.sender/DefaultAttestationSender : sentinel.attest.sender/AttestationSender { // sentinel.attest.sender/DefaultAttestationSender|null[0]
-    constructor <init>() // sentinel.attest.sender/DefaultAttestationSender.<init>|<init>(){}[0]
-
-    final fun onCompleted() // sentinel.attest.sender/DefaultAttestationSender.onCompleted|onCompleted(){}[0]
-    final fun onFailure(sentinel.attest.result/AttestationResult.Error) // sentinel.attest.sender/DefaultAttestationSender.onFailure|onFailure(sentinel.attest.result.AttestationResult.Error){}[0]
-    final fun verify(sentinel.attest.result/EncryptedAttestation) // sentinel.attest.sender/DefaultAttestationSender.verify|verify(sentinel.attest.result.EncryptedAttestation){}[0]
 }
 
 final class sentinel.attest/AttestConfig { // sentinel.attest/AttestConfig|null[0]
